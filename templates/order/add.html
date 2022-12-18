@@ -1,0 +1,83 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h4 class="py-3 breadcrumb-wrapper mb-2">ثبت درخواست</h4>
+
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert alert-danger">{{ message }}</div>
+{% else %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endif %}
+{% endfor %}
+
+<div class="card">
+    <div class="card-body">
+        <form id="formValidationExamples" action="{% url 'order_add' %}" method="post">
+            {% csrf_token %}
+            <div class="row ">
+            
+                <div class="col-md-3 mb-1">
+                    <label for="" class="form-label">عملیات درخواستی*</label>
+                    <select class="select2 form-select form-select-lg" data-allow-clear="true"  name="operation" required>
+                        <option value="">لطفا انتخاب کنید</option>
+                        {% for operation in operations %}
+                        <option value="{{ operation.id }}">{{ operation.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="col-md-3 mb-1">
+                    <label for="select2Success" class="form-label">زیرگروه</label>
+                    <div class="select2-success">
+                        <select id="select2Success" class="select2 form-select" name="subgroup" multiple required>
+                            {% for subgroup in subgroups %}
+                            <option value="{{ subgroup.id }}">{{ subgroup.name }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-1">
+                    <label for="" class="form-label">واحد ارجاعی *</label>
+                    <select class="select2 form-select form-select-lg" data-allow-clear="true" name="department" required>
+                        <!--<option value="">لطفا انتخاب کنید</option>-->
+                        {% for department in departments %}
+                        <option value="{{ department.id }}">{{ department.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+               
+                <div class="col-md-3 mb-1">
+                    <label for="" class="form-label">اولویت</label>
+                    <select class="form-select" name="priority" id="">
+                        <option value="">انتخاب کنید</option>
+                        <option value="1">کم</option>
+                        <option value="2">متوسط</option>
+                        <option value="3">زیاد</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-12 mb-1">
+                    <label for="" class="form-label">توضیحات</label>
+                    <textarea style="  height: 150px;" class="form-control" placeholder="توضیح" name='description'>  </textarea>
+                    
+                 
+                    
+                </div>
+
+            <div class="mt-1">
+                <button type="submit" class="btn btn-primary me-2">ثبت</button>
+            </div>
+            
+    		 </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}
