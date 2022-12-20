@@ -13,6 +13,7 @@ from users.models import *
 from .forms import OrderForm
 from .utils import split_persian_date, is_member
 
+
 @login_required(login_url='/users/login/')
 def index(request):
     user = request.user
@@ -23,10 +24,11 @@ def index(request):
     else:
         users = User.objects.filter(is_superuser=False)
         orders = Order.objects.filter(user=user)
-        tasks = Task.objects.filter(order__user=user,completed=True)
+        tasks = Task.objects.filter(order__user=user, completed=True)
 
-    context = {'users':users, 'orders':orders, 'tasks':tasks}
+    context = {'users': users, 'orders': orders, 'tasks': tasks}
     return render(request, 'index.html', context)
+
 
 class OrdersList(ListView):
     model = Order
@@ -38,11 +40,10 @@ class OrdersList(ListView):
         if self.request.user.has_perm('base.view_order_all'):
             orders = Order.objects.all().order_by('-createdAt')
 
-            
         else:
             profile = Profile.objects.get(user=self.request.user)
-            orders =  Order.objects.filter(department_id=profile.department.id, isConfirmed=True).order_by('-createdAt')
-
+            orders = Order.objects.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
+            print(profile.department.id)
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -51,7 +52,7 @@ class OrdersList(ListView):
 
         if q:
             orders = orders.filter(Q(orderId__contains=q))
-        
+
         if department:
             orders = orders.filter(department_id=department)
 
@@ -60,14 +61,18 @@ class OrdersList(ListView):
 
         if status:
             orders = orders.filter(isCompleted=status)
-
         return orders
-        
+
     def get_context_data(self, **kwargs):
+        contains_building = False
+        orders = self.get_queryset()
         context = super().get_context_data(**kwargs)
+        context['templatetags'] = contains_building
         context['operations'] = Operation.objects.all()
         context['departments'] = Department.objects.all()
+
         return context
+
 
 def order_add(request):
     if request.method == 'POST':
@@ -77,7 +82,7 @@ def order_add(request):
         priority = request.POST.get('priority')
 
         lastOrder = Order.objects.last()
-        code = int(lastOrder.orderId) + 1 
+        code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
 
@@ -86,35 +91,41 @@ def order_add(request):
             instance = form.save(commit=False)
             instance.orderId = code
             instance.user = request.user
-            
+
             instance.operation = operation
             instance.operationName = operation.name
-            
+
             instance.department = department
             instance.departmentName = department.name
-
             instance.priority = priority
             instance.save()
-            
+
             instance.isConfirmed = True
             instance.status = f'ارسال به  {department.name}'
-            instance.status = 'درانتظار تایید مدیریت'
             instance.status = 'ارسال به واحد فنی'
 
-            for subgroupId in subgropuIds:
-                instance.subGroup.add(Subgroup.objects.get(id=subgroupId))
+            # id of ساخت subgroup is 4
+            building_subgroup = Subgroup.objects.get(id=4)
 
-            instance.save()        
+            for subgroupId in subgropuIds:
+                subgroup_item = Subgroup.objects.get(id=subgroupId)
+                if subgroup_item == building_subgroup:
+                    instance.isConfirmed = False
+                    instance.status = 'درانتظار تایید مدیریت'
+                instance.subGroup.add(subgroup_item)
+
+            instance.save()
         messages.success(request, 'درخواست ثبت شد')
-        
+
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    
+
     else:
         form = OrderForm()
+
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
-    departments = Department.objects.filter(id=3) # limit the department by technical in form
-    context = {'departments':departments, 'operations':operations, 'subgroups':subgroups, 'form':form}
+    departments = Department.objects.filter(id=3)  # limit the department by technical in form
+    context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'form': form}
     return render(request, 'order/add.html', context)
 
 
@@ -137,40 +148,44 @@ def order_edit(request, orderId):
             instance.description = description
             instance.operation = operation
             instance.operationName = operation.name
-            
+
             instance.department = department
             instance.departmentName = department.name
             instance.priority = priority
             instance.save()
-            
+
             instance.subGroup.clear()
             for subgroupId in subgropuIds:
                 instance.subGroup.add(Subgroup.objects.get(id=subgroupId))
 
-            instance.save()        
+            instance.save()
         messages.success(request, 'درخواست ویرایش شد')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         form = OrderForm(request.POST or None, instance=order)
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
-    departments = Department.objects.filter(id=3) # limit the department by technical in form
-    context = {'departments':departments, 'operations':operations, 'subgroups':subgroups, 'order':order,
-                'form':form}
+    departments = Department.objects.filter(id=3)  # limit the department by technical in form
+    context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'order': order,
+               'form': form}
     return render(request, 'order/edit.html', context)
 
 
 def order_detail(request, orderId):
     order = Order.objects.get(orderId=orderId)
-    context = {'order':order}
+    context = {'order': order}
     return render(request, 'order/detail.html', context)
+
 
 def order_invoice(request, orderId):
     order = Order.objects.get(orderId=orderId)
-    context = {'order':order}
+    context = {'order': order}
     return render(request, 'order/invoice.html', context)
 
+
 from django.http import HttpResponse
+
+
 class TasksList(ListView):
     model = Task
     template_name = 'task/list.html'
@@ -178,11 +193,11 @@ class TasksList(ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        if is_member(self.request.user):
+        if is_member(self.request.user) or self.request.user.is_superuser:
             tasks = Task.objects.all().order_by('-date')
         else:
-            tasks = Task.objects.filter(order__user=self.request.user,completed=True).order_by('-date')
-
+            # tasks = Task.objects.filter(order__user=self.request.user, completed=True).order_by('-date')
+            tasks = Task.objects.filter(user=self.request.user, completed=True).order_by('-date')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -190,7 +205,7 @@ class TasksList(ListView):
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)
-        
+
         if department:
             tasks = tasks.filter(order__department_id=department)
 
@@ -210,15 +225,16 @@ def task_add(request):
     if request.method == 'POST':
         description = request.POST.get('description')
         description2 = request.POST.get('description2')
-        orderId = request.POST.get('orderId')    
+        orderId = request.POST.get('orderId')
         date = request.POST.get('date')
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
-        
+
         if orderId:
             order = Order.objects.get(orderId=orderId)
-            task = Task.objects.create(order=order, user=request.user, description=description, description2=description2)
+            task = Task.objects.create(order=order, user=request.user, description=description,
+                                       description2=description2)
             year, month, day = split_persian_date(date)
             date = jdatetime.date(year, month, day).togregorian()
 
@@ -229,8 +245,8 @@ def task_add(request):
             if status == '1':
                 order.isCompleted = True
                 order.save()
-        
-            task.save() 
+
+            task.save()
 
             messages.success(request, 'درخواست شروع کار ثبت شد')
             return redirect('orders_list')
@@ -241,7 +257,7 @@ def task_add(request):
     else:
         order = None
         tasks = None
-    context = {'order':order, 'tasks':tasks}
+    context = {'order': order, 'tasks': tasks}
     return render(request, 'task/add.html', context)
 
 
@@ -251,7 +267,7 @@ def task_edit(request, taskId):
 
     if request.method == 'POST':
         description = request.POST.get('description')
-        description2 = request.POST.get('description2') 
+        description2 = request.POST.get('description2')
         date = request.POST.get('date')
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
@@ -267,28 +283,28 @@ def task_edit(request, taskId):
         task.end_time = end_time
         task.completed = status
         task.save()
-        
+
         if status == '1':
             order = Order.objects.get(task__id=taskId)
             order.isCompleted = True
             order.save()
-        
 
         messages.success(request, 'درخواست شروع کار ویرایش شد')
         return redirect('orders_list')
 
-    context = {'task':task}
-    return render(request, 'task/edit.html', context)      
+    context = {'task': task}
+    return render(request, 'task/edit.html', context)
 
 
 def task_detail(request, taskId):
     task = Task.objects.get(id=taskId)
-    context = {'task':task}
+    context = {'task': task}
     return render(request, 'task/detail.html', context)
+
 
 def task_invoice(request, taskId):
     task = Task.objects.get(id=taskId)
-    context = {'task':task}
+    context = {'task': task}
     return render(request, 'task/invoice.html', context)
 
 
@@ -315,7 +331,6 @@ def department_edit(request, departmentId):
         return redirect('department_list')
 
 
-
 class OperationList(ListView):
     model = Operation
     template_name = 'operation/list.html'
@@ -337,7 +352,6 @@ def operation_edit(request, operationId):
         Operation.objects.filter(id=operationId).update(name=name)
         messages.success(request, 'عملیات ویرایش شد')
         return redirect('operation_list')
-
 
 
 class SubgroupList(ListView):

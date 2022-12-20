@@ -1,6 +1,5 @@
 
 from django.urls import path
-
 from . import ajax_views as views
 
 urlpatterns = [

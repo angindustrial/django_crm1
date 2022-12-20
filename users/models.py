@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Permission
 
 from base.models import Department
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobileNumber = models.CharField(max_length=11, blank=True, null=True)

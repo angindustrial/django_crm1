@@ -1,252 +1,263 @@
 {% extends '../base.html' %}
-
+{% load contains_building %}
 {% load static %}
 {% load jalali_tags %}
 
 {% block content %}
 
-<h4 class="py-3 breadcrumb-wrapper mb-2">لیست درخواست ها</h4>
+    <h4 class="py-3 breadcrumb-wrapper mb-2">لیست درخواست ها</h4>
 
-{% for message in messages %}
-{% if message.tags == 'error' %}
-<div class="alert alert-danger">{{ message }}</div>
-{% else %}
-<div class="alert alert-{{ message.tags }}">{{ message }}</div>
-{% endif %}
-{% endfor %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% else %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
 
-<div class="card">
-    <div class="card-header border-bottom">
-        <h5 class="card-title">فیلتر جستجو</h5>
-        <form action="{% url 'orders_list' %}">
-            <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                <div class="col-md-3 user_role">
-                    <input class="form-control" type="search" name="q" placeholder="جستجو براساس شماره درخواست"
-                        value="{{ request.GET.q }}">
+    <div class="card">
+        <div class="card-header border-bottom">
+            <h5 class="card-title">فیلتر جستجو</h5>
+            <form action="{% url 'orders_list' %}">
+                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                    <div class="col-md-3 user_role">
+                        <input class="form-control" type="search" name="q" placeholder="جستجو براساس شماره درخواست"
+                               value="{{ request.GET.q }}">
+                    </div>
+                    <div class="col-md-3 user_plan">
+                        <select class="select2 form-select" name="department" id="">
+                            <option value="">انتخاب واحد</option>
+                            {% for department in departments %}
+                                <option value="{{ department.id }}"
+                                        {% if request.GET.department|add:0 == department.id %}
+                                        selected {% endif %}>{{ department.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3 order_status">
+                        <select class="select2 form-select" name="operation" id="">
+                            <option value="">عملیات درخواستی</option>
+                            {% for operation in operations %}
+                                <option value="{{ operation.id }}" {% if request.GET.operation|add:0 == operation.id %}
+                                        selected
+                                {% endif %}>{{ operation.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3 order_status">
+                        <select class="form-select" name="status" id="">
+                            <option value="">وضعیت</option>
+                            <option value="1" {% if request.GET.status == '1' %} selected {% endif %}>کامل</option>
+                            <option value="0" {% if request.GET.status == '0' %} selected {% endif %}>ناقص</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-3 user_plan">
-                    <select class="select2 form-select" name="department" id="">
-                        <option value="">انتخاب واحد</option>
-                        {% for department in departments %}
-                        <option value="{{ department.id }}" {% if request.GET.department|add:0 == department.id %}
-                            selected {% endif %}>{{ department.name }}</option>
-                        {% endfor %}
-                    </select>
+
+                <div class="row">
+                    <div class="col-md-12 user_status" style="text-align: left;">
+                        <button type="submit" class="btn btn-label-primary">اعمال فیلتر</button>
+                    </div>
                 </div>
-                <div class="col-md-3 order_status">
-                    <select class="select2 form-select" name="operation" id="">
-                        <option value="">عملیات درخواستی</option>
-                        {% for operation in operations %}
-                        <option value="{{ operation.id }}" {% if request.GET.operation|add:0 == operation.id %} selected
-                            {% endif %}>{{ operation.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-3 order_status">
-                    <select class="form-select" name="status" id="">
-                        <option value="">وضعیت</option>
-                        <option value="1" {% if request.GET.status == '1' %} selected {% endif %}>کامل</option>
-                        <option value="0" {% if request.GET.status == '0' %} selected {% endif %}>ناقص</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 user_status" style="text-align: left;">
-                    <button type="submit" class="btn btn-label-primary">اعمال فیلتر</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="card-datatable table-responsive">
-        <table class="table border-top text-center table-striped">
-            <thead class="table-dark">
+            </form>
+        </div>
+        <div class="card-datatable table-responsive">
+            <table class="table border-top text-center table-striped">
+                <thead class="table-dark">
                 <tr>
                     <th>#</th>
                     <th>درخواست کننده</th>
                     <th>شماره درخواست</th>
                     <th>تاریخ درخواست</th>
+                    <th>عملیات</th>
                     <th>پیگیری</th>
                     <th>وضعیت</th>
                     <th>اولویت</th>
                     <th>عمل‌ها</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for order in orders %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ order.user.profile }}</td>
-                    
-                    <td>{{ order.orderId }}</td>
-                    <td>{{ order.createdAt|to_jalali:'%y/%m/%d' }}</td>
-                    <td><span class="badge bg-label-success">{{ order.status }}</span></td>
-                    </td>
-                    <td>
-                        {% if order.isCompleted %}
-                        <span class="badge bg-label-success">کامل</span>
-                        {% else %}
-                        <span class="badge bg-label-danger">ناقص</span>
-                        {% endif %}
-                    </td>
-                    <td>{{ order.get_priority }}</td>
-                    <td>
-                        <div class="d-inline-block text-nowrap">
-                            {% if perms.base.change_order %}
-                            <a href="{% url 'order_edit' order.orderId %}" class="btn btn-sm btn-icon">
-                                <i class="bx bx-edit"></i>
-                            </a>
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ order.user.profile }}</td>
+                        <td>{{ order.orderId }}</td>
+
+                        <td>{{ order.createdAt|to_jalali:'%y/%m/%d' }}</td>
+                        <td>{{ order.operation }}</td>
+
+                        <td><span class="badge bg-label-success">{{ order.status }}</span></td>
+                        </td>
+                        <td>
+                            {% if order.isCompleted %}
+                                <span class="badge bg-label-success">کامل</span>
+                            {% else %}
+                                <span class="badge bg-label-danger">ناقص</span>
                             {% endif %}
-                            <button data-bs-toggle="modal" data-bs-target="#viewOrderDetail_{{ order.id }}"
-                                class="btn btn-sm btn-icon delete-record">
-                                <i class="bx bx-show"></i>
-                            </button>
+                        </td>
+                        <td>{{ order.get_priority }}</td>
+                        <td>
+                            <div class="d-inline-block text-nowrap">
+                                {% if perms.base.change_order %}
+                                    <a href="{% url 'order_edit' order.orderId %}" class="btn btn-sm btn-icon">
+                                        <i class="bx bx-edit"></i>
+                                    </a>
+                                {% endif %}
+                                <button data-bs-toggle="modal" data-bs-target="#viewOrderDetail_{{ order.id }}"
+                                        class="btn btn-sm btn-icon delete-record">
+                                    <i class="bx bx-show"></i>
+                                </button>
 
-                            <!--/ Add Role Modal -->
-                            <div class="modal fade" id="viewOrderDetail_{{ order.id }}" tabindex="-1"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-dialog-centered modal-add-new-role modal-fullscreen">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="">وضعیت درخواست : {{ order.status }}</label>
-                                                {% if not order.isConfirmed and perms.base.change_order and order.subgroup.id == 4 %}
-                                                <button type="button" class="btn btn-label-primary btn-sm" data-orderid="{{ order.orderId }}"
-                                                    id="confirmOrderBtn">تایید درخواست</button>
-                                                  
-                                                {% endif %}
-                                            </div>
-                                            <div class="text-center mb-4">
-                                                <h3 class="role-title">مشاهده درخواست</h3>
-                                            </div>
-                                            <!-- View Order Details -->
-                                            <div class="row g-3">
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <td><b>درخواست کننده :</b> {{ order.user.profile }}</td>
-                                                            <td><b>شماره درخواست :</b>{{ order.orderId }}</td>
-                                                            <td><b>تاریخ درخواست :</b>
-                                                                {{ order.createdAt|to_jalali:'%y/%m/%d' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>واحد :</b>   {{ order.user.profile.department.name}}</td>
-                                                            <td><b>زیرگروه :</b>
-                                                                {% for sub in order.subGroup.all %}
-                                                               {{ sub.name }}
-                                                                {% endfor %}
-                                                            </td>
-                                                            <td><b>عملیات :</b>{{ order.operationName }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>شرح درخواست</td>
-                                                            <td colspan="2">
-                                                                {{ order.description|safe|wordwrap:50|linebreaks }}
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                {% if order.task_set.all %}
-                                                <div class="table-responsive">
-                                                    <h4>لیست کارهای انجام شده</h4>
-                                                    <table class="table table-bordered text-center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>نام مجری</th>
-                                                                <th>شرح فعالیت</th>
-                                                                <th>شرح لوازم مصرفی</th>
-                                                                <th>تاریخ</th>
-                                                                <th>ساعت شروع</th>
-                                                                <th>ساعت پایان</th>
-                                                                <th>وضعیت</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {% for task in order.task_set.all %}
-                                                            <tr>
-                                                                <td>{{ task.user.profile }}</td>
-                                                                <td>{{ task.description|truncatewords:"10"|linebreaks }}
-                                                                </td>
-                                                                <td>{{ task.description2|truncatewords:"10"|linebreaks }}
-                                                                </td>
-                                                                <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
-                                                                <td dir="ltr">{{ task.start_time|time:'h:i A'}}</td>
-                                                                <td dir="ltr">{{ task.end_time|time:'h:i A'}}</td>
-                                                                <td>
-                                                                    {% if task.completed %}
-                                                                    <span class="badge bg-label-success">کامل</span>
-                                                                    {% else %}
-                                                                    <span class="badge bg-label-danger">ناقص</span>
-                                                                    {% endif %}
-                                                                </td>
-                                                            </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                {% endif %}
-
-                                                <div class="col-12 text-center">
-                                                    {% if not order.isCompleted %}
-                                                    <a href="{% url 'task_add' %}?orderId={{ order.orderId}}"
-                                                        class="btn btn-primary me-sm-3 me-1">شروع به کار</a>
-                                                    {% else %}
-                                                    <a href="{% url 'order_detail' order.orderId %}"
-                                                        class="btn btn-primary me-sm-3 me-1">مشاهده درخواست</a>
+                                <!--/ Add Role Modal -->
+                                <div class="modal fade" id="viewOrderDetail_{{ order.id }}" tabindex="-1"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered modal-add-new-role modal-fullscreen">
+                                        <div class="modal-content p-3 p-md-5">
+                                            <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="">وضعیت درخواست : {{ order.status }}</label>
+                                                    {% contains_building order as contains %}
+                                                    {% if not order.isConfirmed and perms.base.change_order and contains%}
+                                                        <button type="button" class="btn btn-label-primary btn-sm"
+                                                                data-orderid="{{ order.orderId }}"
+                                                                id="confirmOrderBtn">تایید درخواست
+                                                        </button>
                                                     {% endif %}
-                                                    <a href="{% url 'order_invoice' order.orderId %}"
-                                                        class="btn btn-primary me-sm-3 me-1" target="_blank">پرینت
-                                                        درخواست</a>
-                                                    <button type="reset" class="btn btn-label-secondary"
-                                                        data-bs-dismiss="modal" aria-label="Close">
-                                                        انصراف
-                                                    </button>
                                                 </div>
+                                                <div class="text-center mb-4">
+                                                    <h3 class="role-title">مشاهده درخواست</h3>
+                                                </div>
+                                                <!-- View Order Details -->
+                                                <div class="row g-3">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <td><b>درخواست کننده :</b> {{ order.user.profile }}</td>
+                                                                <td><b>شماره درخواست :</b>{{ order.orderId }}</td>
+                                                                <td><b>تاریخ درخواست :</b>
+                                                                    {{ order.createdAt|to_jalali:'%y/%m/%d' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>واحد
+                                                                    :</b> {{ order.user.profile.department.name }}</td>
+                                                                <td><b>زیرگروه :</b>
+                                                                    {% for sub in order.subGroup.all %}
+                                                                        {{ sub.name }}
+                                                                    {% endfor %}
+                                                                </td>
+                                                                <td><b>عملیات :</b>{{ order.operationName }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>شرح درخواست</td>
+                                                                <td colspan="2">
+                                                                    {{ order.description|safe|wordwrap:50|linebreaks }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    {% if order.task_set.all %}
+                                                        <div class="table-responsive">
+                                                            <h4>لیست کارهای انجام شده</h4>
+                                                            <table class="table table-bordered text-center">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>نام مجری</th>
+                                                                    <th>شرح فعالیت</th>
+                                                                    <th>شرح لوازم مصرفی</th>
+                                                                    <th>تاریخ</th>
+                                                                    <th>ساعت شروع</th>
+                                                                    <th>ساعت پایان</th>
+                                                                    <th>وضعیت</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for task in order.task_set.all %}
+                                                                    <tr>
+                                                                        <td>{{ task.user.profile }}</td>
+                                                                        <td>{{ task.description|truncatewords:"10"|linebreaks }}
+                                                                        </td>
+                                                                        <td>{{ task.description2|truncatewords:"10"|linebreaks }}
+                                                                        </td>
+                                                                        <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
+                                                                        <td dir="ltr">{{ task.start_time|time:'h:i A' }}</td>
+                                                                        <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
+                                                                        <td>
+                                                                            {% if task.completed %}
+                                                                                <span class="badge bg-label-success">کامل</span>
+                                                                            {% else %}
+                                                                                <span class="badge bg-label-danger">ناقص</span>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    {% endif %}
+
+                                                    <div class="col-12 text-center">
+                                                        {% if not order.isCompleted %}
+                                                            <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
+                                                               class="btn btn-primary me-sm-3 me-1">شروع به کار</a>
+                                                        {% else %}
+                                                            <a href="{% url 'order_detail' order.orderId %}"
+                                                               class="btn btn-primary me-sm-3 me-1">مشاهده درخواست</a>
+                                                        {% endif %}
+                                                        <a href="{% url 'order_invoice' order.orderId %}"
+                                                           class="btn btn-primary me-sm-3 me-1" target="_blank">پرینت
+                                                            درخواست</a>
+                                                        <button type="reset" class="btn btn-label-secondary"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            انصراف
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!--/ View Order Details -->
                                             </div>
-                                            <!--/ View Order Details -->
                                         </div>
                                     </div>
                                 </div>
+                                <!-- / Add Role Modal -->
                             </div>
-                            <!-- / Add Role Modal -->
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-        <div class="pagination justify-content-center">
-            {% if is_paginated %}
-            <div class="card-footer">
-                <div style="text-align: center;">
+                </tbody>
+            </table>
+            <div class="pagination justify-content-center">
+                {% if is_paginated %}
+                    <div class="card-footer">
+                        <div style="text-align: center;">
 
-                    {% if page_obj.has_previous %}
-                    <a class="btn btn-outline-primary btn-sm  paging" href="#" data-num="1">اولین صفحه</a>
-                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
-                        data-num="{{ page_obj.previous_page_number }}">قبلی</a>
-                    {% endif %}
+                            {% if page_obj.has_previous %}
+                                <a class="btn btn-outline-primary btn-sm  paging" href="#" data-num="1">اولین صفحه</a>
+                                <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                   data-num="{{ page_obj.previous_page_number }}">قبلی</a>
+                            {% endif %}
 
-                    {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                    <a class="btn btn-primary btn-sm  paging" href="#" data-num="{{ num }}">{{ num }}</a>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                    <a class="btn btn-outline-primary btn-sm  paging" href="#" data-num="{{ num }}">{{ num }}</a>
-                    {% endif %}
-                    {% endfor %}
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <a class="btn btn-primary btn-sm  paging" href="#"
+                                       data-num="{{ num }}">{{ num }}</a>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                       data-num="{{ num }}">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
 
-                    {% if page_obj.has_next %}
-                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
-                        data-num="{{ page_obj.next_page_number }}">بعدی</a>
-                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
-                        data-num="{{ page_obj.paginator.num_pages }}">
-                        آخرین صفحه</a>
-                    {% endif %}
-                </div>
+                            {% if page_obj.has_next %}
+                                <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                   data-num="{{ page_obj.next_page_number }}">بعدی</a>
+                                <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                   data-num="{{ page_obj.paginator.num_pages }}">
+                                    آخرین صفحه</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
-</div>
 {% endblock content %}

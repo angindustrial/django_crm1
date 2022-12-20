@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from .models import *
 from .forms import PasswordChangeForm
 
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -30,7 +31,7 @@ class UsersList(ListView):
     template_name = 'users/list.html'
     paginate_by = 10
     context_object_name = 'users'
-    
+
     def get_queryset(self):
         users = User.objects.filter(is_superuser=False).order_by('-date_joined')
 
@@ -43,7 +44,7 @@ class UsersList(ListView):
 
         if role:
             users = users.filter(groups__id=role)
-        
+
         if status:
             users = users.filter(is_active=status)
 
@@ -78,13 +79,14 @@ def user_add(request):
             profile.department = Department.objects.get(id=department)
             profile.save()
             messages.success(request, 'کاربر ایجاد شد')
-        
+
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     departments = Department.objects.all()
     roles = Group.objects.all()
-    context = {'roles':roles, 'departments':departments}
+    context = {'roles': roles, 'departments': departments}
     return render(request, 'users/add.html', context)
+
 
 def user_edit(request, username):
     user = User.objects.get(username=username)
@@ -97,14 +99,14 @@ def user_edit(request, username):
         mobile = request.POST.get('mobile')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
+
         if User.objects.filter(username=username).exclude(id=user.id).exists():
             messages.error(request, 'نام کابری ثبت شده است')
         else:
-            user.first_name=fname
-            user.last_name=lname
-            user.username=username
-            user.email=email
+            user.first_name = fname
+            user.last_name = lname
+            user.username = username
+            user.email = email
             user.groups.clear()
             user.groups.add(Group.objects.get(id=role))
             if password:
@@ -116,24 +118,24 @@ def user_edit(request, username):
             profile.mobileNumber = mobile
             profile.save()
             messages.success(request, 'کاربر ویرایش شد')
-        
+
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     departments = Department.objects.all()
     roles = Group.objects.all()
-    context = {'roles':roles, 'departments':departments, 'user':user}
+    context = {'roles': roles, 'departments': departments, 'user': user}
     return render(request, 'users/edit.html', context)
 
 
 def role_list(request):
     roles = Group.objects.all()
-
-    context = {'roles':roles}
+    context = {'roles': roles}
     return render(request, 'roles/list.html', context)
+
 
 def role_add(request):
     if request.method == 'POST':
-        role_name=request.POST.get('roleName')
+        role_name = request.POST.get('roleName')
         permissisons_list = request.POST.getlist('permission')
 
         if Group.objects.filter(name=role_name).exists():
@@ -147,7 +149,7 @@ def role_add(request):
                 if q.exists():
                     role.permissions.add(q[0])
                 else:
-                    if 'orer' in per:
+                    if 'order' in per:
                         q = Permission.objects.create(codename=per, name='Can view order all', content_type_id=13)
                     elif 'task' in per:
                         q = Permission.objects.create(codename=per, name='Can view task all', content_type_id=13)
@@ -157,12 +159,12 @@ def role_add(request):
             return redirect('roles_list')
 
     return render(request, 'roles/list.html')
-        
+
 
 def role_edit(request, role_id):
     role = Group.objects.get(id=role_id)
     if request.method == 'POST':
-        role_name=request.POST.get('roleName')
+        role_name = request.POST.get('roleName')
         permissisons_list = request.POST.getlist('permission')
 
         if Group.objects.filter(name=role_name).exclude(id=role_id).exists():
@@ -171,7 +173,7 @@ def role_edit(request, role_id):
         else:
             role.name = role_name
             role.save()
-        
+
         if permissisons_list:
             role.permissions.clear()
             for per in permissisons_list:
@@ -179,7 +181,7 @@ def role_edit(request, role_id):
                 if q.exists():
                     role.permissions.add(q[0])
                 else:
-                    if 'orer' in per:
+                    if 'order' in per:
                         q = Permission.objects.create(codename=per, name='Can view order all', content_type_id=13)
                     elif 'task' in per:
                         q = Permission.objects.create(codename=per, name='Can view task all', content_type_id=13)
@@ -187,9 +189,10 @@ def role_edit(request, role_id):
 
             messages.success(request, 'نقش ویرایش شد')
             return redirect('roles_list')
-    
+
     return render(request, 'roles/list.html')
-    
+
+
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -218,17 +221,17 @@ def profile(request):
         if User.objects.filter(username=username).exclude(id=request.user.id).exists():
             messages.error(request, 'نام کابری ثبت شده است')
         else:
-            user.first_name=fname
-            user.last_name=lname
-            user.username=username
-            user.email=email
+            user.first_name = fname
+            user.last_name = lname
+            user.username = username
+            user.email = email
             user.save()
 
             profile = Profile.objects.get(user=user)
             profile.mobileNumber = mobile
             profile.save()
             messages.success(request, 'پروفایل ویرایش شد')
-        
+
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    context = {'user':user}
+    context = {'user': user}
     return render(request, 'users/profile.html', context)
