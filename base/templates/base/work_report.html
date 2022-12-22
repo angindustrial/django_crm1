@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+{% load seconds_to_time %}
+
+{% block content %}
+    <h4 class="py-3 breadcrumb-wrapper mb-2">گزارش افراد</h4>
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% else %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+    <div class="card">
+        <div class="card-header border-bottom">
+            <h5 class="card-title">فیلتر جستجو</h5>
+            <form action="{% url 'work_report' %}">
+                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                    <div class="col-md-3 user_role">
+                        <input class="form-control" type="search" name="executor_name" placeholder="نام مجری"
+                               value="{{ request.GET.executor_name }}">
+                    </div>
+                    <div class="col-md-3">
+                        {% if total_seconds %}
+                            <b> مدت زمان فعالیت:</b>
+                            <p class="m-0">{% seconds_to_time total_seconds %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 user_status " style="text-align: right;">
+                        <button type="submit" class="btn btn-label-primary">اعمال فیلتر</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% if results %}
+            <div class="card-datatable table-responsive">
+                <table class="table border-top text-center table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>شماره سفارش</th>
+                        <th>مجری</th>
+                        <th>تاریخ</th>
+                        <th>زمان شروع</th>
+                        <th>زمان پایان</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a href="{% url 'order_detail' result.order.orderId %}">{{ result.order.orderId }}</a>
+                            </td>
+                            <td>{{ result.user.profile }}</td>
+                            <td>{{ result.date|to_jalali:'%y/%m/%d' }}</td>
+                            <td>{{ result.start_time|time:'H:i' }}</td>
+                            <td>{{ result.end_time|time:'H:i' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="pagination justify-content-center">
+                    {% if is_paginated %}
+                        <div class="card-footer">
+                            <div style="text-align: center;">
+                                {% if page_obj.has_previous %}
+                                    <a class="btn btn-outline-primary btn-sm  paging" href="#" data-num="1">اولین
+                                        صفحه</a>
+                                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                       data-num="{{ page_obj.previous_page_number }}">قبلی</a>
+                                {% endif %}
+
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <a class="btn btn-primary btn-sm  paging" href="#"
+                                           data-num="{{ num }}">{{ num }}</a>
+                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                           data-num="{{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                       data-num="{{ page_obj.next_page_number }}">بعدی</a>
+                                    <a class="btn btn-outline-primary btn-sm  paging" href="#"
+                                       data-num="{{ page_obj.paginator.num_pages }}">
+                                        آخرین صفحه</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock content %}

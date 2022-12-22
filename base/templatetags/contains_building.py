@@ -1,5 +1,4 @@
 from django import template
-from ..models import Order
 
 register = template.Library()
 

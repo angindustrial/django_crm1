@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    
+
     path('orders/list/', views.OrdersList.as_view(), name='orders_list'),
     path('order/add/', views.order_add, name='order_add'),
     path('order/edit/<orderId>/', views.order_edit, name='order_edit'),
@@ -30,4 +30,6 @@ urlpatterns = [
     path('subgroup/edit/<subgroupId>/', views.subgroup_edit, name='subgroup_edit'),
     
     path('ajax/', include('base.ajax_urls')),
+
+    path('work_report/', views.WorkReportView.as_view(), name='work_report')
 ]

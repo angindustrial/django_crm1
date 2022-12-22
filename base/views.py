@@ -4,12 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q
+from django.db.utils import IntegrityError
 
-import random
 import jdatetime
 
 from .models import *
-from users.models import *
 from .forms import OrderForm
 from .utils import split_persian_date, is_member
 
@@ -37,13 +36,11 @@ class OrdersList(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        if self.request.user.has_perm('base.view_order_all'):
+        if self.request.user.has_perm('review.view_order_all'):
             orders = Order.objects.all().order_by('-createdAt')
-
         else:
-            profile = Profile.objects.get(user=self.request.user)
+            # profile = Profile.objects.get(user=self.request.user)
             orders = Order.objects.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
-            print(profile.department.id)
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -98,8 +95,11 @@ def order_add(request):
             instance.department = department
             instance.departmentName = department.name
             instance.priority = priority
-            instance.save()
-
+            try:
+                instance.save()
+            except IntegrityError as e:
+                messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
+                return redirect('orders_list')
             instance.isConfirmed = True
             instance.status = f'ارسال به  {department.name}'
             instance.status = 'ارسال به واحد فنی'
@@ -115,6 +115,7 @@ def order_add(request):
                 instance.subGroup.add(subgroup_item)
 
             instance.save()
+
         messages.success(request, 'درخواست ثبت شد')
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -183,9 +184,6 @@ def order_invoice(request, orderId):
     return render(request, 'order/invoice.html', context)
 
 
-from django.http import HttpResponse
-
-
 class TasksList(ListView):
     model = Task
     template_name = 'task/list.html'
@@ -204,7 +202,7 @@ class TasksList(ListView):
         status = self.request.GET.get('status')
 
         if q:
-            tasks = tasks.filter(order__orderId__contains=q)
+            tasks = tasks.filter(order__orderId__contains=q)[:1]
 
         if department:
             tasks = tasks.filter(order__department_id=department)
@@ -375,3 +373,37 @@ def subgroup_edit(request, subgroupId):
         Subgroup.objects.filter(id=subgroupId).update(name=name)
         messages.success(request, 'زیرگروه ویرایش شد')
         return redirect('subgroup_list')
+
+
+class WorkReportView(ListView):
+    # model = Task
+    template_name = "base/work_report.html"
+    paginate_by = 10
+    context_object_name = 'results'
+
+    def get_queryset(self):
+        executor_name = self.request.GET.get('executor_name')
+        if executor_name:
+            split_query = executor_name.split(' ')
+            first_name = split_query[0]
+            last_name = split_query[1]
+            tasks = Task.objects.filter(user__first_name=first_name, user__last_name=last_name)
+            return tasks
+        else:
+            tasks = Task.objects.all()
+            return tasks
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        tasks = self.get_queryset()
+        total_seconds = 0
+        executor_name = self.request.GET.get('executor_name')
+        if executor_name:
+            for task in tasks:
+                t_start = task.start_time
+                t_end = task.end_time
+                seconds_start = (t_start.hour * 60 + t_start.minute) * 60 + t_start.second
+                seconds_end = (t_end.hour * 60 + t_end.minute) * 60 + t_end.second
+                total_seconds += seconds_end - seconds_start
+            context['total_seconds'] = total_seconds
+        return context

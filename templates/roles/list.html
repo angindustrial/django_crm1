@@ -55,7 +55,11 @@
                                 <p>مجوزهای نقش را تنظیم کنید</p>
                             </div>
                             <!-- Edit role form -->
+                            {% for per in role.permissions.all %}
+                                {{ per.codename }}
+                            {% endfor %}
                             <form method="post" class="row g-3" action="{% url 'role_edit' role.id %}">
+
                                 {% csrf_token %}
                                 <div class="col-12 mb-4">
                                     <label class="form-label" for="roleName">نام نقش</label>
@@ -97,22 +101,6 @@
                                                                    name="permission"
                                                                    value="view_order_all">
                                                             <label class="form-check-label" for="userManagementRead">
-                                                                {#                                                                add_order#}
-                                                                {#                                                                add_department#}
-                                                                {#                                                                add_operation#}
-                                                                {#                                                                add_subgroup#}
-                                                                {#                                                                change_order#}
-                                                                {#                                                                change_department#}
-                                                                {#                                                                change_subgroup#}
-                                                                {#                                                                delete_department#}
-                                                                {#                                                                change_operation#}
-                                                                {#                                                                delete_subgroup#}
-                                                                {#                                                                delete_operation#}
-                                                                {#                                                                view_department#}
-                                                                {#                                                                view_subgroup#}
-                                                                {#                                                                view_task#}
-                                                                {#                                                                view_order#}
-                                                                {#                                                                view_operation#}
                                                                 مشاهده
                                                                 همه
                                                                 درخواست ها

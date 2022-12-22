@@ -5,6 +5,7 @@ from django.contrib.auth.models import Permission, Group, User
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 from .models import *
 from .forms import PasswordChangeForm
@@ -166,7 +167,7 @@ def role_edit(request, role_id):
     if request.method == 'POST':
         role_name = request.POST.get('roleName')
         permissisons_list = request.POST.getlist('permission')
-
+        print(permissisons_list)
         if Group.objects.filter(name=role_name).exclude(id=role_id).exists():
             messages.error(request, 'نقش ایجاد شده است')
             return redirect('roles_list')

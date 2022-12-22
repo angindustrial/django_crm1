@@ -129,7 +129,6 @@
                         </ul>
                     </li>
                 {% endif %}
-
                 {% if perms.base.view_task %}
                     <!-- Tasks -->
                     <li class="menu-item {% if 'task' in request.resolver_match.url_name %} active {% endif %}">
@@ -159,7 +158,14 @@
                         </a>
                     </li>
                 {% endif %}
-
+                {% if perms.auth.view_user %}
+                    <li class="menu-item {% if 'workreport' in request.resolver_match.url_name %} active {% endif %}">
+                        <a href="{% url 'work_report' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-select-multiple"></i>
+                            <div data-i18n="users">مدیریت مدت زمان کار</div>
+                        </a>
+                    </li>
+                {% endif %}
                 {% if perms.base.view_subgroup %}
                     <!-- SubGroup -->
                     <li class="menu-item {% if 'subgroup' in request.resolver_match.url_name %} active {% endif %}">

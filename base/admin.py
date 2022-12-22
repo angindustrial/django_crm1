@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, Department, Task, Subgroup
+from .models import Order, Department, Task, Subgroup, Operation
 
 
 # class OrderInline(admin.TabularInline):
@@ -10,7 +10,7 @@ from .models import Order, Department, Task, Subgroup
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'operation', 'department')
-    list_filter = ('user', 'department')
+    list_filter = ('user', 'department', 'createdAt')
 # inlines = (OrderInline,)
 
 
@@ -30,3 +30,4 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Subgroup)
+admin.site.register(Operation)

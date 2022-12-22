@@ -1,12 +1,10 @@
-
 from django.db import models
-from django.contrib.auth.models import User, Permission
-
+from django.conf import settings
 from base.models import Department
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mobileNumber = models.CharField(max_length=11, blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
 

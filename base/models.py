@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField 
+from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils import timezone
 
 
 class Order(models.Model):
@@ -12,12 +13,16 @@ class Order(models.Model):
     departmentName = models.CharField(max_length=300, blank=True, null=True)
     subGroup = models.ManyToManyField('Subgroup')
     createdAt = models.DateTimeField(auto_now_add=True)
+    today = models.DateField(default=timezone.now)
     description = RichTextField(blank=True, null=True)
     orderId = models.CharField(max_length=50)
-    isConfirmed = models.BooleanField(default=False) # Confirmed by manager
+    isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
-    status = models.CharField(max_length=200, blank=True, null=True) # Which step is right now
+    status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
     isCompleted = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ("today", "operation")
 
     def __str__(self):
         return str(self.orderId)
@@ -60,7 +65,7 @@ class Task(models.Model):
     description2 = RichTextUploadingField()
     date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
-    end_time = models.TimeField(null=True)   
+    end_time = models.TimeField(null=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
 
