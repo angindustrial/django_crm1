@@ -23,7 +23,7 @@ class Order(models.Model):
     isCompleted = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ("today", "operation")
+        unique_together = ("today", "operation", "description")
 
     def __str__(self):
         return str(self.orderId)
