@@ -31,5 +31,6 @@ urlpatterns = [
     
     path('ajax/', include('base.ajax_urls')),
 
-    path('work_report/', views.WorkReportView.as_view(), name='work_report')
+    path('persons_report/', views.WorkReportView.as_view(), name='persons_report'),
+    path('machines_report/', views.MachineReportView.as_view(), name='machines_report')
 ]

@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
+from django.utils.encoding import force_str
 
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    operation = models.ForeignKey('Operation', on_delete=models.SET_NULL, null=True)
+    operation = models.ForeignKey('Operation', on_delete=models.SET_NULL, null=True, related_name='order')
     operationName = models.CharField(max_length=300, blank=True, null=True)
     department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True)
     departmentName = models.CharField(max_length=300, blank=True, null=True)
@@ -59,7 +60,7 @@ class Subgroup(models.Model):
 
 
 class Task(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='task')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextUploadingField()
     description2 = RichTextUploadingField()
@@ -69,5 +70,14 @@ class Task(models.Model):
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ("-date",)
+
     def __str__(self):
         return f'{self.order.orderId}'
+
+    @property
+    def get_time_diff(self):
+        from datetime import datetime, date
+        time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
+        return time_diff.total_seconds()

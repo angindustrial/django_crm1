@@ -3,14 +3,14 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Sum, F, CharField, TimeField
 from django.db.utils import IntegrityError
 
 import jdatetime
 
 from .models import *
 from .forms import OrderForm
-from .utils import split_persian_date, is_member
+from .utils import split_persian_date, is_member, total_seconds_calculator, to_gregorian, find_longest_work
 
 
 @login_required(login_url='/users/login/')
@@ -376,34 +376,65 @@ def subgroup_edit(request, subgroupId):
 
 
 class WorkReportView(ListView):
-    # model = Task
     template_name = "base/work_report.html"
     paginate_by = 10
     context_object_name = 'results'
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.tasks = None
+        self.end_date = None
+        self.start_date = None
+        self.executor_name = None
+
     def get_queryset(self):
-        executor_name = self.request.GET.get('executor_name')
-        if executor_name:
-            split_query = executor_name.split(' ')
-            first_name = split_query[0]
-            last_name = split_query[1]
-            tasks = Task.objects.filter(user__first_name=first_name, user__last_name=last_name)
-            return tasks
-        else:
-            tasks = Task.objects.all()
-            return tasks
+        self.executor_name = self.request.GET.get('executor_name')
+        self.start_date = to_gregorian(self.request.GET.get('execution_start_time'))
+        self.end_date = to_gregorian(self.request.GET.get('execution_end_time'))
+        tasks = Task.objects.all()
+
+        if self.start_date:
+            tasks = tasks.filter(date__gte=self.start_date)
+        if self.end_date:
+            tasks = tasks.filter(date__lte=self.end_date)
+        if self.executor_name:
+            first_name, last_name = self.executor_name.split(' ')
+            tasks = tasks.filter(user__first_name=first_name, user__last_name=last_name)
+
+        return tasks
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        tasks = self.get_queryset()
         total_seconds = 0
-        executor_name = self.request.GET.get('executor_name')
-        if executor_name:
-            for task in tasks:
-                t_start = task.start_time
-                t_end = task.end_time
-                seconds_start = (t_start.hour * 60 + t_start.minute) * 60 + t_start.second
-                seconds_end = (t_end.hour * 60 + t_end.minute) * 60 + t_end.second
-                total_seconds += seconds_end - seconds_start
+        the_longest_work_seconds = 0
+        the_longest_work_object = None
+        if self.start_date or self.end_date or self.executor_name:
+            for task in self.get_queryset():
+                total_seconds = total_seconds_calculator(task, total_seconds)
+                the_longest_work_seconds, the_longest_work_object = find_longest_work(task, the_longest_work_seconds,
+                                                                                      the_longest_work_object)
+                context['the_longest_operation'] = the_longest_work_object.order
             context['total_seconds'] = total_seconds
+            context['the_longest_work'] = the_longest_work_seconds
+        return context
+
+
+class MachineReportView(ListView):
+    model = Operation
+    template_name = "base/machine_report.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        operations = Operation.objects.all()
+
+        operation_query = self.request.GET.get('operation')
+        print(operation_query)
+        if operation_query:
+            operations = operations.filter(name=operation_query)
+
+        return operations
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(MachineReportView, self).get_context_data()
+        context['all_operations'] = Operation.objects.all()
         return context

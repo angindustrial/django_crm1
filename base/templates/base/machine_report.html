@@ -2,7 +2,7 @@
 {% load static %}
 {% load jalali_tags %}
 {% load seconds_to_time %}
-
+{% load task_time %}
 {% block content %}
     <h4 class="py-3 breadcrumb-wrapper mb-2">گزارش افراد</h4>
     {% for message in messages %}
@@ -15,40 +15,17 @@
     <div class="card">
         <div class="card-header border-bottom">
             <h5 class="card-title">فیلتر جستجو</h5>
-            <form action="{% url 'persons_report' %}">
+            <form action="{% url 'machines_report' %}">
                 <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-3 user_role">
-                        <label class="w-100">
-                            نام مجری:
-                            <input class="form-control" type="search" name="executor_name" placeholder="محمد نوروزی"
-                                   value="{{ request.GET.executor_name }}">
-                        </label>
-                    </div>
-                    <div class="col-md-3 user_role">
-                        <label class="w-100" for="execution_start_time">
-                            تاریخ شروع:
-                            <input class="form-control" type="date" name="execution_start_time" placeholder="تاریخ شروع"
-                                   value="{{ request.GET.execution_start_time }}">
-                        </label>
-                    </div>
-                    <div class="col-md-3 user_role">
-                        <label class="w-100">
-                            تاریخ پایان:
-                            <input class="form-control w-100" type="date" name="execution_end_time"
-                                   placeholder="تاریخ پایان"
-                                   value="{{ request.GET.execution_end_time }}">
-                        </label>
-                    </div>
-                    <div class="col-md-3 text-cendter border-2 border-danger ">
-                        {% if total_seconds %}
-                            <b> مدت زمان فعالیت:</b>
-                            <p class="m-0 mb-4">{% seconds_to_time total_seconds %}</p>
-                        {% endif %}
-                        {% if total_seconds %}
-                            <b> اطلاعات طولانی ترین فعالیت:</b>
-                            <p class="m-0">{% seconds_to_time the_longest_work %} </p>
-                            <a href="{% url 'order_detail' the_longest_operation.orderId %}">{{ the_longest_operation.operationName }}</a>
-                        {% endif %}
+                    <div class="col-md-3 order_status">
+                        <select class="select2 form-select" name="operation" id="">
+                            <option value="">عملیات درخواستی</option>
+                            {% for operation in all_operations %}
+                                <option value="{{ operation.name }}" {% if request.GET.operation == operation.name %}
+                                        selected
+                                {% endif %}>{{ operation.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -58,29 +35,29 @@
                 </div>
             </form>
         </div>
-        {% if results %}
+        {% if operation_list %}
             <div class="card-datatable table-responsive">
                 <table class="table border-top text-center table-striped">
                     <thead class="table-dark">
                     <tr>
                         <th>#</th>
                         <th>شماره سفارش</th>
-                        <th>مجری</th>
-                        <th>تاریخ</th>
-                        <th>زمان شروع</th>
-                        <th>زمان پایان</th>
+                        <th>مدت زمان</th>
+                        {#                        <th>تاریخ</th>#}
+                        {#                        <th>زمان شروع</th>#}
+                        {#                        <th>زمان پایان</th>#}
                     </tr>
                     </thead>
                     <tbody>
-                    {% for result in results %}
+                    {% for operation in operation_list %}
+                        {% total_task_time operation.order.all as total_seconds %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'order_detail' result.order.orderId %}">{{ result.order.orderId }}</a>
+                            <td><a href="{% url 'operation_edit' operation.id %}">{{ operation.name }}</a>
                             </td>
-                            <td>{{ result.user.profile }}</td>
-                            <td>{{ result.date|to_jalali:'%y/%m/%d' }}</td>
-                            <td>{{ result.start_time|time:'H:i' }}</td>
-                            <td>{{ result.end_time|time:'H:i' }}</td>
+                            <td>
+                                {% seconds_to_time total_seconds %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -101,7 +101,6 @@
                         <div data-i18n="Dashboard">داشبورد</div>
                     </a>
                 </li>
-
                 {% if perms.base.view_order or perms.base.add_order %}
                     <!-- Orders -->
                     <li class="menu-item {% if 'order' in request.resolver_match.url_name %} open {% endif %}">
@@ -159,10 +158,18 @@
                     </li>
                 {% endif %}
                 {% if perms.auth.view_user %}
-                    <li class="menu-item {% if 'workreport' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'work_report' %}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-select-multiple"></i>
+                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">
+                        <a href="{% url 'persons_report' %}" class="menu-link">
+                            <i class="menu-icon tf-icons fa fa-user-gear"></i>
                             <div data-i18n="users">مدیریت مدت زمان کار</div>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if perms.base.view_operation %}
+                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">
+                        <a href="{% url 'machines_report' %}" class="menu-link">
+                            <i class="menu-icon tf-icons fa fa-car-on"></i>
+                            <div data-i18n="users">گزارش دستگاه ها</div>
                         </a>
                     </li>
                 {% endif %}
@@ -234,7 +241,7 @@
                             {% if perms.review.view_part %}
                                 <!-- Machine -->
                                 <li
-                                        class="menu-item {% if 'machine' in request.resolver_match.url_name %} active {% endif %}">
+                                        class="menu-item {% if 'machine_list' in request.resolver_match.url_name %} active {% endif %}">
                                     <a href="{% url 'machine_list' %}" class="menu-link">
                                         <div data-i18n="users">مدیریت دستگاه</div>
                                     </a>
@@ -242,7 +249,7 @@
                             {% endif %}
                             {% if perms.review.view_part %}
                                 <!-- Part -->
-                                <li class="menu-item {% if 'part' in request.resolver_match.url_name %} active {% endif %}">
+                                <li class="menu-item {% if 'part_list' in request.resolver_match.url_name %} active {% endif %}">
                                     <a href="{% url 'part_list' %}" class="menu-link">
                                         <div data-i18n="users">مدیریت قطعات</div>
                                     </a>

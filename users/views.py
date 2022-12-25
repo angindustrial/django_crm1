@@ -104,8 +104,8 @@ def user_edit(request, username):
         if User.objects.filter(username=username).exclude(id=user.id).exists():
             messages.error(request, 'نام کابری ثبت شده است')
         else:
-            user.first_name = fname
-            user.last_name = lname
+            user.first_name = fname.strip()
+            user.last_name = lname.strip()
             user.username = username
             user.email = email
             user.groups.clear()
