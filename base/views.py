@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q, Sum, F, CharField, TimeField
 from django.db.utils import IntegrityError
+from users.models import Profile
 
 import jdatetime
 
@@ -200,6 +201,8 @@ class TasksList(ListView):
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
         status = self.request.GET.get('status')
+        operation = self.request.GET.get('operation')
+        subgroup = self.request.GET.get('subgroup')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)[:1]
@@ -210,11 +213,18 @@ class TasksList(ListView):
         if status:
             tasks = tasks.filter(completed=status)
 
+        if operation:
+            tasks = tasks.filter(order__operation=operation)
+
+        if subgroup:
+            tasks = tasks.filter(order__subGroup=subgroup)
+
         return tasks
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['departments'] = Department.objects.all()
+        context['operations'] = Operation.objects.all()
         return context
 
 
@@ -376,6 +386,7 @@ def subgroup_edit(request, subgroupId):
 
 
 class WorkReportView(ListView):
+    # person per hour report
     template_name = "base/work_report.html"
     paginate_by = 10
     context_object_name = 'results'
@@ -416,6 +427,7 @@ class WorkReportView(ListView):
                 context['the_longest_operation'] = the_longest_work_object.order
             context['total_seconds'] = total_seconds
             context['the_longest_work'] = the_longest_work_seconds
+        context['persons'] = Profile.mechanical_users.all()
         return context
 
 

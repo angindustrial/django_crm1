@@ -48,7 +48,7 @@
 
             <div class="table-responsive">
                 <h4>لیست کارهای انجام شده</h4>
-                {% for task in order.task_set.all|dictsort:"date" %}
+                {% for task in order.task.all|dictsort:"date" %}
                 <table class="table table-bordered text-center mb-4">
                     <tr>
                         <td colspan="4"> <b> نام مجری :</b> {{ task.user.profile }}</td>

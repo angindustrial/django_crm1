@@ -41,11 +41,8 @@
                     <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>شماره سفارش</th>
+                        <th>نام دسنگاه</th>
                         <th>مدت زمان</th>
-                        {#                        <th>تاریخ</th>#}
-                        {#                        <th>زمان شروع</th>#}
-                        {#                        <th>زمان پایان</th>#}
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +50,7 @@
                         {% total_task_time operation.order.all as total_seconds %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'operation_edit' operation.id %}">{{ operation.name }}</a>
+                            <td><a href="{% url 'orders_list' %}?operation={{ operation.id }}">{{ operation.name }}</a>
                             </td>
                             <td>
                                 {% seconds_to_time total_seconds %}

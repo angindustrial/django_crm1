@@ -18,11 +18,18 @@
             <form action="{% url 'persons_report' %}">
                 <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-3 user_role">
-                        <label class="w-100">
-                            نام مجری:
-                            <input class="form-control" type="search" name="executor_name" placeholder="محمد نوروزی"
-                                   value="{{ request.GET.executor_name }}">
+
+                        <label for="executor_name">مجری
+
                         </label>
+                        <select class="select2 form-select" name="executor_name" id="">
+                            <option value="">مجری</option>
+                            {% for person in persons %}
+                                <option value="{{ person }}" {% if request.GET.executor_name == person %}
+                                        selected
+                                {% endif %}>{{ person }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="col-md-3 user_role">
                         <label class="w-100" for="execution_start_time">
@@ -39,17 +46,7 @@
                                    value="{{ request.GET.execution_end_time }}">
                         </label>
                     </div>
-                    <div class="col-md-3 text-cendter border-2 border-danger ">
-                        {% if total_seconds %}
-                            <b> مدت زمان فعالیت:</b>
-                            <p class="m-0 mb-4">{% seconds_to_time total_seconds %}</p>
-                        {% endif %}
-                        {% if total_seconds %}
-                            <b> اطلاعات طولانی ترین فعالیت:</b>
-                            <p class="m-0">{% seconds_to_time the_longest_work %} </p>
-                            <a href="{% url 'order_detail' the_longest_operation.orderId %}">{{ the_longest_operation.operationName }}</a>
-                        {% endif %}
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-12 user_status " style="text-align: right;">
@@ -60,6 +57,26 @@
         </div>
         {% if results %}
             <div class="card-datatable table-responsive">
+                {% if total_seconds %}
+                    <table class="table border-top text-center table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>نام مجری</th>
+                            <th>مجموع فعالیت</th>
+                            <th>طولانی ترین فعالیت</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ request.GET.executor_name }}</td>
+                            <td>{% seconds_to_time total_seconds %}</td>
+                            <td>
+                                <a href="{% url 'tasks_list' %}?operation={{ the_longest_operation.id }}">{{ the_longest_operation.operationName }}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% endif %}
                 <table class="table border-top text-center table-striped">
                     <thead class="table-dark">
                     <tr>
