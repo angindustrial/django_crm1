@@ -157,22 +157,8 @@
                         </a>
                     </li>
                 {% endif %}
-                {% if perms.auth.view_user %}
-                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'persons_report' %}" class="menu-link">
-                            <i class="menu-icon tf-icons fa fa-user-gear"></i>
-                            <div data-i18n="users">مدیریت مدت زمان کار</div>
-                        </a>
-                    </li>
-                {% endif %}
-                {% if perms.base.view_operation %}
-                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'machines_report' %}" class="menu-link">
-                            <i class="menu-icon tf-icons fa fa-car-on"></i>
-                            <div data-i18n="users">گزارش دستگاه ها</div>
-                        </a>
-                    </li>
-                {% endif %}
+
+
                 {% if perms.base.view_subgroup %}
                     <!-- SubGroup -->
                     <li class="menu-item {% if 'subgroup' in request.resolver_match.url_name %} active {% endif %}">
@@ -180,6 +166,43 @@
                             <i class="menu-icon tf-icons bx bx-layer"></i>
                             <div data-i18n="users">مدیریت زیرگروه</div>
                         </a>
+                    </li>
+                {% endif %}
+{#                {% if perms.base.view_operation %}#}
+{#                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">#}
+{#                        <a href="{% url 'machines_report' %}" class="menu-link">#}
+{#                            <i class="menu-icon tf-icons fa fa-car-on"></i>#}
+{#                            <div data-i18n="users">گزارش دستگاه ها</div>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">#}
+{#                        <a href="{% url 'persons_report' %}" class="menu-link">#}
+{#                            <i class="menu-icon tf-icons fa fa-user-gear"></i>#}
+{#                            <div data-i18n="users">مدیریت مدت زمان کار</div>#}
+{#                        </a>#}
+{#                    </li>#}
+                {% if perms.base.view_operation or perms.auth.view_user %}
+                    <!-- Users -->
+                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} open {% endif %}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="users">گزارشات</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li
+                                    class="menu-item {% if request.resolver_match.url_name == 'persons_report' %} active {% endif %}">
+                                <a href="{% url 'persons_report' %}" class="menu-link">
+                                    <div data-i18n="Users list">افراد</div>
+                                </a>
+                            </li>
+                            <li
+                                    class="menu-item {% if request.resolver_match.url_name == 'machines_report' %} active {% endif %}">
+                                <a href="{% url 'machines_report' %}" class="menu-link">
+                                    <div data-i18n="User add">دستگاه ها</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 {% endif %}
 
