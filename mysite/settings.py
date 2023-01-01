@@ -1,8 +1,8 @@
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -14,7 +14,6 @@ SECRET_KEY = 'django-insecure-pzt1x3t)m-e@m@$*r&rpgvqpxjyl$r4^y7l8xl3iyfb2#4gf9^
 DEBUG = True
 
 ALLOWED_HOSTS = ['www.pm.ang.ir', 'pm.ang.ir', '0.0.0.0']
-
 
 # Application definition
 
@@ -29,7 +28,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'jalali_date',
-    'crispy_forms',    
+    'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
 
@@ -69,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -84,13 +82,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-
-
-
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -110,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -121,7 +111,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
