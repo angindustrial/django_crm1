@@ -11349,3 +11349,9 @@ False
 False
 Not Found: /assets/img/favicon/favicon.ico
 False
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Subgroup'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+None
+دستگاه تانک چسب HESSAN
