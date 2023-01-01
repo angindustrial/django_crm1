@@ -102,12 +102,40 @@
                                     <i class="bx bx-show"></i>
                                 </a>
                                 {% if user.is_superuser %}
-                                    <form method="post" action="{% url 'archive-task' task.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-icon ps-4 text-danger">
-                                                <i class="bx bx-trash"></i>
-                                        </button>
-                                    </form>
+                                    <a href="javascript:;" data-bs-toggle="modal"
+                                       data-bs-target="#deleteTaskModal_{{ task.id }}"
+                                       class="role-edit-modal">
+                                        <i class="bx bx-trash"></i>
+                                    </a>
+                                    <div class="modal fade" id="deleteTaskModal_{{ task.id }}" tabindex="-1"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
+                                            <div class="modal-content p-3 p-md-5">
+                                                <button type="button" class="btn-close btn-pinned"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                <div class="modal-body">
+
+                                                    <div class="text-center mb-4">
+                                                        <h3 class="role-title">آیا میخواهید درخواست مربوط با کار حذف شود؟</h3>
+                                                    </div>
+                                                    <form method="post" class="row g-3"
+                                                          action="{% url 'archive-task' task.id %}">
+                                                        {% csrf_token %}
+                                                        <div class="col-12 text-center">
+                                                            <button type="submit" name="type_of_delete" value="delete_all" class="btn btn-danger me-sm-3 me-1">
+                                                                بله
+                                                            </button>
+                                                            <button type="submit" name="type_of_delete" value="delete_this" class="btn btn-primary">
+                                                                خیر
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 {% endif %}
                             </div>
                         </td>
