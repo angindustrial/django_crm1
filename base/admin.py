@@ -9,7 +9,7 @@ from .models import Order, Department, Task, Subgroup, Operation
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'operation', 'department')
+    list_display = ('id', 'user', 'operation', 'department', 'orderId')
     list_filter = ('user', 'department', 'createdAt')
 # inlines = (OrderInline,)
 
@@ -25,7 +25,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user']
+    list_display = ['id', 'user', 'order']
     list_filter = ['user']
 
 
