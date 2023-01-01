@@ -161,7 +161,7 @@
                                                                 </tr>
                                                             </table>
                                                         </div>
-                                                        {% if order.task_set.all %}
+                                                        {% if order.task.all %}
                                                             <div class="table-responsive">
                                                                 <h4>لیست کارهای انجام شده</h4>
                                                                 <table class="table table-bordered text-center">
@@ -177,7 +177,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    {% for task in order.task_set.all %}
+                                                                    {% for task in order.task.all %}
                                                                         <tr>
                                                                             <td>{{ task.user.profile }}</td>
                                                                             <td>{{ task.description|truncatewords:"10"|linebreaks }}
