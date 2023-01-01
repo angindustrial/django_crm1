@@ -30,7 +30,6 @@ class Order(models.Model):
 
     class Meta:
         unique_together = ("operation", "description")
-        # unique_together = ("today", "operation", "description")
 
     def __str__(self):
         return str(self.orderId)
