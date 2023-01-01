@@ -455,11 +455,23 @@ class MachineReportView(ListView):
 
 def change_task_publish_status(request, pk):
     if request.method == 'POST':
+
         if request.user.is_superuser:
+            type_of_delete = request.POST.get('type_of_delete')
             task = Task.published.get(pk=pk)
-            task.publish = False
-            task.save()
+
+            if type_of_delete == 'delete_all':
+                task.publish = False
+                task.save()
+                task.order.publish = False
+                task.order.save()
+
+            elif type_of_delete == 'delete_this':
+                task.publish = False
+                task.save()
+
             return redirect('tasks_list')
+
         else:
             return PermissionDenied()
     else:
