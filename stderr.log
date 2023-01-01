@@ -7330,3 +7330,1353 @@ Traceback (most recent call last):
   File "/home/pmangir/project/test.py", line 10, in <module>
     with open('data.json', mode='r') as in_file, \
 FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+OSError: LSAPI: Socket read/write error
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Department'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Subgroup'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+None
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+Not Found: /favicon.ico
+Internal Server Error: /tasks/list/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py", line 142, in get
+    self.object_list = self.get_queryset()
+  File "/home/pmangir/project/base/views.py", line 214, in get_queryset
+    tasks = tasks.filter(completed=status)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 836, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 848, in _filter_or_exclude
+    "Cannot filter a query once a slice has been taken."
+AssertionError: Cannot filter a query once a slice has been taken.
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Not Found: /_ignition/health-check/
+Invalid HTTP_HOST header: 'mail.pm.ang.ir'. You may need to add 'mail.pm.ang.ir' to ALLOWED_HOSTS.
+Not Found: /public/_ignition/health-check/
+Invalid HTTP_HOST header: 'mail.pm.ang.ir'. You may need to add 'mail.pm.ang.ir' to ALLOWED_HOSTS.
+Not Found: /wp-includes/wlwmanifest.xml
+Invalid HTTP_HOST header: 'mail.pm.ang.ir'. You may need to add 'mail.pm.ang.ir' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Internal Server Error: /task/edit/261/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 293, in task_edit
+    task.save()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 729, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 759, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 823, in _save_table
+    forced_update)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 872, in _do_update
+    return filtered._update(values) > 0
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 709, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1374, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1050, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1340, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 767, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2248, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2243, in get_prep_value
+    return self.to_python(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2230, in to_python
+    params={'value': value},
+django.core.exceptions.ValidationError: ["'' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] format."]
+Not Found: /favicon.ico
+Internal Server Error: /task/edit/261/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 293, in task_edit
+    task.save()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 729, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 759, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 823, in _save_table
+    forced_update)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 872, in _do_update
+    return filtered._update(values) > 0
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 709, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1374, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1050, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1340, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 767, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2248, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2243, in get_prep_value
+    return self.to_python(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2230, in to_python
+    params={'value': value},
+django.core.exceptions.ValidationError: ["'' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] format."]
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+False
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+OSError: LSAPI: Socket read/write error
+OSError: LSAPI: Socket read/write error
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+None
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Internal Server Error: /order/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 91, in order_add
+    instance.user = request.user
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/related_descriptors.py", line 197, in __set__
+    self.field.remote_field.model._meta.object_name,
+ValueError: Cannot assign "<SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f927ca979d0>>": "Order.user" must be a "User" instance.
+Not Found: /favicon.ico
+Internal Server Error: /order/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 91, in order_add
+    instance.user = request.user
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/related_descriptors.py", line 197, in __set__
+    self.field.remote_field.model._meta.object_name,
+ValueError: Cannot assign "<SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f927cbc7ed0>>": "Order.user" must be a "User" instance.
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+[UID:1004][4060656] Child process with pid: 4060706 was killed by signal: 15, core dump: 0
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+Internal Server Error: /task/edit/225/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Not Found: /favicon.ico
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+False
+Internal Server Error: /task/edit/225/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /task/edit/226/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /task/edit/225/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Not Found: /assets/img/favicon/favicon.ico
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+Not Found: /favicon.ico
+False
+Internal Server Error: /task/edit/225/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /task/edit/226/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /task/edit/226/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 284, in task_edit
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /task/edit/226/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/pmangir/project/base/views.py", line 293, in task_edit
+    task.save()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 729, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 759, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 823, in _save_table
+    forced_update)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/base.py", line 872, in _do_update
+    return filtered._update(values) > 0
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 709, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1374, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1050, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1340, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 767, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2248, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2243, in get_prep_value
+    return self.to_python(value)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 2230, in to_python
+    params={'value': value},
+django.core.exceptions.ValidationError: ["'' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] format."]
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Invalid HTTP_HOST header: 'mail.pm.ang.ir'. You may need to add 'mail.pm.ang.ir' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: //wp-includes/wlwmanifest.xml
+Not Found: //wp-includes/wlwmanifest.xml
+Not Found: //xmlrpc.php
+Not Found: //xmlrpc.php
+Not Found: //blog/wp-includes/wlwmanifest.xml
+Not Found: //blog/wp-includes/wlwmanifest.xml
+Not Found: //web/wp-includes/wlwmanifest.xml
+Not Found: //web/wp-includes/wlwmanifest.xml
+Not Found: //wordpress/wp-includes/wlwmanifest.xml
+Not Found: //wordpress/wp-includes/wlwmanifest.xml
+Not Found: //website/wp-includes/wlwmanifest.xml
+Not Found: //website/wp-includes/wlwmanifest.xml
+Not Found: //wp/wp-includes/wlwmanifest.xml
+Not Found: //wp/wp-includes/wlwmanifest.xml
+Not Found: //news/wp-includes/wlwmanifest.xml
+Not Found: //news/wp-includes/wlwmanifest.xml
+Not Found: //2020/wp-includes/wlwmanifest.xml
+Not Found: //2020/wp-includes/wlwmanifest.xml
+Not Found: //2019/wp-includes/wlwmanifest.xml
+Not Found: //2019/wp-includes/wlwmanifest.xml
+Not Found: //shop/wp-includes/wlwmanifest.xml
+Not Found: //shop/wp-includes/wlwmanifest.xml
+Not Found: //wp1/wp-includes/wlwmanifest.xml
+Not Found: //wp1/wp-includes/wlwmanifest.xml
+Not Found: //test/wp-includes/wlwmanifest.xml
+Not Found: //test/wp-includes/wlwmanifest.xml
+Not Found: //wp2/wp-includes/wlwmanifest.xml
+Not Found: //wp2/wp-includes/wlwmanifest.xml
+Not Found: //site/wp-includes/wlwmanifest.xml
+Not Found: //site/wp-includes/wlwmanifest.xml
+Not Found: //cms/wp-includes/wlwmanifest.xml
+Not Found: //cms/wp-includes/wlwmanifest.xml
+Not Found: //sito/wp-includes/wlwmanifest.xml
+Not Found: //sito/wp-includes/wlwmanifest.xml
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Invalid HTTP_HOST header: 'mail.pm.ang.ir'. You may need to add 'mail.pm.ang.ir' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+Not Found: /favicon.ico
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+[UID:1004][4133727] Child process with pid: 4134012 was killed by signal: 15, core dump: 0
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+OSError: LSAPI: Socket read/write error
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+False
+None
+None
+None
+None
+None
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+OSError: LSAPI: Socket read/write error
+None
+/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'base.models.Operation'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+None
+None
+None
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+OSError: LSAPI: Socket read/write error
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 8, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 7, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 7, please increase LSAPI_CHILDREN.
+[UID:1004][2393521] Reached max children process limit: 6, extra: 2, current: 8, busy: 7, please increase LSAPI_CHILDREN.
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+OSError: LSAPI: Socket read/write error
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Not Found: /assets/img/favicon/favicon.ico
+False
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 263, in task_add
+    order = Order.objects.get(orderId=orderId)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/db/models/query.py", line 407, in get
+    (self.model._meta.object_name, num)
+base.models.MultipleObjectsReturned: get() returned more than one Order -- it returned 2!
+Not Found: /favicon.ico
+Internal Server Error: /task/add/
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmangir/virtualenv/project/3.7/lib/python3.7/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmangir/project/base/views.py", line 246, in task_add
+    year, month, day = split_persian_date(date)
+  File "/home/pmangir/project/base/utils.py", line 5, in split_persian_date
+    year = int(date.split('-')[0])
+ValueError: invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+[UID:1004][3850708] Child process with pid: 3850998 was killed by signal: 15, core dump: 0
+[UID:1004][3850708] Child process with pid: 3851361 was killed by signal: 15, core dump: 0
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
+Traceback (most recent call last):
+  File "/home/pmangir/virtualenv/project/3.7/bin/set_env_vars.py", line 18, in <module>
+    from clselect.clselectnodejs.apps_manager import ApplicationsManager as NodeJsAppsManager
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/__init__.py", line 4, in <module>
+    from .clselect import ClSelect
+  File "/opt/alt/python37/lib/python3.7/site-packages/clselect/clselect.py", line 19, in <module>
+    from future.moves import configparser as ConfigParser
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/moves/__init__.py", line 8, in <module>
+    import_top_level_modules()
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 810, in import_top_level_modules
+    with exclude_local_folder_imports(*TOP_LEVEL_MODULES):
+  File "/opt/alt/python37/lib/python3.7/site-packages/future/standard_library/__init__.py", line 781, in __enter__
+    module = __import__(m, level=0)
+  File "/home/pmangir/project/test.py", line 10, in <module>
+    with open('data.json', mode='r') as in_file, \
+FileNotFoundError: [Errno 2] No such file or directory: 'data.json'
