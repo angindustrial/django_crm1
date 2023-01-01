@@ -5,6 +5,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 from django.utils.encoding import force_str
 
+from base.managers import PublishedManager
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -17,10 +19,14 @@ class Order(models.Model):
     # today = models.DateField(default=timezone.now)
     description = RichTextField(blank=True, null=True)
     orderId = models.CharField(max_length=50)
+    publish = models.BooleanField(default=True)
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
     isCompleted = models.BooleanField(default=False)
+
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         unique_together = ("operation", "description")
@@ -68,8 +74,12 @@ class Task(models.Model):
     date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
+    publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
+
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ("-date",)

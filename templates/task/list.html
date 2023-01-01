@@ -97,9 +97,18 @@
                                         <i class="bx bx-edit"></i>
                                     </a>
                                 {% endif %}
+
                                 <a href="{% url 'task_detail' task.id %}" class="btn btn-sm btn-icon">
                                     <i class="bx bx-show"></i>
                                 </a>
+                                {% if user.is_superuser %}
+                                    <form method="post" action="{% url 'archive-task' task.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-icon ps-4 text-danger">
+                                                <i class="bx bx-trash"></i>
+                                        </button>
+                                    </form>
+                                {% endif %}
                             </div>
                         </td>
                     </tr>

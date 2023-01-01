@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib import messages
 from django.db.models import Q, Sum, F, CharField, TimeField
 from django.db.utils import IntegrityError
 from users.models import Profile
+from django.core.exceptions import PermissionDenied
 
 import jdatetime
 
@@ -19,12 +20,12 @@ def index(request):
     user = request.user
     if user.is_superuser:
         users = User.objects.filter(is_superuser=False)
-        orders = Order.objects.all()
-        tasks = Task.objects.all()
+        orders = Order.published.all()
+        tasks = Task.published.all()
     else:
         users = User.objects.filter(is_superuser=False)
-        orders = Order.objects.filter(user=user)
-        tasks = Task.objects.filter(order__user=user, completed=True)
+        orders = Order.published.filter(user=user)
+        tasks = Task.published.filter(order__user=user, completed=True)
 
     context = {'users': users, 'orders': orders, 'tasks': tasks}
     return render(request, 'index.html', context)
@@ -37,11 +38,11 @@ class OrdersList(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        if self.request.user.has_perm('review.view_order_all'):
-            orders = Order.objects.all().order_by('-createdAt')
+        if self.request.user.has_perm('review.view_order_all') or is_member(self.request.user):
+            orders = Order.published.all().order_by('-createdAt')
         else:
             # profile = Profile.objects.get(user=self.request.user)
-            orders = Order.objects.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
+            orders = Order.published.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -79,7 +80,7 @@ def order_add(request):
         subgropuIds = request.POST.getlist('subgroup')
         priority = request.POST.get('priority')
 
-        lastOrder = Order.objects.last()
+        lastOrder = Order.published.last()
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
@@ -133,7 +134,7 @@ def order_add(request):
 
 @login_required(login_url='/users/login/')
 def order_edit(request, orderId):
-    order = Order.objects.get(orderId=orderId)
+    order = Order.published.get(orderId=orderId)
     if request.method == 'POST':
         operationId = request.POST.get('operation')
         departmentId = request.POST.get('department')
@@ -174,13 +175,13 @@ def order_edit(request, orderId):
 
 
 def order_detail(request, orderId):
-    order = Order.objects.get(orderId=orderId)
+    order = Order.published.get(orderId=orderId)
     context = {'order': order}
     return render(request, 'order/detail.html', context)
 
 
 def order_invoice(request, orderId):
-    order = Order.objects.get(orderId=orderId)
+    order = Order.published.get(orderId=orderId)
     context = {'order': order}
     return render(request, 'order/invoice.html', context)
 
@@ -192,11 +193,11 @@ class TasksList(ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        if is_member(self.request.user) or self.request.user.is_superuser:
-            tasks = Task.objects.all().order_by('-date')
+        if self.request.user.is_superuser:
+            tasks = Task.published.all().order_by('-date')
         else:
             # tasks = Task.objects.filter(order__user=self.request.user, completed=True).order_by('-date')
-            tasks = Task.objects.filter(user=self.request.user, completed=True).order_by('-date')
+            tasks = Task.published.filter(user=self.request.user, completed=True).order_by('-date')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -240,9 +241,9 @@ def task_add(request):
         status = request.POST.get('status')
 
         if orderId:
-            order = Order.objects.get(orderId=orderId)
-            task = Task.objects.create(order=order, user=request.user, description=description,
-                                       description2=description2)
+            order = Order.published.get(orderId=orderId)
+            task = Task.published.create(order=order, user=request.user, description=description,
+                                         description2=description2)
             year, month, day = split_persian_date(date)
             date = jdatetime.date(year, month, day).togregorian()
 
@@ -260,8 +261,8 @@ def task_add(request):
             return redirect('orders_list')
 
     if orderId:
-        order = Order.objects.get(orderId=orderId)
-        tasks = Task.objects.filter(order=order).order_by('date')
+        order = Order.published.get(orderId=orderId)
+        tasks = Task.published.filter(order=order).order_by('date')
     else:
         order = None
         tasks = None
@@ -271,7 +272,7 @@ def task_add(request):
 
 @login_required(login_url='/users/login/')
 def task_edit(request, taskId):
-    task = Task.objects.get(id=taskId)
+    task = Task.published.get(id=taskId)
 
     if request.method == 'POST':
         description = request.POST.get('description')
@@ -293,25 +294,25 @@ def task_edit(request, taskId):
         task.save()
 
         if status == '1':
-            order = Order.objects.get(task__id=taskId)
+            order = Order.published.get(task__id=taskId)
             order.isCompleted = True
             order.save()
 
-        messages.success(request, 'درخواست شروع کار ویرایش شد')
-        return redirect('orders_list')
+        messages.success(request, f' کار با شماره سفارش {task.order.orderId} ویرایش شد')
+        return redirect('tasks_list')
 
     context = {'task': task}
     return render(request, 'task/edit.html', context)
 
 
 def task_detail(request, taskId):
-    task = Task.objects.get(id=taskId)
+    task = Task.published.get(id=taskId)
     context = {'task': task}
     return render(request, 'task/detail.html', context)
 
 
 def task_invoice(request, taskId):
-    task = Task.objects.get(id=taskId)
+    task = Task.published.get(id=taskId)
     context = {'task': task}
     return render(request, 'task/invoice.html', context)
 
@@ -450,3 +451,29 @@ class MachineReportView(ListView):
         context = super(MachineReportView, self).get_context_data()
         context['all_operations'] = Operation.objects.all()
         return context
+
+
+def change_task_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            task = Task.published.get(pk=pk)
+            task.publish = False
+            task.save()
+            return redirect('tasks_list')
+        else:
+            return PermissionDenied()
+    else:
+        return redirect('tasks_list')
+
+
+def change_order_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            order = Order.published.get(pk=pk)
+            order.publish = False
+            order.save()
+            return redirect('orders_list')
+        else:
+            return PermissionDenied()
+    else:
+        return HttpResponseForbidden()
