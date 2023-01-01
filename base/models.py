@@ -16,7 +16,7 @@ class Order(models.Model):
     departmentName = models.CharField(max_length=300, blank=True, null=True)
     subGroup = models.ManyToManyField('Subgroup')
     createdAt = models.DateTimeField(auto_now_add=True)
-    today = models.DateField(default=timezone.now)
+    # today = models.DateField(default=timezone.now)
     description = RichTextField(blank=True, null=True)
     orderId = models.CharField(max_length=50)
     publish = models.BooleanField(default=True)
@@ -29,7 +29,7 @@ class Order(models.Model):
     published = PublishedManager()
 
     class Meta:
-        unique_together = ("today", "operation", "description")
+        unique_together = ("operation", "description")
 
     def __str__(self):
         return str(self.orderId)
