@@ -27,9 +27,11 @@ urlpatterns = [
     path('subgroup/list/', views.SubgroupList.as_view(), name='subgroup_list'),
     path('subgroup/add/', views.subgroup_add, name='subgroup_add'),
     path('subgroup/edit/<subgroupId>/', views.subgroup_edit, name='subgroup_edit'),
-    
+
     path('ajax/', include('base.ajax_urls')),
 
     path('persons_report/', views.WorkReportView.as_view(), name='persons_report'),
-    path('machines_report/', views.MachineReportView.as_view(), name='machines_report')
+    path('machines_report/', views.MachineReportView.as_view(), name='machines_report'),
+    path("archive-task/<int:pk>/", views.change_task_publish_status, name='archive-task'),
+    path("archive-order/<int:pk>/", views.change_order_publish_status, name='archive-order'),
 ]
