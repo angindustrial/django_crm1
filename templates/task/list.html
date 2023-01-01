@@ -107,7 +107,6 @@
                                        class="role-edit-modal">
                                         <i class="bx bx-trash"></i>
                                     </a>
-                                    <!--/ Edit Role Modal -->
                                     <div class="modal fade" id="deleteTaskModal_{{ task.id }}" tabindex="-1"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
@@ -136,13 +135,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- / Edit Role Modal -->
-                                    {#                                    <form method="post" action="{% url 'archive-task' task.id %}">#}
-                                    {#                                        {% csrf_token %}#}
-                                    {#                                        <button type="submit" class="btn btn-sm btn-icon ps-4 text-danger">#}
-                                    {#                                            <i class="bx bx-trash"></i>#}
-                                    {#                                        </button>#}
-                                    {#                                    </form>#}
+
                                 {% endif %}
                             </div>
                         </td>

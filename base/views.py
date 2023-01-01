@@ -479,13 +479,35 @@ def change_task_publish_status(request, pk):
 
 
 def change_order_publish_status(request, pk):
+    # if request.method == 'POST':
+    #     if request.user.is_superuser:
+    #         order = Order.published.get(pk=pk)
+    #         order.publish = False
+    #         order.save()
+    #         return redirect('orders_list')
+    #     else:
+    #         return PermissionDenied()
+    # else:
+    #     return HttpResponseForbidden()
     if request.method == 'POST':
+
         if request.user.is_superuser:
+            type_of_delete = request.POST.get('type_of_delete')
             order = Order.published.get(pk=pk)
-            order.publish = False
-            order.save()
+
+            if type_of_delete == 'delete_all':
+                order.publish = False
+                order.save()
+                order.task.all().update(publish=False)
+                # order.task.all().save()
+
+            elif type_of_delete == 'delete_this':
+                order.publish = False
+                order.save()
+
             return redirect('orders_list')
+
         else:
             return PermissionDenied()
     else:
-        return HttpResponseForbidden()
+        return redirect('orders_list')
