@@ -100,6 +100,7 @@ def order_add(request):
             try:
                 instance.save()
             except IntegrityError as e:
+                print(e)
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
