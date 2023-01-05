@@ -71,7 +71,7 @@ class OrdersList(ListView):
             orders = orders.filter(createdAt__gte=start_date)
 
         if due_date:
-            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian()
+            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian().date()
             orders = orders.filter(createdAt__lte=due_date)
         return orders
 
@@ -452,9 +452,7 @@ class MachineReportView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-
         operation_query = self.request.GET.get('operation')
-
         operations = Operation.objects.annotate(
             time_spent=Coalesce(
                 Sum(F('order__task__end_time') - F('order__task__start_time'), output_field=DurationField())
