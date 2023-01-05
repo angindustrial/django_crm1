@@ -7,7 +7,7 @@ register = template.Library()
 def total_task_time(orders):
     total = 0
     for order in orders:
-        task = order.task.all().first()
-        if task:
+        tasks = order.task.all()
+        for task in tasks:
             total += task.get_time_diff
     return total

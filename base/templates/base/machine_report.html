@@ -16,15 +16,27 @@
         <div class="card-header border-bottom">
             <h5 class="card-title">فیلتر جستجو</h5>
             <form action="{% url 'machines_report' %}">
-                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                <div class="d-flex align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-3 order_status">
-                        <select class="select2 form-select" name="operation" id="">
+                        <label for="operation_name">نام دستگاه</label>
+                        <select class="select2 form-select" name="operation" id="operation_name">
                             <option value="">عملیات درخواستی</option>
                             {% for operation in all_operations %}
                                 <option value="{{ operation.name }}" {% if request.GET.operation == operation.name %}
                                         selected
                                 {% endif %}>{{ operation.name }}</option>
                             {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3 order_status">
+                        <label for="time_spent">مرتب سازی بر اساس</label>
+                        <select class="select2 form-select" name="time_spent" id="time_spent">
+                            <option value="highest" {% if request.GET.time_spent == 'highest' %}selected{% endif %}>
+                                بیشترین زمان
+                            </option>
+                            <option value="lowest" {% if request.GET.time_spent == 'lowest' %}selected{% endif %}>
+                                کمترین زمان
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -47,14 +59,15 @@
                     </thead>
                     <tbody>
                     {% for operation in operation_list %}
-                        {% total_task_time operation.order.all as total_seconds %}
+{#                        {% total_task_time operation.order.all as total_seconds %}#}
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td><a href="{% url 'orders_list' %}?operation={{ operation.id }}">{{ operation.name }}</a>
                             </td>
                             <td>
-                                {% seconds_to_time total_seconds %}
+                                {{ operation.time_spent }}
                             </td>
+
                         </tr>
                     {% endfor %}
                     </tbody>

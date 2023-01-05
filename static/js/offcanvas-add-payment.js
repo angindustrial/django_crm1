@@ -23,7 +23,7 @@
     invoiceDateList.forEach(function (invoiceDateEl) {
       invoiceDateEl.flatpickr({
         monthSelectorType: 'static',
-        defaultDate: new JDate(date),
+        // defaultDate: new JDate(date),
         locale: 'fa',
         altInput: true,
         altFormat: 'Y/m/d',
