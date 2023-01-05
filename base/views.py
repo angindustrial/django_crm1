@@ -1,6 +1,8 @@
+from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, UpdateView
 from django.contrib.auth.decorators import login_required
+from django.db.models import Value, Count, Subquery, OuterRef, DurationField, IntegerField
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib import messages
 from django.db.models import Q, Sum, F, CharField, TimeField
@@ -8,7 +10,9 @@ from django.db.utils import IntegrityError
 from users.models import Profile
 from django.core.exceptions import PermissionDenied
 
+from pg_utils import Seconds
 import jdatetime
+from datetime import datetime, timedelta, time
 
 from .models import *
 from .forms import OrderForm
@@ -48,7 +52,8 @@ class OrdersList(ListView):
         department = self.request.GET.get('department')
         operation = self.request.GET.get('operation')
         status = self.request.GET.get('status')
-
+        start_date = self.request.GET.get('start_date')
+        due_date = self.request.GET.get('due_date')
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -60,6 +65,14 @@ class OrdersList(ListView):
 
         if status:
             orders = orders.filter(isCompleted=status)
+
+        if start_date:
+            start_date = jdatetime.datetime.strptime(start_date, '%Y-%m-%d').togregorian().date()
+            orders = orders.filter(createdAt__gte=start_date)
+
+        if due_date:
+            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian()
+            orders = orders.filter(createdAt__lte=due_date)
         return orders
 
     def get_context_data(self, **kwargs):
@@ -100,6 +113,7 @@ def order_add(request):
             try:
                 instance.save()
             except IntegrityError as e:
+                print(e)
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
@@ -401,14 +415,14 @@ class WorkReportView(ListView):
 
     def get_queryset(self):
         self.executor_name = self.request.GET.get('executor_name')
-        self.start_date = to_gregorian(self.request.GET.get('execution_start_time'))
-        self.end_date = to_gregorian(self.request.GET.get('execution_end_time'))
+        self.start_date = to_gregorian(self.request.GET.get('start_date'))
+        self.due_date = to_gregorian(self.request.GET.get('due_date'))
         tasks = Task.objects.all()
 
         if self.start_date:
             tasks = tasks.filter(date__gte=self.start_date)
-        if self.end_date:
-            tasks = tasks.filter(date__lte=self.end_date)
+        if self.due_date:
+            tasks = tasks.filter(date__lte=self.due_date)
         if self.executor_name:
             first_name, last_name = self.executor_name.split(' ')
             tasks = tasks.filter(user__first_name=first_name, user__last_name=last_name)
@@ -438,12 +452,23 @@ class MachineReportView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        operations = Operation.objects.all()
 
         operation_query = self.request.GET.get('operation')
-        print(operation_query)
+
+        operations = Operation.objects.annotate(
+            time_spent=Coalesce(
+                Sum(F('order__task__end_time') - F('order__task__start_time'), output_field=DurationField())
+                , timedelta(0, 0, 0), timedelta(0, 0, 0), output_field=DurationField()
+            ),
+        )
+        time_spent = self.request.GET.get('time_spent')
+
         if operation_query:
             operations = operations.filter(name=operation_query)
+        if time_spent == 'highest':
+            operations = operations.order_by('-time_spent')
+        elif time_spent == 'lowest':
+            operations = operations.order_by('time_spent')
 
         return operations
 

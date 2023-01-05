@@ -35,7 +35,7 @@
   if (invoiceDate) {
     invoiceDate.flatpickr({
       monthSelectorType: 'static',
-      defaultDate: new JDate(date),
+      // defaultDate: new JDate(date),
       locale: 'fa',
       altInput: true,
       altFormat: 'Y/m/d',
@@ -45,7 +45,7 @@
   if (dueDate) {
     dueDate.flatpickr({
       monthSelectorType: 'static',
-      defaultDate: new JDate(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 5)),
+      // defaultDate: new JDate(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 5)),
       locale: 'fa',
       altInput: true,
       altFormat: 'Y/m/d',

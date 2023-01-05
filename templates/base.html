@@ -168,20 +168,20 @@
                         </a>
                     </li>
                 {% endif %}
-{#                {% if perms.base.view_operation %}#}
-{#                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">#}
-{#                        <a href="{% url 'machines_report' %}" class="menu-link">#}
-{#                            <i class="menu-icon tf-icons fa fa-car-on"></i>#}
-{#                            <div data-i18n="users">گزارش دستگاه ها</div>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% endif %}#}
-{#                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">#}
-{#                        <a href="{% url 'persons_report' %}" class="menu-link">#}
-{#                            <i class="menu-icon tf-icons fa fa-user-gear"></i>#}
-{#                            <div data-i18n="users">مدیریت مدت زمان کار</div>#}
-{#                        </a>#}
-{#                    </li>#}
+                {#                {% if perms.base.view_operation %}#}
+                {#                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">#}
+                {#                        <a href="{% url 'machines_report' %}" class="menu-link">#}
+                {#                            <i class="menu-icon tf-icons fa fa-car-on"></i>#}
+                {#                            <div data-i18n="users">گزارش دستگاه ها</div>#}
+                {#                        </a>#}
+                {#                    </li>#}
+                {#                {% endif %}#}
+                {#                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">#}
+                {#                        <a href="{% url 'persons_report' %}" class="menu-link">#}
+                {#                            <i class="menu-icon tf-icons fa fa-user-gear"></i>#}
+                {#                            <div data-i18n="users">مدیریت مدت زمان کار</div>#}
+                {#                        </a>#}
+                {#                    </li>#}
                 {% if perms.base.view_operation or perms.auth.view_user %}
                     <!-- Users -->
                     <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} open {% endif %}">
@@ -459,6 +459,8 @@
 <script src="{% static 'vendor/libs/select2/select2.js' %}"></script>
 <script src="{% static 'vendor/libs/jquery-repeater/jquery-repeater.js' %}"></script>
 <script src="{% static 'vendor/libs/sweetalert2/sweetalert2.js' %}"></script>
+<script src="{% static 'vendor/libs/cleavejs/cleave-phone.js' %}"></script>
+<script src="{% static 'vendor/libs/cleavejs/cleave.js' %}"></script>
 
 <!-- Page JS -->
 <script src="{% static 'js/forms-extras.js' %}"></script>
@@ -470,8 +472,10 @@
 <script src="{% static 'js/custom-switch.js' %}"></script>
 <script src="{% static 'js/reviewTask.js' %}"></script>
 <script src="{% static 'js/paginate.js' %}"></script>
+<script src="{% static 'js/app-invoice-edit.js' %}"></script>
+<script src="{% static 'js/offcanvas-add-payment.js' %}"></script>
+<script src="{% static 'js/offcanvas-send-payment.js' %}"></script>
 <script src="{% static 'js/extended-ui-sweetalert2.js' %}"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function (e) {
         (function () {

@@ -34,16 +34,17 @@
                     <div class="col-md-3 user_role">
                         <label class="w-100" for="execution_start_time">
                             تاریخ شروع:
-                            <input class="form-control" type="date" name="execution_start_time" placeholder="تاریخ شروع"
-                                   value="{{ request.GET.execution_start_time }}">
+                            <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'
+                               class="form-control invoice-date"
+                               placeholder="YYYY/MM/DD">
                         </label>
                     </div>
                     <div class="col-md-3 user_role">
                         <label class="w-100">
                             تاریخ پایان:
-                            <input class="form-control w-100" type="date" name="execution_end_time"
-                                   placeholder="تاریخ پایان"
-                                   value="{{ request.GET.execution_end_time }}">
+                            <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'
+                               class="form-control due-date"
+                               placeholder="YYYY/MM/DD">
                         </label>
                     </div>
 
