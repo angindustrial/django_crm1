@@ -5,10 +5,15 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
 from base.managers import PublishedManager
 
-from .enum_types import StatusChoices
-
 
 class Order(models.Model):
+    StatusChoices = (
+        ('SE', 'مشاهده شده'),
+        ("DG", 'در حال انجام'),
+        ("WG", "در انتظار قطعه"),
+        ('ST', "ارسال به پیمانکار"),
+        ("DN", "تکمیل شده")
+    )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     operation = models.ForeignKey('Operation', on_delete=models.SET_NULL, null=True, related_name='order')
     operationName = models.CharField(max_length=300, blank=True, null=True)
@@ -22,7 +27,7 @@ class Order(models.Model):
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
-    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices.choices)
+    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
     isCompleted = models.BooleanField(default=False)
 
     objects = models.Manager()
@@ -66,6 +71,13 @@ class Subgroup(models.Model):
 
 
 class Task(models.Model):
+    StatusChoices = (
+        ('SE', 'مشاهده شده',),
+        ("DG", 'در حال انجام'),
+        ("WG", "در انتظار قطعه"),
+        ('ST', "ارسال به پیمانکار"),
+        ("DN", "تکمیل شده"),
+    )
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='task')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextUploadingField()
@@ -77,7 +89,7 @@ class Task(models.Model):
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
     operator = models.ForeignKey('RepairOperator', on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
-    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices.choices)
+    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
 
     objects = models.Manager()
     published = PublishedManager()
