@@ -25,7 +25,10 @@
                                value="{{ request.GET.q }}">
                     </div>
                     <div class="col-md-3 user_plan">
-                        <select class="select2 form-select" name="department" id="">
+                        <label for="departmentfield">
+                            دپارتمان
+                        </label>
+                        <select class="select2 form-select" name="department" id="departmentfield">
                             <option value="">انتخاب واحد</option>
                             {% for department in departments %}
                                 <option value="{{ department.id }}"
@@ -35,14 +38,20 @@
                         </select>
                     </div>
                     <div class="col-md-3 order_status">
-                        <select class="form-select" name="status" id="">
+                        <label for="statusfield">
+                            وضعیت
+                        </label>
+                        <select class="form-select" name="status" id="statusfield">
                             <option value="">وضعیت</option>
                             <option value="1" {% if request.GET.status == '1' %} selected {% endif %}>کامل</option>
                             <option value="0" {% if request.GET.status == '0' %} selected {% endif %}>ناقص</option>
                         </select>
                     </div>
                     <div class="col-md-3 user_plan">
-                        <select class="select2 form-select" name="operation" id="">
+                        <label for="operationfield">
+                            عملیات
+                        </label>
+                        <select class="select2 form-select" name="operation" id="operationfield">
                             <option value="">انتخاب عملیات</option>
                             {% for operation in operations %}
                                 <option value="{{ operation.id }}"
@@ -65,11 +74,10 @@
                 <tr>
                     <th>شماره سفارش</th>
                     <th>نام مجری</th>
+                    <th>اپراتور فنی</th>
                     <th>شرح فعالیت</th>
                     <th>شرح لوازم مصرفی</th>
                     <th>تاریخ</th>
-                    {#                    <th>ساعت شروع</th>#}
-                    {#                    <th>ساعت پایان</th>#}
                     <th>وضعیت</th>
                     <th>عملیات</th>
                 </tr>
@@ -79,11 +87,10 @@
                     <tr>
                         <td>{{ task.order.orderId }}</td>
                         <td>{{ task.user.profile }}</td>
+                        <td>{{ task.operator.operator.get_full_name }}</td>
                         <td>{{ task.description|truncatewords:"10" }}</td>
                         <td>{{ task.description2|truncatewords:"10" }}</td>
                         <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
-                        {#                        <td>{{ task.start_time|time:'H:i' }}</td>#}
-                        {#                        <td>{{ task.end_time|time:'H:i' }}</td>#}
                         <td>{% if task.completed %}
                             <span class="badge bg-label-success">کامل</span>
                         {% else %}
@@ -91,20 +98,19 @@
                         {% endif %}
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex justify-content-center">
                                 {% if perms.base.change_task %}
                                     <a href="{% url 'task_edit' task.id %}" class="btn btn-sm btn-icon">
                                         <i class="bx bx-edit"></i>
                                     </a>
                                 {% endif %}
-
                                 <a href="{% url 'task_detail' task.id %}" class="btn btn-sm btn-icon">
                                     <i class="bx bx-show"></i>
                                 </a>
                                 {% if user.is_superuser %}
                                     <a href="javascript:;" data-bs-toggle="modal"
                                        data-bs-target="#deleteTaskModal_{{ task.id }}"
-                                       class="role-edit-modal">
+                                       class="role-edit-modal text-danger">
                                         <i class="bx bx-trash"></i>
                                     </a>
                                     <div class="modal fade" id="deleteTaskModal_{{ task.id }}" tabindex="-1"
@@ -117,16 +123,20 @@
                                                 <div class="modal-body">
 
                                                     <div class="text-center mb-4">
-                                                        <h3 class="role-title">آیا میخواهید درخواست مربوط با کار حذف شود؟</h3>
+                                                        <h3 class="role-title">آیا میخواهید درخواست مربوط با کار حذف
+                                                            شود؟</h3>
                                                     </div>
                                                     <form method="post" class="row g-3"
                                                           action="{% url 'archive-task' task.id %}">
                                                         {% csrf_token %}
                                                         <div class="col-12 text-center">
-                                                            <button type="submit" name="type_of_delete" value="delete_all" class="btn btn-danger me-sm-3 me-1">
+                                                            <button type="submit" name="type_of_delete"
+                                                                    value="delete_all"
+                                                                    class="btn btn-danger me-sm-3 me-1">
                                                                 بله
                                                             </button>
-                                                            <button type="submit" name="type_of_delete" value="delete_this" class="btn btn-primary">
+                                                            <button type="submit" name="type_of_delete"
+                                                                    value="delete_this" class="btn btn-primary">
                                                                 خیر
                                                             </button>
                                                         </div>

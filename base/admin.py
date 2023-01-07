@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, Department, Task, Subgroup, Operation
+from .models import Order, Department, Task, Subgroup, Operation, RepairOperator
 
 
 # class OrderInline(admin.TabularInline):
@@ -31,3 +31,4 @@ class TaskAdmin(admin.ModelAdmin):
 
 admin.site.register(Subgroup)
 admin.site.register(Operation)
+admin.site.register(RepairOperator)
