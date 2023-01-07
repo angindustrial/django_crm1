@@ -56,8 +56,7 @@
                         <select class="select2 form-select form-select-lg" id="second_status" data-allow-clear="true"
                                 name="status"
                                 required>
-                            {% for key, text in status_choices.choices %}
-{#                                {{ text }}#}
+                            {% for key, text in status_choices %}
                                 <option value="{{key}}"
                                         {% if order.second_status == key %} selected
                                         {% endif %}>{{ text }}</option>

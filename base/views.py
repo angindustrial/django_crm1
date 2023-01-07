@@ -16,7 +16,7 @@ from datetime import timedelta
 from .models import *
 from .forms import OrderForm
 from .utils import split_persian_date, is_member, total_seconds_calculator, to_gregorian, find_longest_work
-from .enum_types import StatusChoices
+# from .enum_types import StatusChoices
 
 
 @login_required(login_url='/users/login/')
@@ -183,7 +183,7 @@ def order_edit(request, orderId):
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
     departments = Department.objects.filter(id=3)  # limit the department by technical in form
-    status_choices = StatusChoices
+    status_choices = Order.StatusChoices
     context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'order': order,
                'form': form, 'status_choices': status_choices}
     return render(request, 'order/edit.html', context)
