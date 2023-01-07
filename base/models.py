@@ -2,10 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-# from django.utils import timezone
-# from django.utils.encoding import force_str
-
+from django.contrib.auth import get_user_model
 from base.managers import PublishedManager
+
+from .enum_types import StatusChoices
 
 
 class Order(models.Model):
@@ -16,13 +16,13 @@ class Order(models.Model):
     departmentName = models.CharField(max_length=300, blank=True, null=True)
     subGroup = models.ManyToManyField('Subgroup')
     createdAt = models.DateTimeField(auto_now_add=True)
-    # today = models.DateField(default=timezone.now)
     description = RichTextField(blank=True, null=True)
     orderId = models.CharField(max_length=50)
     publish = models.BooleanField(default=True)
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
+    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices.choices)
     isCompleted = models.BooleanField(default=False)
 
     objects = models.Manager()
@@ -76,6 +76,8 @@ class Task(models.Model):
     publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
+    operator = models.ForeignKey('RepairOperator', on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
+    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices.choices)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -91,3 +93,10 @@ class Task(models.Model):
         from datetime import datetime, date
         time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
         return time_diff.total_seconds()
+
+
+class RepairOperator(models.Model):
+    operator = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='operator')
+
+    def __str__(self):
+        return self.operator.username

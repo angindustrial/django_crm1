@@ -103,15 +103,11 @@
                         <td><span class="badge bg-label-success">{{ order.status }}</span></td>
                         </td>
                         <td>
-                            {% if order.isCompleted %}
-                                <span class="badge bg-label-success">کامل</span>
-                            {% else %}
-                                <span class="badge bg-label-danger">ناقص</span>
-                            {% endif %}
+                            {{ order.get_second_status_display }}
                         </td>
                         <td>{{ order.get_priority }}</td>
                         <td>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex justify-content-center">
                                 <div class="d-inline-block text-nowrap">
                                     {% if perms.base.change_order %}
                                         <a href="{% url 'order_edit' order.orderId %}" class="btn btn-sm btn-icon">
@@ -123,7 +119,6 @@
                                         <i class="bx bx-show"></i>
                                     </button>
 
-                                    <!--/ Add Role Modal -->
                                     <div class="modal fade" id="viewOrderDetail_{{ order.id }}" tabindex="-1"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-xl modal-dialog-centered modal-add-new-role modal-fullscreen">
@@ -145,7 +140,6 @@
                                                     <div class="text-center mb-4">
                                                         <h3 class="role-title">مشاهده درخواست</h3>
                                                     </div>
-                                                    <!-- View Order Details -->
                                                     <div class="row g-3">
                                                         <div class="table-responsive">
                                                             <table class="table table-bordered">
@@ -234,53 +228,53 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <!--/ View Order Details -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- / Add Role Modal -->
-                                </div>
-                                {% if user.is_superuser %}
-                                    <a href="javascript:;" data-bs-toggle="modal"
-                                       data-bs-target="#deleteOrderModal_{{ order.id }}"
-                                       class="role-edit-modal">
-                                        <i class="bx bx-trash"></i>
-                                    </a>
-                                    <div class="modal fade" id="deleteOrderModal_{{ order.id }}" tabindex="-1"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
-                                            <div class="modal-content p-3 p-md-5">
-                                                <button type="button" class="btn-close btn-pinned"
-                                                        data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                <div class="modal-body">
+                                    {% if user.is_superuser %}
+                                        <a href="javascript:;" data-bs-toggle="modal"
+                                           data-bs-target="#deleteOrderModal_{{ order.id }}"
+                                           class="role-edit-modal btn btn-sm btn-icon text-danger">
+                                            <i class="bx bx-trash"></i>
+                                        </a>
+                                        <div class="modal fade" id="deleteOrderModal_{{ order.id }}" tabindex="-1"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
+                                                <div class="modal-content p-3 p-md-5">
+                                                    <button type="button" class="btn-close btn-pinned"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    <div class="modal-body">
 
-                                                    <div class="text-center mb-4">
-                                                        <h3 class="role-title">آیا میخواهید کارهای مرتبط با درخواست حذف
-                                                            شوند؟</h3>
-                                                    </div>
-                                                    <form method="post" class="row g-3"
-                                                          action="{% url 'archive-order' order.id %}">
-                                                        {% csrf_token %}
-                                                        <div class="col-12 text-center">
-                                                            <button type="submit" name="type_of_delete"
-                                                                    value="delete_all"
-                                                                    class="btn btn-danger me-sm-3 me-1">
-                                                                بله
-                                                            </button>
-                                                            <button type="submit" name="type_of_delete"
-                                                                    value="delete_this" class="btn btn-primary">
-                                                                خیر
-                                                            </button>
+                                                        <div class="text-center mb-4">
+                                                            <h3 class="role-title">آیا میخواهید کارهای مرتبط با درخواست
+                                                                حذف
+                                                                شوند؟</h3>
                                                         </div>
-                                                    </form>
+                                                        <form method="post" class="row g-3"
+                                                              action="{% url 'archive-order' order.id %}">
+                                                            {% csrf_token %}
+                                                            <div class="col-12 text-center">
+                                                                <button type="submit" name="type_of_delete"
+                                                                        value="delete_all"
+                                                                        class="btn btn-danger me-sm-3 me-1">
+                                                                    بله
+                                                                </button>
+                                                                <button type="submit" name="type_of_delete"
+                                                                        value="delete_this" class="btn btn-primary">
+                                                                    خیر
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                {% endif %}
+                                    {% endif %}
+                                </div>
+
                                 {#                                {% if user.is_superuser %}#}
                                 {#                                    <form method="post" action="{% url 'archive-order' order.id %}">#}
                                 {#                                        {% csrf_token %}#}

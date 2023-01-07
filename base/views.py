@@ -1,22 +1,22 @@
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
-from django.db.models import Value, Count, Subquery, OuterRef, DurationField, IntegerField
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.db.models import DurationField
+from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.db.models import Q, Sum, F, CharField, TimeField
+from django.db.models import Q, Sum, F
 from django.db.utils import IntegrityError
 from users.models import Profile
 from django.core.exceptions import PermissionDenied
 
-from pg_utils import Seconds
 import jdatetime
-from datetime import datetime, timedelta, time
+from datetime import timedelta
 
 from .models import *
 from .forms import OrderForm
 from .utils import split_persian_date, is_member, total_seconds_calculator, to_gregorian, find_longest_work
+from .enum_types import StatusChoices
 
 
 @login_required(login_url='/users/login/')
@@ -155,7 +155,7 @@ def order_edit(request, orderId):
         subgropuIds = request.POST.getlist('subgroup')
         description = request.POST.get('description')
         priority = request.POST.get('priority')
-
+        status = request.POST.get('status')
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
 
@@ -165,7 +165,7 @@ def order_edit(request, orderId):
             instance.description = description
             instance.operation = operation
             instance.operationName = operation.name
-
+            instance.second_status = status
             instance.department = department
             instance.departmentName = department.name
             instance.priority = priority
@@ -183,8 +183,9 @@ def order_edit(request, orderId):
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
     departments = Department.objects.filter(id=3)  # limit the department by technical in form
+    status_choices = StatusChoices
     context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'order': order,
-               'form': form}
+               'form': form, 'status_choices': status_choices}
     return render(request, 'order/edit.html', context)
 
 
@@ -253,9 +254,12 @@ def task_add(request):
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
-
+        operator_id = request.POST.get('operator')
         if orderId:
+            print(operator_id)
             order = Order.published.get(orderId=orderId)
+            operator = RepairOperator.objects.get(id=operator_id)
+
             task = Task.published.create(order=order, user=request.user, description=description,
                                          description2=description2)
             year, month, day = split_persian_date(date)
@@ -265,6 +269,7 @@ def task_add(request):
             task.start_time = start_time
             task.end_time = end_time
             task.completed = status
+            task.operator = operator
             if status == '1':
                 order.isCompleted = True
                 order.save()
@@ -280,7 +285,8 @@ def task_add(request):
     else:
         order = None
         tasks = None
-    context = {'order': order, 'tasks': tasks}
+    operators = RepairOperator.objects.all()
+    context = {'order': order, 'tasks': tasks, 'operators': operators}
     return render(request, 'task/add.html', context)
 
 
