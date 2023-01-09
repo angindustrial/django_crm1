@@ -76,12 +76,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pmangir_regangpm',
-        'USER': 'pmangir',
-        'PASSWORD': 'v5DY*xg9!VV12j',
+#        'NAME': 'public',
+        'USER': 'postgres',
+#        'PASSWORD': 'v5DY*xg9!VV12j',
+	'PASSWORD': '898^rzM.(t@C',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'pmangir_regangpm',
+#        'USER': 'pmangir',
+#        'PASSWORD': 'v5DY*xg9!VV12j',
+#        'HOST': 'https://vm2399.euhosted.com/phpPgAdmin',
+#        'PORT': '5432',
+#    }
+#}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
