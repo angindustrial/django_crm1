@@ -185,9 +185,9 @@ def order_edit(request, orderId):
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
     departments = Department.objects.filter(id=3)  # limit the department by technical in form
-    status_choices = Order.StatusChoices
+#    status_choices = Order.StatusChoices
     context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'order': order,
-               'form': form, 'status_choices': status_choices}
+               'form': form}
     return render(request, 'order/edit.html', context)
 
 
