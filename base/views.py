@@ -16,6 +16,8 @@ from datetime import timedelta
 from .models import *
 from .forms import OrderForm
 from .utils import split_persian_date, is_member, total_seconds_calculator, to_gregorian, find_longest_work
+
+
 # from .enum_types import StatusChoices
 
 
@@ -219,6 +221,8 @@ class TasksList(ListView):
         status = self.request.GET.get('status')
         operation = self.request.GET.get('operation')
         subgroup = self.request.GET.get('subgroup')
+        start_date = self.request.GET.get('start_date')
+        due_date = self.request.GET.get('due_date')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)[:1]
@@ -234,6 +238,14 @@ class TasksList(ListView):
 
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
+
+        if start_date:
+            start_date = jdatetime.datetime.strptime(start_date, '%Y-%m-%d').togregorian().date()
+            tasks = tasks.filter(date__gte=start_date)
+
+        if due_date:
+            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian().date()
+            tasks = tasks.filter(date__lte=due_date)
 
         return tasks
 

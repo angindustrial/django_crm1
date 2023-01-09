@@ -7,13 +7,13 @@ from base.managers import PublishedManager
 
 
 class Order(models.Model):
-    # StatusChoices = (
-    #     ('SE', 'مشاهده شده'),
-    #     ("DG", 'در حال انجام'),
-    #     ("WG", "در انتظار قطعه"),
-    #     ('ST', "ارسال به پیمانکار"),
-    #     ("DN", "تکمیل شده")
-    # )
+    StatusChoices = (
+        ('SE', 'مشاهده شده'),
+        ("DG", 'در حال انجام'),
+        ("WG", "در انتظار قطعه"),
+        ('ST', "ارسال به پیمانکار"),
+        ("DN", "تکمیل شده")
+    )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     operation = models.ForeignKey('Operation', on_delete=models.SET_NULL, null=True, related_name='order')
     operationName = models.CharField(max_length=300, blank=True, null=True)
@@ -27,7 +27,7 @@ class Order(models.Model):
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
-    # second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
+    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
     isCompleted = models.BooleanField(default=False)
 
     objects = models.Manager()

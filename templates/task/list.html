@@ -60,11 +60,28 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="col-md-3 order_status mt-3">
+                        <label for="start_date">
+                            از تاریخ:
+                        </label>
+                        <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'
+                               class="form-control invoice-date"
+                               placeholder="YYYY/MM/DD">
+                    </div>
+                    <div class="col-md-3 order_status mt-3 me-auto">
+                        <label for="start_date">
+                            تا تاریخ:
+                        </label>
+                        <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'
+                               class="form-control due-date"
+                               placeholder="YYYY/MM/DD">
+                    </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-3 user_status">
                         <button type="submit" class="btn btn-label-primary">اعمال فیلتر</button>
                     </div>
-                </div>
-                <div class="row">
                 </div>
             </form>
         </div>
