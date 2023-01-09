@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
-from base.models import RepairOperator
+# from base.models import RepairOperator
 from .models import *
 from .forms import PasswordChangeForm
 
@@ -77,9 +77,9 @@ def user_add(request):
             user.groups.add(Group.objects.get(id=role))
             user.save()
 
-            repair_operator_role = Group.objects.get(name='اپراتور فنی')
-            if int(role) == repair_operator_role.id:
-                RepairOperator.objects.create(operator=user)
+            # repair_operator_role = Group.objects.get(name='اپراتور فنی')
+            # if int(role) == repair_operator_role.id:
+            #     RepairOperator.objects.create(operator=user)
 
             profile = Profile.objects.get(user=user)
             profile.mobileNumber = mobile

@@ -104,7 +104,7 @@
                     <tr>
                         <td>{{ task.order.orderId }}</td>
                         <td>{{ task.user.profile }}</td>
-                        <td>{{ task.operator.operator.get_full_name }}</td>
+                        <td>{{ task.operator.username }}</td>
                         <td>{{ task.description|truncatewords:"10" }}</td>
                         <td>{{ task.description2|truncatewords:"10" }}</td>
                         <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>

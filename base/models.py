@@ -1,9 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
 from base.managers import PublishedManager
+
+User = get_user_model()
 
 
 class Order(models.Model):
@@ -88,7 +90,7 @@ class Task(models.Model):
     publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
-    operator = models.ForeignKey('RepairOperator', on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
+    operator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
     status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
 
     objects = models.Manager()
@@ -106,9 +108,8 @@ class Task(models.Model):
         time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
         return time_diff.total_seconds()
 
-
-class RepairOperator(models.Model):
-    operator = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='operator')
-
-    def __str__(self):
-        return self.operator.username
+# class RepairOperator(models.Model):
+#     operator = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='operator')
+#
+#     def __str__(self):
+#         return self.operator.username

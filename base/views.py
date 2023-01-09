@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
@@ -267,10 +268,13 @@ def task_add(request):
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
         operator_id = request.POST.get('operator')
+
         if orderId:
-            print(operator_id)
             order = Order.published.get(orderId=orderId)
-            operator = RepairOperator.objects.get(id=operator_id)
+            operator = User.objects.get(id=operator_id)
+            print(operator)
+            print(operator.id)
+            print(type(operator))
 
             task = Task.published.create(order=order, user=request.user, description=description,
                                          description2=description2)
@@ -297,7 +301,7 @@ def task_add(request):
     else:
         order = None
         tasks = None
-    operators = RepairOperator.objects.all()
+    operators = Group.objects.get(name='اپراتور فنی').user_set.all()
     context = {'order': order, 'tasks': tasks, 'operators': operators}
     return render(request, 'task/add.html', context)
 
