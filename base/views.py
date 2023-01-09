@@ -1,6 +1,6 @@
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import DurationField
 from django.http import HttpResponseRedirect
@@ -552,3 +552,5 @@ def change_order_publish_status(request, pk):
             return PermissionDenied()
     else:
         return redirect('orders_list')
+
+

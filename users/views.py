@@ -76,7 +76,8 @@ def user_add(request):
             user.groups.add(Group.objects.get(id=role))
             user.save()
 
-            profile = Profile.objects.create(user=user, mobileNumber=mobile)
+            profile = Profile.objects.get(user=user)
+            profile.mobileNumber = mobile
             profile.department = Department.objects.get(id=department)
             profile.save()
             messages.success(request, 'کاربر ایجاد شد')

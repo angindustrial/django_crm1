@@ -34,4 +34,5 @@ urlpatterns = [
     path('machines_report/', views.MachineReportView.as_view(), name='machines_report'),
     path("archive-task/<int:pk>/", views.change_task_publish_status, name='archive-task'),
     path("archive-order/<int:pk>/", views.change_order_publish_status, name='archive-order'),
+
 ]
