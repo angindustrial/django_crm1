@@ -88,8 +88,8 @@ class Task(models.Model):
     publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     completed = models.BooleanField(default=False)
-#    operator = models.ForeignKey('RepairOperator', on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
-#    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
+    operator = models.ForeignKey('RepairOperator', on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
+    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
 
     objects = models.Manager()
     published = PublishedManager()
