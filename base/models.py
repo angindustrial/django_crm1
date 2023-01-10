@@ -10,6 +10,7 @@ User = get_user_model()
 
 class Order(models.Model):
     StatusChoices = (
+        ('SV', 'ثبت شده'),
         ('SE', 'مشاهده شده'),
         ("DG", 'در حال انجام'),
         ("WG", "در انتظار قطعه"),
@@ -29,7 +30,7 @@ class Order(models.Model):
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
-    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
+    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices, default='SV')
     isCompleted = models.BooleanField(default=False)
 
     objects = models.Manager()
