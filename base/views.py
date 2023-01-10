@@ -96,11 +96,10 @@ def order_add(request):
         subgropuIds = request.POST.getlist('subgroup')
         priority = request.POST.get('priority')
 
-
         lastOrder = Order.objects.last()
         print(lastOrder)
         print(lastOrder.orderId)
-        
+
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
@@ -319,9 +318,15 @@ def task_edit(request, taskId):
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
 
-        year, month, day = split_persian_date(date)
-        date = jdatetime.date(year, month, day).togregorian()
+        start_time = start_time if start_time != '' else None
+        end_time = end_time if end_time != '' else None
 
+        if date != '-':
+            print('here ', date)
+            year, month, day = split_persian_date(date)
+            date = jdatetime.date(year, month, day).togregorian()
+        else:
+            date = None
         task.description = description
         task.description2 = description2
         task.date = date
@@ -338,7 +343,8 @@ def task_edit(request, taskId):
         messages.success(request, f' کار با شماره سفارش {task.order.orderId} ویرایش شد')
         return redirect('tasks_list')
 
-    context = {'task': task}
+    operators = Group.objects.get(name='اپراتور فنی').user_set.all()
+    context = {'task': task, 'operators': operators}
     return render(request, 'task/edit.html', context)
 
 
@@ -557,5 +563,3 @@ def change_order_publish_status(request, pk):
             return PermissionDenied()
     else:
         return redirect('orders_list')
-
-

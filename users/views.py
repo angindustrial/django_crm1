@@ -3,14 +3,11 @@ from django.contrib import messages
 from django.views.generic import ListView
 from django.contrib.auth.models import Permission, Group
 from django.contrib.auth import authenticate, login, update_session_auth_hash, get_user_model
-# from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
-# from base.models import RepairOperator
 from .models import *
 from .forms import PasswordChangeForm
-
 
 User = get_user_model()
 
@@ -64,7 +61,7 @@ class UsersList(ListView):
 def user_add(request):
     if request.method == 'POST':
         fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
+        last_name = request.POST.get('lname')
         username = request.POST.get('username')
         role = request.POST.get('role')
         department = request.POST.get('department')
@@ -76,7 +73,8 @@ def user_add(request):
             messages.error(request, 'نام کابری ثبت شده است')
         else:
 
-            user = User.objects.create_user(first_name=fname, last_name=lname, username=username, email=email, password=password)
+            User.objects.create_user(first_name=fname, last_name=last_name, username=username, email=email,
+                                     password=password)
             # user.set_password(password)
             # user.groups.add(Group.objects.get(id=role))
             # user.save()
@@ -103,7 +101,7 @@ def user_edit(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
         fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
+        last_name = request.POST.get('lname')
         username = request.POST.get('username')
         role = request.POST.get('role')
         department = request.POST.get('department')
@@ -115,7 +113,7 @@ def user_edit(request, username):
             messages.error(request, 'نام کابری ثبت شده است')
         else:
             user.first_name = fname.strip()
-            user.last_name = lname.strip()
+            user.last_name = last_name.strip()
             user.username = username
             user.email = email
             user.groups.clear()
@@ -147,15 +145,15 @@ def role_list(request):
 def role_add(request):
     if request.method == 'POST':
         role_name = request.POST.get('roleName')
-        permissisons_list = request.POST.getlist('permission')
+        permissions_list = request.POST.getlist('permission')
 
         if Group.objects.filter(name=role_name).exists():
             messages.error(request, 'نقش ایجاد شده است')
             return redirect('roles_list')
-        elif permissisons_list:
+        elif permissions_list:
             role = Group.objects.create(name=role_name)
 
-            for per in permissisons_list:
+            for per in permissions_list:
                 q = Permission.objects.filter(codename=per)
                 if q.exists():
                     role.permissions.add(q[0])
@@ -176,8 +174,7 @@ def role_edit(request, role_id):
     role = Group.objects.get(id=role_id)
     if request.method == 'POST':
         role_name = request.POST.get('roleName')
-        permissisons_list = request.POST.getlist('permission')
-        # print(permissisons_list)
+        permissions_list = request.POST.getlist('permission')
         if Group.objects.filter(name=role_name).exclude(id=role_id).exists():
             messages.error(request, 'نقش ایجاد شده است')
             return redirect('roles_list')
@@ -185,9 +182,9 @@ def role_edit(request, role_id):
             role.name = role_name
             role.save()
 
-        if permissisons_list:
+        if permissions_list:
             role.permissions.clear()
-            for per in permissisons_list:
+            for per in permissions_list:
                 q = Permission.objects.filter(codename=per)
                 if q.exists():
                     role.permissions.add(q[0])

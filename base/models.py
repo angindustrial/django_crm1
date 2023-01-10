@@ -1,5 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
@@ -108,9 +107,3 @@ class Task(models.Model):
         from datetime import datetime, date
         time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
         return time_diff.total_seconds()
-
-# class RepairOperator(models.Model):
-#     operator = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='operator')
-#
-#     def __str__(self):
-#         return self.operator.username
