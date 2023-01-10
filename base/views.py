@@ -218,7 +218,7 @@ class TasksList(ListView):
             tasks = Task.published.all().order_by('-date')
         else:
             # tasks = Task.objects.filter(order__user=self.request.user, completed=True).order_by('-date')
-            tasks = Task.published.filter(user=self.request.user, completed=True).order_by('-date')
+            tasks = Task.published.filter(user=self.request.user).order_by('-date')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
