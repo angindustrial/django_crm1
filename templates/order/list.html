@@ -47,8 +47,11 @@
                     <div class="col-md-3 order_status">
                         <select class="form-select" name="status" id="">
                             <option value="">وضعیت</option>
-                            <option value="1" {% if request.GET.status == '1' %} selected {% endif %}>کامل</option>
-                            <option value="0" {% if request.GET.status == '0' %} selected {% endif %}>ناقص</option>
+                            {% for key, text in status_choices %}
+                                <option value="{{ key }}" {% if request.GET.status == key %} selected {% endif %}>
+                                    {{ text }}
+                                </option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-3 order_status mt-3">

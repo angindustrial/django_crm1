@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load jalali_tags %}
-
+{% load seconds_to_time %}
 {% block content %}
 
     <h4 class="py-3 breadcrumb-wrapper mb-2">لیست درخواست شروع به کار</h4>
@@ -169,6 +169,12 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="d-flex m-3 col-4 justify-content-around">
+                <p>مدت زمان کار انجام شده:</p>
+                <p>
+                    {% seconds_to_time time_spent %}
+                </p>
+            </div>
             <div class="pagination justify-content-center">
                 {% if is_paginated %}
                     <div class="card-footer">

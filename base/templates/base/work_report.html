@@ -70,7 +70,7 @@
                         <tbody>
                         <tr>
                             <td>{{ request.GET.executor_name }}</td>
-                            <td>{% seconds_to_time total_seconds %}</td>
+                            <td>{% time_or_none total_seconds %}</td>
                             <td>
                                 <a href="{% url 'tasks_list' %}?operation={{ the_longest_operation.id }}">{{ the_longest_operation.operationName }}</a>
                             </td>

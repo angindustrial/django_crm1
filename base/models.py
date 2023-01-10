@@ -105,5 +105,8 @@ class Task(models.Model):
     @property
     def get_time_diff(self):
         from datetime import datetime, date
-        time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
-        return time_diff.total_seconds()
+        try:
+            time_diff = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
+            return time_diff.total_seconds()
+        except TypeError as e:
+            return 0

@@ -73,20 +73,21 @@ def user_add(request):
             messages.error(request, 'نام کابری ثبت شده است')
         else:
 
-            User.objects.create_user(first_name=fname, last_name=last_name, username=username, email=email,
-                                     password=password)
+            user = User.objects.create_user(first_name=fname, last_name=last_name, username=username, email=email,
+                                            password=password)
             # user.set_password(password)
-            # user.groups.add(Group.objects.get(id=role))
-            # user.save()
-
+            user.groups.add(Group.objects.get(id=role))
+            print('before save')
+            user.save()
+            print('after save')
             # repair_operator_role = Group.objects.get(name='اپراتور فنی')
             # if int(role) == repair_operator_role.id:
             #     RepairOperator.objects.create(operator=user)
 
-            # profile = Profile.objects.get(user=user)
-            # profile.mobileNumber = mobile
-            # profile.department = Department.objects.get(id=department)
-            # profile.save()
+            profile = Profile.objects.get(user=user)
+            profile.mobileNumber = mobile
+            profile.department = Department.objects.get(id=department)
+            profile.save()
             messages.success(request, 'کاربر ایجاد شد')
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

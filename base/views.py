@@ -67,7 +67,8 @@ class OrdersList(ListView):
             orders = orders.filter(operation_id=operation)
 
         if status:
-            orders = orders.filter(isCompleted=status)
+            print(status)
+            orders = orders.filter(second_status=status)
 
         if start_date:
             start_date = jdatetime.datetime.strptime(start_date, '%Y-%m-%d').togregorian().date()
@@ -85,7 +86,8 @@ class OrdersList(ListView):
         context['templatetags'] = contains_building
         context['operations'] = Operation.objects.all()
         context['departments'] = Department.objects.all()
-
+        status_choices = Order.StatusChoices
+        context['status_choices'] = status_choices
         return context
 
 
@@ -217,7 +219,6 @@ class TasksList(ListView):
         if self.request.user.is_superuser:
             tasks = Task.published.all().order_by('-date')
         else:
-            # tasks = Task.objects.filter(order__user=self.request.user, completed=True).order_by('-date')
             tasks = Task.published.filter(user=self.request.user).order_by('-date')
 
         q = self.request.GET.get('q')
@@ -257,6 +258,13 @@ class TasksList(ListView):
         context = super().get_context_data(**kwargs)
         context['departments'] = Department.objects.all()
         context['operations'] = Operation.objects.all()
+        # if start_date or due_date:
+        tasks = self.get_queryset()
+        time_spent = 0
+        for task in tasks:
+            time_spent += task.get_time_diff
+
+        context['time_spent'] = time_spent
         return context
 
 
