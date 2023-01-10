@@ -96,10 +96,11 @@ def order_add(request):
         subgropuIds = request.POST.getlist('subgroup')
         priority = request.POST.get('priority')
 
-        lastOrder = Order.published.last()
+
+        lastOrder = Order.objects.last()
         print(lastOrder)
         print(lastOrder.orderId)
-
+        
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
