@@ -47,7 +47,6 @@ def find_longest_work(task, the_longest_work_seconds, the_longest_work_object):
     seconds_start = (t_start.hour * 60 + t_start.minute) * 60 + t_start.second
     seconds_end = (t_end.hour * 60 + t_end.minute) * 60 + t_end.second
     current_task_seconds = seconds_end - seconds_start
-    print(current_task_seconds, the_longest_work_seconds)
     if the_longest_work_seconds <= current_task_seconds:
         the_longest_work_object = task
         # return max(the_longest_work_seconds, current_task_seconds), the_longest_work

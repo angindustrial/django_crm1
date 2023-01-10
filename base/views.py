@@ -97,6 +97,9 @@ def order_add(request):
         priority = request.POST.get('priority')
 
         lastOrder = Order.published.last()
+        print(lastOrder)
+        print(lastOrder.orderId)
+
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
@@ -116,12 +119,11 @@ def order_add(request):
             try:
                 instance.save()
             except IntegrityError as e:
-                print(e)
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
             instance.status = f'ارسال به  {department.name}'
-            instance.status = 'ارسال به واحد فنی'
+            # instance.status = 'ارسال به واحد فنی'
 
             # id of ساخت subgroup is 4
             building_subgroup = Subgroup.objects.get(id=4)
@@ -134,7 +136,8 @@ def order_add(request):
                 instance.subGroup.add(subgroup_item)
 
             instance.save()
-
+        else:
+            messages.error(request, 'اطلاعات به صورت صحیح وارد نشده است')
         messages.success(request, 'درخواست ثبت شد')
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -272,9 +275,6 @@ def task_add(request):
         if orderId:
             order = Order.published.get(orderId=orderId)
             operator = User.objects.get(id=operator_id)
-            print(operator)
-            print(operator.id)
-            print(type(operator))
 
             task = Task.published.create(order=order, user=request.user, description=description,
                                          description2=description2)

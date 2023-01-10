@@ -16,7 +16,7 @@ with open('data.json', mode='r') as in_file, \
 
         # Tuple unpacking is more Pythonic and readable
         # than using indices
-        print(line)
+        # print(line)
         # ref, name, price, quantity, reorder = line.split()
         #
         # # Turn strings into integers

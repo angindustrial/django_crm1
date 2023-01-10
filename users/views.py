@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import ListView
-from django.contrib.auth.models import Permission, Group, User
-from django.contrib.auth import authenticate, login, update_session_auth_hash
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.models import Permission, Group
+from django.contrib.auth import authenticate, login, update_session_auth_hash, get_user_model
+# from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
 # from base.models import RepairOperator
 from .models import *
 from .forms import PasswordChangeForm
+
+
+User = get_user_model()
 
 
 def user_login(request):
@@ -72,7 +75,7 @@ def user_add(request):
         if User.objects.filter(username=username).exists():
             messages.error(request, 'نام کابری ثبت شده است')
         else:
-            user = User.objects.create(first_name=fname, last_name=lname, username=username, email=email)
+            user = User.objects.create_user(first_name=fname, last_name=lname, username=username, email=email)
             user.set_password(password)
             user.groups.add(Group.objects.get(id=role))
             user.save()
@@ -173,7 +176,7 @@ def role_edit(request, role_id):
     if request.method == 'POST':
         role_name = request.POST.get('roleName')
         permissisons_list = request.POST.getlist('permission')
-        print(permissisons_list)
+        # print(permissisons_list)
         if Group.objects.filter(name=role_name).exclude(id=role_id).exists():
             messages.error(request, 'نقش ایجاد شده است')
             return redirect('roles_list')
