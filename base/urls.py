@@ -9,7 +9,7 @@ urlpatterns = [
     path('order/edit/<orderId>/', views.order_edit, name='order_edit'),
     path('order/detail/<orderId>/', views.order_detail, name='order_detail'),
     path('order/invoice/<orderId>/', views.order_invoice, name='order_invoice'),
-
+    path('order/change_status/<int:pk>/', views.change_order_status, name='change_order_status'),
     path('tasks/list/', views.TasksList.as_view(), name='tasks_list'),
     path('task/add/', views.task_add, name='task_add'),
     path('task/edit/<taskId>/', views.task_edit, name='task_edit'),

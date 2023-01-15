@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import DurationField
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
 from django.db.models import Q, Sum, F
 from django.db.utils import IntegrityError
@@ -55,8 +55,10 @@ class OrdersList(ListView):
         department = self.request.GET.get('department')
         operation = self.request.GET.get('operation')
         status = self.request.GET.get('status')
-        start_date = self.request.GET.get('start_date')
-        due_date = self.request.GET.get('due_date')
+        # start_date = self.request.GET.get('start_date')
+        # due_date = self.request.GET.get('due_date')
+        dt_date = self.request.GET.get('dt_date')
+        start_date, due_date = dt_date.split(' تا ')
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -71,11 +73,11 @@ class OrdersList(ListView):
             orders = orders.filter(second_status=status)
 
         if start_date:
-            start_date = jdatetime.datetime.strptime(start_date, '%Y-%m-%d').togregorian().date()
+            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
             orders = orders.filter(createdAt__gte=start_date)
 
         if due_date:
-            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian().date()
+            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             orders = orders.filter(createdAt__lte=due_date)
         return orders
 
@@ -226,8 +228,10 @@ class TasksList(ListView):
         status = self.request.GET.get('status')
         operation = self.request.GET.get('operation')
         subgroup = self.request.GET.get('subgroup')
-        start_date = self.request.GET.get('start_date')
-        due_date = self.request.GET.get('due_date')
+        # start_date = self.request.GET.get('start_date')
+        # due_date = self.request.GET.get('due_date')
+        dt_date = self.request.GET.get('dt_date')
+        start_date, due_date = dt_date.split(' تا ')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)[:1]
@@ -236,7 +240,7 @@ class TasksList(ListView):
             tasks = tasks.filter(order__department_id=department)
 
         if status:
-            tasks = tasks.filter(completed=status)
+            tasks = tasks.filter(status=status)
 
         if operation:
             tasks = tasks.filter(order__operation=operation)
@@ -245,11 +249,11 @@ class TasksList(ListView):
             tasks = tasks.filter(order__subGroup=subgroup)
 
         if start_date:
-            start_date = jdatetime.datetime.strptime(start_date, '%Y-%m-%d').togregorian().date()
+            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
             tasks = tasks.filter(date__gte=start_date)
 
         if due_date:
-            due_date = jdatetime.datetime.strptime(due_date, '%Y-%m-%d').togregorian().date()
+            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             tasks = tasks.filter(date__lte=due_date)
 
         return tasks
@@ -258,6 +262,8 @@ class TasksList(ListView):
         context = super().get_context_data(**kwargs)
         context['departments'] = Department.objects.all()
         context['operations'] = Operation.objects.all()
+        status_choices = Task.StatusChoices
+        context['status_choices'] = status_choices
         # if start_date or due_date:
         tasks = self.get_queryset()
         time_spent = 0
@@ -301,7 +307,7 @@ def task_add(request):
             task.save()
 
             messages.success(request, 'درخواست شروع کار ثبت شد')
-            return redirect('orders_list')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if orderId:
         order = Order.published.get(orderId=orderId)
@@ -340,7 +346,7 @@ def task_edit(request, taskId):
         task.date = date
         task.start_time = start_time
         task.end_time = end_time
-        task.completed = status
+        task.status = status
         task.save()
 
         if status == '1':
@@ -352,7 +358,8 @@ def task_edit(request, taskId):
         return redirect('tasks_list')
 
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
-    context = {'task': task, 'operators': operators}
+    status_choices = Task.StatusChoices
+    context = {'task': task, 'operators': operators, 'status_choices': status_choices}
     return render(request, 'task/edit.html', context)
 
 
@@ -571,3 +578,10 @@ def change_order_publish_status(request, pk):
             return PermissionDenied()
     else:
         return redirect('orders_list')
+
+
+def change_order_status(request, pk):
+    order = Order.objects.get(pk=pk)
+    order.second_status = 'SE'
+    order.save()
+    return HttpResponse(status=200)

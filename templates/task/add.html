@@ -134,7 +134,7 @@
                             <label class="form-label">اپراتور فنی</label>
                             <select class="form-select" name="operator" id="" required>
                                 {% for operator in operators %}
-                                    <option value={{ operator.id }}>{{ operator }}</option>
+                                    <option value={{ operator.id }}>{{ operator.get_full_name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
