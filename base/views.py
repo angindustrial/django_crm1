@@ -58,7 +58,8 @@ class OrdersList(ListView):
         # start_date = self.request.GET.get('start_date')
         # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
-        start_date, due_date = dt_date.split(' تا ')
+        if dt_date:
+            start_date, due_date = dt_date.split(' تا ')
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -69,16 +70,15 @@ class OrdersList(ListView):
             orders = orders.filter(operation_id=operation)
 
         if status:
-            print(status)
-            orders = orders.filter(second_status=status)
+            orders = orders.filter(status=status)
 
-        if start_date:
-            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-            orders = orders.filter(createdAt__gte=start_date)
-
-        if due_date:
-            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-            orders = orders.filter(createdAt__lte=due_date)
+        # if start_date:
+        #     start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
+        #     orders = orders.filter(createdAt__gte=start_date)
+        #
+        # if due_date:
+        #     due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
+        #     orders = orders.filter(createdAt__lte=due_date)
         return orders
 
     def get_context_data(self, **kwargs):
@@ -162,7 +162,7 @@ def order_edit(request, orderId):
     if request.method == 'POST':
         operationId = request.POST.get('operation')
         departmentId = request.POST.get('department')
-        subgropuIds = request.POST.getlist('subgroup')
+        subgropupIds = request.POST.getlist('subgroup')
         description = request.POST.get('description')
         priority = request.POST.get('priority')
         status = request.POST.get('status')
@@ -175,14 +175,14 @@ def order_edit(request, orderId):
             instance.description = description
             instance.operation = operation
             instance.operationName = operation.name
-            instance.second_status = status
+            instance.status = status
             instance.department = department
             instance.departmentName = department.name
             instance.priority = priority
             instance.save()
 
             instance.subGroup.clear()
-            for subgroupId in subgropuIds:
+            for subgroupId in subgropupIds:
                 instance.subGroup.add(Subgroup.objects.get(id=subgroupId))
 
             instance.save()
@@ -231,7 +231,8 @@ class TasksList(ListView):
         # start_date = self.request.GET.get('start_date')
         # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
-        start_date, due_date = dt_date.split(' تا ')
+        if dt_date:
+            start_date, due_date = dt_date.split(' تا ')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)[:1]
@@ -240,7 +241,11 @@ class TasksList(ListView):
             tasks = tasks.filter(order__department_id=department)
 
         if status:
-            tasks = tasks.filter(status=status)
+            orders = list(Order.objects.filter(task__in=tasks, status=status).values_list('id', flat=True))
+            tasks = tasks.filter(order_id__in=orders)
+            if tasks:
+                task = tasks[0]
+                print(task.order.status)
 
         if operation:
             tasks = tasks.filter(order__operation=operation)
@@ -248,13 +253,13 @@ class TasksList(ListView):
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
 
-        if start_date:
-            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-            tasks = tasks.filter(date__gte=start_date)
-
-        if due_date:
-            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-            tasks = tasks.filter(date__lte=due_date)
+        # if start_date:
+        #     start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
+        #     tasks = tasks.filter(date__gte=start_date)
+        #
+        # if due_date:
+        #     due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
+        #     tasks = tasks.filter(date__lte=due_date)
 
         return tasks
 
@@ -262,7 +267,7 @@ class TasksList(ListView):
         context = super().get_context_data(**kwargs)
         context['departments'] = Department.objects.all()
         context['operations'] = Operation.objects.all()
-        status_choices = Task.StatusChoices
+        status_choices = Order.StatusChoices
         context['status_choices'] = status_choices
         # if start_date or due_date:
         tasks = self.get_queryset()
@@ -316,7 +321,9 @@ def task_add(request):
         order = None
         tasks = None
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
-    context = {'order': order, 'tasks': tasks, 'operators': operators}
+    status_choices = Order.StatusChoices
+
+    context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices}
     return render(request, 'task/add.html', context)
 
 
@@ -336,7 +343,6 @@ def task_edit(request, taskId):
         end_time = end_time if end_time != '' else None
 
         if date != '-':
-            print('here ', date)
             year, month, day = split_persian_date(date)
             date = jdatetime.date(year, month, day).togregorian()
         else:
@@ -346,7 +352,8 @@ def task_edit(request, taskId):
         task.date = date
         task.start_time = start_time
         task.end_time = end_time
-        task.status = status
+        task.order.status = status
+        task.order.save()
         task.save()
 
         if status == '1':
@@ -358,7 +365,7 @@ def task_edit(request, taskId):
         return redirect('tasks_list')
 
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
-    status_choices = Task.StatusChoices
+    status_choices = Order.StatusChoices
     context = {'task': task, 'operators': operators, 'status_choices': status_choices}
     return render(request, 'task/edit.html', context)
 

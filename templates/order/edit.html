@@ -59,7 +59,7 @@
                                 required>
                             {% for key, text in status_choices %}
                                 <option value="{{key}}"
-                                        {% if order.second_status == key %} selected
+                                        {% if order.status == key %} selected
                                         {% endif %}>{{ text }}</option>
                             {% endfor %}
                         </select>
