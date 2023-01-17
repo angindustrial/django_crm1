@@ -98,7 +98,6 @@
                     <th>شماره درخواست</th>
                     <th>تاریخ درخواست</th>
                     <th>عملیات</th>
-                    <th>پیگیری</th>
                     <th>وضعیت</th>
                     <th>اولویت</th>
                     <th>عمل‌ها</th>
@@ -114,8 +113,7 @@
                         <td>{{ order.createdAt|to_jalali:'%y/%m/%d' }}</td>
                         <td>{{ order.operation }}</td>
 
-                        <td><span class="badge bg-label-success">{{ order.status }}</span></td>
-                        </td>
+{#                        <td><span class="badge bg-label-success">{{ order.status }}</span></td>#}
                         <td>
                             {{ order.get_status_display }}
                         </td>

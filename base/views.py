@@ -99,11 +99,7 @@ def order_add(request):
         departmentId = request.POST.get('department')
         subgropuIds = request.POST.getlist('subgroup')
         priority = request.POST.get('priority')
-
         lastOrder = Order.objects.last()
-        print(lastOrder)
-        print(lastOrder.orderId)
-
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
@@ -123,10 +119,11 @@ def order_add(request):
             try:
                 instance.save()
             except IntegrityError as e:
+                print(e)
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
-            instance.status = f'ارسال به  {department.name}'
+            # instance.status = f'ارسال به  {department.name}'
             # instance.status = 'ارسال به واحد فنی'
 
             # id of ساخت subgroup is 4
@@ -287,12 +284,10 @@ def task_add(request):
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
-        operator_id = request.POST.get('operator')
-
+        operator_id = request.POST.getlist('operator')
         if orderId:
             order = Order.published.get(orderId=orderId)
-            operator = User.objects.get(id=operator_id)
-
+            operators = User.objects.filter(id__in=operator_id)
             task = Task.published.create(order=order, user=request.user, description=description,
                                          description2=description2)
             year, month, day = split_persian_date(date)
@@ -302,7 +297,7 @@ def task_add(request):
             task.start_time = start_time
             task.end_time = end_time
             task.completed = status
-            task.operator = operator
+            task.operators.set(operators)
             if status == '1':
                 order.isCompleted = True
                 order.save()
@@ -320,7 +315,6 @@ def task_add(request):
         tasks = None
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
     status_choices = Order.StatusChoices
-
     context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices}
     return render(request, 'task/add.html', context)
 
