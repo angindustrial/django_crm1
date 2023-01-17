@@ -136,9 +136,9 @@
                         </div>
                         <div class="col-md-3 col-12 mb-4">
                             <label class="form-label">اپراتور فنی</label>
-                            <select class="form-select" name="operator" id="" required>
+                            <select class="select2 form-select" name="operator" id="select2Success" multiple required>
                                 {% for operator in operators %}
-                                    <option value={{ operator.id }}>{{ operator.get_full_name }}</option>
+                                    <option value={{ operator.id }}>{{ operator.get_full_name }} {{ operator.username }}</option>
                                 {% endfor %}
                             </select>
                         </div>
