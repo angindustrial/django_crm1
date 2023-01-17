@@ -58,8 +58,7 @@ class OrdersList(ListView):
         # start_date = self.request.GET.get('start_date')
         # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
-        if dt_date:
-            start_date, due_date = dt_date.split(' تا ')
+
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -72,13 +71,14 @@ class OrdersList(ListView):
         if status:
             orders = orders.filter(status=status)
 
-        # if start_date:
-        #     start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-        #     orders = orders.filter(createdAt__gte=start_date)
-        #
-        # if due_date:
-        #     due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-        #     orders = orders.filter(createdAt__lte=due_date)
+        if dt_date:
+            start_date, due_date = dt_date.split(' تا ')
+
+            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
+            orders = orders.filter(createdAt__gte=start_date)
+
+            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
+            orders = orders.filter(createdAt__lte=due_date)
         return orders
 
     def get_context_data(self, **kwargs):
@@ -231,8 +231,6 @@ class TasksList(ListView):
         # start_date = self.request.GET.get('start_date')
         # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
-        if dt_date:
-            start_date, due_date = dt_date.split(' تا ')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)[:1]
@@ -252,14 +250,14 @@ class TasksList(ListView):
 
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
+        if dt_date:
+            start_date, due_date = dt_date.split(' تا ')
 
-        # if start_date:
-        #     start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-        #     tasks = tasks.filter(date__gte=start_date)
-        #
-        # if due_date:
-        #     due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-        #     tasks = tasks.filter(date__lte=due_date)
+            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
+            tasks = tasks.filter(date__gte=start_date)
+
+            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
+            tasks = tasks.filter(date__lte=due_date)
 
         return tasks
 
