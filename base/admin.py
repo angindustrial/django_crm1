@@ -28,7 +28,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'order']
     list_filter = ['user']
-    search_fields = ['description', 'description2']
+    search_fields = ['description', 'description2', 'order']
 
 
 admin.site.register(Subgroup)
