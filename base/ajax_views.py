@@ -9,6 +9,7 @@ def confirm_order(request):
     orderId = data['orderId']
     
     q = Order.objects.filter(orderId=orderId)
+    # TODO change status on line 14 later
     if q.exists():
         q.update(isConfirmed=True, status=f'ارسال به واحد {q[0].departmentName}')
         message = {'status':200, 'text':''}

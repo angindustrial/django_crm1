@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fa" class="light-style" dir="rtl" data-theme="theme-default" data-assets-path="/static/"
-    data-template="vertical-menu-template">
+      data-template="vertical-menu-template">
 
 <head>
     {% load static %}
     {% load jalali_tags %}
     <meta charset="utf-8">
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
     <title>سامانه درخواست کار گروه صنعتی ANG</title>
 
@@ -47,145 +47,147 @@
 </head>
 
 <body>
-    <!-- Content -->
+<!-- Content -->
 
-    <div class="invoice-print p-5">
-    
-			<div style="text-align: center;">
-			  <img src="{% static 'img/ANG.jpg' %}" alt="" style="width:auto; height:150px; ;">
-			</div>
-          
+<div class="invoice-print p-5">
+
+    <div style="text-align: center;">
+        <img src="{% static 'img/ANG.jpg' %}" alt="" style="width:auto; height:150px; ;">
+    </div>
+
+
+    <div class="row g-3">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <td><b> درخواست کننده : </b> {{ task.order.user.profile }}</td>
+                    <td><b> عملیات : </b> {{ task.order.operationName }}</td>
+
+                    <td><b> تاریخ درخواست : </b>
+                        {{ task.order.createdAt|to_jalali:'%y/%m/%d' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td><b> واحد : </b>
+
+                        {{ task.order.user.profile.department.name }}
+
+                    </td>
+                    <td><b> زیرگروه : </b>
+                        {% for sub in task.order.subGroup.all %}
+                            {{ sub.name }}
+                        {% endfor %}
+                    </td>
+                    <td><b> شماره درخواست : </b> {{ task.order.orderId }}</td>
+                </tr>
+
+                <tr>
+                    <td><b> اپراتور تعمیرات </b></td>
+                    <td colspan="3" style="text-align: justify;">
+                        {% for operator in task.operators.all %}
+                            {{ operator.get_full_name }} |
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <td><b> شرح درخواست </b></td>
+                    <td>{{ task.order.description }}</td>
+                </tr>
+            </table>
+        </div>
 
         <div class="row g-3">
-           
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <tr>
-                        <td><b> درخواست کننده : </b> {{ task.order.user.profile }}</td>
-                        <td><b> عملیات : </b> {{ task.order.operationName }}</td>
-                        
-                        <td> <b> تاریخ درخواست : </b>
-                            {{ task.order.createdAt|to_jalali:'%y/%m/%d' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> <b> واحد : </b>
-                       
-                          {{ task.order.user.profile.department.name}}
-                        
-                         </td>
-                        <td> <b> زیرگروه : </b>
-                            {% for sub in task.order.subGroup.all %}
-                            {{ sub.name }}
-                            {% endfor %}
-                        </td>
-                        <td> <b> شماره درخواست : </b> {{ task.order.orderId }}</td>
-                    </tr>
-                             
-             <tr>
-                 <td> <b> اپراتور تعمیرات </b> </td>
-                 <td colspan="3" style="text-align: justify;"> </td>
-            </tr>
-                </table>
-            </div>
-            
-             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <tr>
-                        <td> <b> شرح درخواست </b> </td>
-                        <td>{{ task.order.description }}</td>
-                    </tr>
-                </table>
-            </div>
-           
-            <div class="row g-3">
             <div class="table-responsive">
                 <br><h4>لیست کارهای انجام شده</h4>
                 {% for task in task.order.task.all|dictsort:"date" %}
-                <table class="table table-bordered text-center mb-4">
-                    <tr>
-                        <td colspan="4">نام مجری : <b>{{ task.user.profile }}</b></td>
-                    </tr>
-                    <tr>
-                        <td rowspan="4" {% if task.completed %} class="bg-label-success" {% else %}
-                            class="bg-label-danger" {% endif %}>
-                            تاریخ : <b>{{ task.date|to_jalali:'%y/%m/%d' }}</b>
-                        </td>
-                        <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
-                        <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
-                        <td>وضعیت : {% if task.completed %}
-                            <span class="badge bg-label-success">کامل</span>
+                    <table class="table table-bordered text-center mb-4">
+                        <tr>
+                            <td colspan="4">نام مجری : <b>{{ task.user.profile }}</b></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4" {% if task.completed %} class="bg-label-success" {% else %}
+                                class="bg-label-danger" {% endif %}>
+                                تاریخ : <b>{{ task.date|to_jalali:'%y/%m/%d' }}</b>
+                            </td>
+                            <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
+                            <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
+                            <td>وضعیت : {% if task.completed %}
+                                <span class="badge bg-label-success">کامل</span>
                             {% else %}
-                            <span class="badge bg-label-danger">ناقص</span>
+                                <span class="badge bg-label-danger">ناقص</span>
                             {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>شرح فعالیت</td>
-                        <td colspan="3" style="text-align: justify;">{{ task.description }}</td>
-                    </tr>
-                    <tr>
-                        <td>شرح لوازم مصرفی</td>
-                        <td colspan="3" style="text-align: justify;">{{ task.description2 }}</td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>شرح فعالیت</td>
+                            <td colspan="3" style="text-align: justify;">{{ task.description }}</td>
+                        </tr>
+                        <tr>
+                            <td>شرح لوازم مصرفی</td>
+                            <td colspan="3" style="text-align: justify;">{{ task.description2 }}</td>
+                        </tr>
+                    </table>
                 {% endfor %}
 
-        </table>
-           </div>
+                </table>
+            </div>
         </div>
-        
 
 
-        
-            <!-- /Time Picker -->
-            
-        </div>    
-             <br/><br/><br/>
-         <div class="row">
-            <div class="col" style="text-align: center;">
-                <span>امضا (اپراتور تعمیرات)</span>
-            </div>
-            
-            <div class="col" style="text-align: center;">
-                <span>امضا (مسئول فنی)</span>
-            </div>
-            
-            <div class="col" style="text-align: center;">
-                <span>امضا (واحد درخواست کننده)</span>
-            </div>
-            
-            <div class="col" style="text-align: center;">
-                <span>امضا (مدیریت)</span>
-            </div>
-            
-        </div>    
-        </div>
+        <!-- /Time Picker -->
+
     </div>
-    <!-- / Content -->
+    <br/><br/><br/>
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <span>امضا (اپراتور تعمیرات)</span>
+        </div>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{% static 'vendor/libs/jquery/jquery.js' %}"></script>
-    <script src="{% static 'vendor/libs/popper/popper.js' %}"></script>
-    <script src="{% static 'vendor/js/bootstrap.js' %}"></script>
-    <script src="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+        <div class="col" style="text-align: center;">
+            <span>امضا (مسئول فنی)</span>
+        </div>
 
-    <script src="{% static 'vendor/libs/hammer/hammer.js' %}"></script>
+        <div class="col" style="text-align: center;">
+            <span>امضا (واحد درخواست کننده)</span>
+        </div>
 
-    <script src="{% static 'vendor/libs/i18n/i18n.js' %}"></script>
-    <script src="{% static 'vendor/libs/typeahead-js/typeahead.js' %}"></script>
+        <div class="col" style="text-align: center;">
+            <span>امضا (مدیریت)</span>
+        </div>
 
-    <script src="{% static 'vendor/js/menu.js' %}"></script>
-    <!-- endbuild -->
+    </div>
+</div>
+</div>
+<!-- / Content -->
 
-    <!-- Vendors JS -->
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="{% static 'vendor/libs/jquery/jquery.js' %}"></script>
+<script src="{% static 'vendor/libs/popper/popper.js' %}"></script>
+<script src="{% static 'vendor/js/bootstrap.js' %}"></script>
+<script src="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
 
-    <!-- Main JS -->
-    <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'vendor/libs/hammer/hammer.js' %}"></script>
 
-    <!-- Page JS -->
-    <script src="{% static 'js/app-invoice-print.js' %}"></script>
+<script src="{% static 'vendor/libs/i18n/i18n.js' %}"></script>
+<script src="{% static 'vendor/libs/typeahead-js/typeahead.js' %}"></script>
+
+<script src="{% static 'vendor/js/menu.js' %}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+<script src="{% static 'js/main.js' %}"></script>
+
+<!-- Page JS -->
+<script src="{% static 'js/app-invoice-print.js' %}"></script>
 </body>
 
 </html>

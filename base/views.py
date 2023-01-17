@@ -48,15 +48,12 @@ class OrdersList(ListView):
         if self.request.user.has_perm('review.view_order_all') or is_member(self.request.user):
             orders = Order.published.all().order_by('-createdAt')
         else:
-            # profile = Profile.objects.get(user=self.request.user)
             orders = Order.published.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
         operation = self.request.GET.get('operation')
         status = self.request.GET.get('status')
-        # start_date = self.request.GET.get('start_date')
-        # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
 
         if q:
@@ -73,17 +70,16 @@ class OrdersList(ListView):
 
         if dt_date:
             start_date, due_date = dt_date.split(' تا ')
-
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-            orders = orders.filter(createdAt__gte=start_date)
-
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-            orders = orders.filter(createdAt__lte=due_date)
+            orders = orders.filter(Q(createdAt__gte=start_date), Q(createdAt__lte=due_date))
+
+        orders = orders.order_by('-createdAt')
+
         return orders
 
     def get_context_data(self, **kwargs):
         contains_building = False
-        orders = self.get_queryset()
         context = super().get_context_data(**kwargs)
         context['templatetags'] = contains_building
         context['operations'] = Operation.objects.all()
@@ -119,7 +115,6 @@ def order_add(request):
             try:
                 instance.save()
             except IntegrityError as e:
-                print(e)
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
@@ -216,17 +211,16 @@ class TasksList(ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            tasks = Task.published.all().order_by('-date')
+            # exclude tasks which their orders are not published
+            tasks = Task.published.all().order_by('-date').exclude(order__publish=False)
         else:
-            tasks = Task.published.filter(user=self.request.user).order_by('-date')
+            tasks = Task.published.filter(user=self.request.user).order_by('-date').exclude(order__publish=False)
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
         status = self.request.GET.get('status')
         operation = self.request.GET.get('operation')
         subgroup = self.request.GET.get('subgroup')
-        # start_date = self.request.GET.get('start_date')
-        # due_date = self.request.GET.get('due_date')
         dt_date = self.request.GET.get('dt_date')
 
         if q:
@@ -251,11 +245,9 @@ class TasksList(ListView):
             start_date, due_date = dt_date.split(' تا ')
 
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
-            tasks = tasks.filter(date__gte=start_date)
-
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
-            tasks = tasks.filter(date__lte=due_date)
-
+            tasks = tasks.filter(Q(date__gte=start_date), Q(date__lte=due_date))
+        tasks = tasks.order_by('date')
         return tasks
 
     def get_context_data(self, **kwargs):
@@ -264,7 +256,6 @@ class TasksList(ListView):
         context['operations'] = Operation.objects.all()
         status_choices = Order.StatusChoices
         context['status_choices'] = status_choices
-        # if start_date or due_date:
         tasks = self.get_queryset()
         time_spent = 0
         for task in tasks:
@@ -330,6 +321,7 @@ def task_edit(request, taskId):
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
+        operators = request.POST.getlist('operator')
 
         start_time = start_time if start_time != '' else None
         end_time = end_time if end_time != '' else None
@@ -345,6 +337,7 @@ def task_edit(request, taskId):
         task.start_time = start_time
         task.end_time = end_time
         task.order.status = status
+        task.operators.set(operators)
         task.order.save()
         task.save()
 
