@@ -247,7 +247,7 @@ class TasksList(ListView):
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             tasks = tasks.filter(Q(date__gte=start_date), Q(date__lte=due_date))
-        tasks = tasks.order_by('date')
+        tasks = tasks.order_by('-date')
         return tasks
 
     def get_context_data(self, **kwargs):
