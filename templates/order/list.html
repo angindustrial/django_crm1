@@ -54,22 +54,33 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3 order_status mt-3">
-                        <label for="start_date">
-                            از تاریخ:
-                        </label>
-                        <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'
-                               class="form-control invoice-date"
-                               placeholder="YYYY/MM/DD">
+                    <div class="col-md-3 mt-3 order_status">
+                        <label for="dt_date">تاریخ</label>
+                        <input type="text" id="dt_date" class="form-control dt-date flatpickr-range dt-input"
+                               data-column="5"
+                               placeholder="تاریخ شروع تا پایان" data-column-index="4" name="dt_date"
+                               value="{{ request.GET.dt_date }}">
+                        <input type="hidden" class="form-control dt-date start_date dt-input" data-column="5"
+                               data-column-index="4" name="value_from_start_date">
+                        <input type="hidden" class="form-control dt-date end_date dt-input" name="value_from_end_date"
+                               data-column="5" data-column-index="4">
                     </div>
-                    <div class="col-md-3 order_status mt-3 me-auto">
-                        <label for="start_date">
-                            تا تاریخ:
-                        </label>
-                        <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'
-                               class="form-control due-date"
-                               placeholder="YYYY/MM/DD">
-                    </div>
+                    {#                    <div class="col-md-3 order_status mt-3">#}
+                    {#                        <label for="start_date">#}
+                    {#                            از تاریخ:#}
+                    {#                        </label>#}
+                    {#                        <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'#}
+                    {#                               class="form-control invoice-date"#}
+                    {#                               placeholder="YYYY/MM/DD">#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-3 order_status mt-3 me-auto">#}
+                    {#                        <label for="start_date">#}
+                    {#                            تا تاریخ:#}
+                    {#                        </label>#}
+                    {#                        <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'#}
+                    {#                               class="form-control due-date"#}
+                    {#                               placeholder="YYYY/MM/DD">#}
+                    {#                    </div>#}
                 </div>
                 <div class="row">
                     <div class="col-md-12 user_status">
@@ -106,7 +117,7 @@
                         <td><span class="badge bg-label-success">{{ order.status }}</span></td>
                         </td>
                         <td>
-                            {{ order.get_second_status_display }}
+                            {{ order.get_status_display }}
                         </td>
                         <td>{{ order.get_priority }}</td>
                         <td>
@@ -117,7 +128,8 @@
                                             <i class="bx bx-edit"></i>
                                         </a>
                                     {% endif %}
-                                    <button data-bs-toggle="modal" data-bs-target="#viewOrderDetail_{{ order.id }}"
+                                    <button data-bs-toggle="modal" onclick="changeStatus('{{ order.id }}')"
+                                            data-bs-target="#viewOrderDetail_{{ order.id }}"
                                             class="btn btn-sm btn-icon delete-record">
                                         <i class="bx bx-show"></i>
                                     </button>
@@ -327,4 +339,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/order_handler.js' %}"></script>
 {% endblock content %}

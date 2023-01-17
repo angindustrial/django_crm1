@@ -1,4 +1,5 @@
 {% extends '../base.html' %}
+{% load crispy_forms_filters %}
 
 {% load static %}
 {% load crispy_forms_tags %}
@@ -60,7 +61,7 @@
                                 required>
                             {% for key, text in status_choices %}
                                 <option value="{{key}}"
-                                        {% if order.second_status == key %} selected
+                                        {% if order.status == key %} selected
                                         {% endif %}>{{ text }}</option>
                             {% endfor %}
                         </select>
@@ -92,7 +93,6 @@
                     <div class="col-md-12 mb-1">
                         {{ form.description|as_crispy_field }}
                     </div>
-
                 </div>
                 <div class="mt-1">
                     <button type="submit" class="btn btn-primary me-2">ویرایش</button>

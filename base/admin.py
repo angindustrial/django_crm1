@@ -11,6 +11,7 @@ from .models import Order, Department, Task, Subgroup, Operation
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'operation', 'department', 'orderId')
     list_filter = ('user', 'department', 'createdAt')
+    search_fields = ['id', 'orderId']
 # inlines = (OrderInline,)
 
 
@@ -27,6 +28,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'order']
     list_filter = ['user']
+    search_fields = ['description', 'description2']
 
 
 admin.site.register(Subgroup)

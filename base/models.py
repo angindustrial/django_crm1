@@ -28,9 +28,9 @@ class Order(models.Model):
     publish = models.BooleanField(default=True)
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
-    status = models.CharField(max_length=200, blank=True, null=True)  # Which step is right now
-    second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices, default='SV')
-    isCompleted = models.BooleanField(default=False)
+    status = models.CharField(max_length=2, choices=StatusChoices, default='SV')  # Which step is right now
+    # second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices, default='SV')
+    # isCompleted = models.BooleanField(default=False)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -73,13 +73,6 @@ class Subgroup(models.Model):
 
 
 class Task(models.Model):
-    StatusChoices = (
-        ('SE', 'مشاهده شده',),
-        ("DG", 'در حال انجام'),
-        ("WG", "در انتظار قطعه"),
-        ('ST', "ارسال به پیمانکار"),
-        ("DN", "تکمیل شده"),
-    )
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='task')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextUploadingField()
@@ -89,9 +82,9 @@ class Task(models.Model):
     end_time = models.TimeField(null=True)
     publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
-    completed = models.BooleanField(default=False)
+    # completed = models.BooleanField(default=False)
     operator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='operator_tasks')
-    status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
+    # status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -110,3 +103,19 @@ class Task(models.Model):
             return time_diff.total_seconds()
         except TypeError as e:
             return 0
+
+# class Status(models.Model):
+#     StatusChoices = (
+#         ('SV', 'ثبت شده'),
+#         ('SE', 'مشاهده شده',),
+#         ("DG", 'در حال انجام'),
+#         ("WG", "در انتظار قطعه"),
+#         ('ST', "ارسال به پیمانکار"),
+#         ("DN", "تکمیل شده"),
+#     )
+#     # order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_status')
+#     # task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='task_status')
+#     name = models.CharField(max_length=2, choices=StatusChoices, default='SV')
+#
+#     def __str__(self):
+#         return self.name

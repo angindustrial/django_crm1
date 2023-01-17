@@ -125,16 +125,20 @@
                         <!-- /Time Picker -->
                         <div class="col-md-3 col-12 mb-4">
                             <label class="form-label">وضعیت</label>
-                            <select class="form-select" name="status" id="" required>
-                                <option value="1">اتمام کار</option>
-                                <option value="0">ناقص</option>
+                               <select class="form-select" name="status" id="">
+                                <option value="">وضعیت</option>
+                                {% for key, text in status_choices %}
+                                    <option value="{{ key }}" {% if task.order.status == key %} selected {% endif %}>
+                                        {{ text }}
+                                    </option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-md-3 col-12 mb-4">
                             <label class="form-label">اپراتور فنی</label>
                             <select class="form-select" name="operator" id="" required>
                                 {% for operator in operators %}
-                                    <option value={{ operator.id }}>{{ operator }}</option>
+                                    <option value={{ operator.id }}>{{ operator.get_full_name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
