@@ -141,7 +141,7 @@
                                                         aria-label="Close"></button>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="">وضعیت درخواست : {{ order.status }}</label>
+                                                        <label for="">وضعیت درخواست : {{ order.get_status_display }}</label>
                                                         {% contains_building order as contains %}
                                                         {% if not order.isConfirmed and perms.base.change_order and contains %}
                                                             <button type="button" class="btn btn-label-primary btn-sm"
@@ -210,11 +210,14 @@
                                                                             <td dir="ltr">{{ task.start_time|time:'h:i A' }}</td>
                                                                             <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
                                                                             <td>
-                                                                                {% if task.completed %}
-                                                                                    <span class="badge bg-label-success">کامل</span>
-                                                                                {% else %}
-                                                                                    <span class="badge bg-label-danger">ناقص</span>
-                                                                                {% endif %}
+                                                                                <span class="badge bg-label-success">
+                                                                                    {{ task.order.get_status_display }}
+                                                                                </span>
+{#                                                                                {% if task.completed %}#}
+{#                                                                                    <span class="badge bg-label-success">کامل</span>#}
+{#                                                                                {% else %}#}
+{#                                                                                    <span class="badge bg-label-danger">ناقص</span>#}
+{#                                                                                {% endif %}#}
                                                                             </td>
                                                                         </tr>
                                                                     {% endfor %}
