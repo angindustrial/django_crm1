@@ -287,12 +287,9 @@ def task_add(request):
             task.date = date
             task.start_time = start_time
             task.end_time = end_time
-            task.completed = status
+            task.order.status = status
             task.operators.set(operators)
-            if status == '1':
-                order.isCompleted = True
-                order.save()
-
+            task.order.save()
             task.save()
 
             messages.success(request, 'درخواست شروع کار ثبت شد')

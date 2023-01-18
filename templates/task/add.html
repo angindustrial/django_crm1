@@ -66,11 +66,14 @@
                             <td dir="ltr">{{ task.start_time|time:'h:i A' }}</td>
                             <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
                             <td>
-                                {% if task.completed %}
-                                    <span class="badge bg-label-success">کامل</span>
-                                {% else %}
-                                    <span class="badge bg-label-danger">ناقص</span>
-                                {% endif %}
+                                <span class="badge bg-label-success">
+                                    {{ task.order.get_status_display }}
+                                </span>
+{#                                {% if task.completed %}#}
+{#                                    <span class="badge bg-label-success">کامل</span>#}
+{#                                {% else %}#}
+{#                                    <span class="badge bg-label-danger">ناقص</span>#}
+{#                                {% endif %}#}
                             </td>
                         </tr>
                     {% endfor %}
@@ -86,7 +89,6 @@
                 <div class="text-center">
                     <h3 class="m-0">افزودن اطلاعات کار</h3>
                 </div>
-
                 <form class="form-repeater" method="post" action="{% url 'task_add' %}">
                     {% csrf_token %}
                     <input type="hidden" name="orderId" value="{{ request.GET.orderId }}">
