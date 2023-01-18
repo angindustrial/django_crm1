@@ -32,7 +32,7 @@ def index(request):
     else:
         users = User.objects.filter(is_superuser=False)
         orders = Order.published.filter(user=user)
-        tasks = Task.published.filter(user=user, completed=True)
+        tasks = Task.published.filter(user=user, order__status='DN')
 
     context = {'users': users, 'orders': orders, 'tasks': tasks}
     return render(request, 'index.html', context)
