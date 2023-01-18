@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.contrib.auth.models import Permission, Group
 from django.contrib.auth import authenticate, login, update_session_auth_hash, get_user_model
 from django.http import HttpResponseRedirect
@@ -135,6 +135,14 @@ def user_edit(request, username):
     roles = Group.objects.all()
     context = {'roles': roles, 'departments': departments, 'user': user}
     return render(request, 'users/edit.html', context)
+
+
+def user_delete(request, pk):
+    if request.method == 'POST':
+        print(pk)
+        User.objects.get(id=pk).delete()
+        messages.success(request, 'کاربر با موفقیت حذف شد!')
+        return redirect('users_list')
 
 
 def role_list(request):
