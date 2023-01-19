@@ -73,6 +73,14 @@ class Subgroup(models.Model):
 
 
 class Task(models.Model):
+    TaskChoices = (
+        ('SV', 'ثبت شده'),
+        ('SE', 'مشاهده شده'),
+        ("DG", 'در حال انجام'),
+        ("WG", "در انتظار قطعه"),
+        ('ST', "ارسال به پیمانکار"),
+        ("DN", "تکمیل شده")
+    )
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='task')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextUploadingField()
@@ -84,7 +92,7 @@ class Task(models.Model):
     hours = models.CharField(max_length=20, blank=True, null=True)
     # completed = models.BooleanField(default=False)
     operators = models.ManyToManyField(User, null=True, related_name='operator_tasks')
-    # status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices)
+    status = models.CharField(max_length=2, blank=True, null=True, choices=TaskChoices, default='SV')
 
     objects = models.Manager()
     published = PublishedManager()
