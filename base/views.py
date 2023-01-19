@@ -224,7 +224,7 @@ class TasksList(ListView):
         dt_date = self.request.GET.get('dt_date')
 
         if q:
-            tasks = tasks.filter(order__orderId__contains=q)[:1]
+            tasks = tasks.filter(order__orderId__contains=q)
 
         if department:
             tasks = tasks.filter(order__department_id=department)
@@ -232,9 +232,8 @@ class TasksList(ListView):
         if status:
             orders = list(Order.objects.filter(task__in=tasks, status=status).values_list('id', flat=True))
             tasks = tasks.filter(order_id__in=orders)
-            if tasks:
-                task = tasks[0]
-                print(task.order.status)
+            # if tasks:
+            #     task = tasks[0]
 
         if operation:
             tasks = tasks.filter(order__operation=operation)
@@ -243,10 +242,10 @@ class TasksList(ListView):
             tasks = tasks.filter(order__subGroup=subgroup)
         if dt_date:
             start_date, due_date = dt_date.split(' تا ')
-
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             tasks = tasks.filter(Q(date__gte=start_date), Q(date__lte=due_date))
+
         tasks = tasks.order_by('-date')
         return tasks
 
@@ -287,9 +286,9 @@ def task_add(request):
             task.date = date
             task.start_time = start_time
             task.end_time = end_time
-            task.order.status = status
+            task.status = status
             task.operators.set(operators)
-            task.order.save()
+            # task.order.save()
             task.save()
 
             messages.success(request, 'درخواست شروع کار ثبت شد')
