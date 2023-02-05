@@ -113,7 +113,7 @@
                         <td>{{ order.createdAt|to_jalali:'%y/%m/%d' }}</td>
                         <td>{{ order.operation }}</td>
 
-{#                        <td><span class="badge bg-label-success">{{ order.status }}</span></td>#}
+                        {#                        <td><span class="badge bg-label-success">{{ order.status }}</span></td>#}
                         <td>
                             {{ order.get_status_display }}
                         </td>
@@ -141,7 +141,8 @@
                                                         aria-label="Close"></button>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="">وضعیت درخواست : {{ order.get_status_display }}</label>
+                                                        <label for="">وضعیت درخواست
+                                                            : {{ order.get_status_display }}</label>
                                                         {% contains_building order as contains %}
                                                         {% if not order.isConfirmed and perms.base.change_order and contains %}
                                                             <button type="button" class="btn btn-label-primary btn-sm"
@@ -213,11 +214,11 @@
                                                                                 <span class="badge bg-label-success">
                                                                                     {{ task.get_status_display }}
                                                                                 </span>
-{#                                                                                {% if task.completed %}#}
-{#                                                                                    <span class="badge bg-label-success">کامل</span>#}
-{#                                                                                {% else %}#}
-{#                                                                                    <span class="badge bg-label-danger">ناقص</span>#}
-{#                                                                                {% endif %}#}
+                                                                                {#                                                                                {% if task.completed %}#}
+                                                                                {#                                                                                    <span class="badge bg-label-success">کامل</span>#}
+                                                                                {#                                                                                {% else %}#}
+                                                                                {#                                                                                    <span class="badge bg-label-danger">ناقص</span>#}
+                                                                                {#                                                                                {% endif %}#}
                                                                             </td>
                                                                         </tr>
                                                                     {% endfor %}
@@ -228,11 +229,12 @@
 
                                                         <div class="col-12 text-center">
                                                             {% if not order.isCompleted %}
-                                                                {% if user.is_superuser %}
-                                                                <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
-                                                                   class="btn btn-primary me-sm-3 me-1">شروع به کار
-                                                                </a>
-                                                                    {% endif %}
+                                                                {% if user.is_superuser or user.groups.all.0.name == 'کاربر فنی' %}
+                                                                    <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
+                                                                       class="btn btn-primary me-sm-3 me-1">شروع
+                                                                        به کار
+                                                                    </a>
+                                                                {% endif %}
                                                             {% else %}
                                                                 <a href="{% url 'order_detail' order.orderId %}"
                                                                    class="btn btn-primary me-sm-3 me-1">مشاهده
