@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load contains_building %}
+{% load order_tags %}
 {% load static %}
 {% load jalali_tags %}
 
@@ -125,6 +126,13 @@
                                         <a href="{% url 'order_edit' order.orderId %}" class="btn btn-sm btn-icon">
                                             <i class="bx bx-edit"></i>
                                         </a>
+                                    {% elif  user == order.user %}
+                                        {% is_24_hours order.createdAt as editable %}
+                                        {% if editable %}
+                                            <a href="{% url 'order_edit' order.orderId %}" class="btn btn-sm btn-icon">
+                                                <i class="bx bx-edit"></i>
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
                                     <button data-bs-toggle="modal" onclick="changeStatus('{{ order.id }}')"
                                             data-bs-target="#viewOrderDetail_{{ order.id }}"
