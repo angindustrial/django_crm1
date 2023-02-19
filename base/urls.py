@@ -32,7 +32,17 @@ urlpatterns = [
 
     path('persons_report/', views.WorkReportView.as_view(), name='persons_report'),
     path('machines_report/', views.MachineReportView.as_view(), name='machines_report'),
+
     path("archive-task/<int:pk>/", views.change_task_publish_status, name='archive-task'),
+    path("archive-part/<int:pk>/", views.change_part_publish_status, name='archive-part'),
+    path("archive-station/<int:pk>/", views.change_station_publish_status, name='archive-station'),
     path("archive-order/<int:pk>/", views.change_order_publish_status, name='archive-order'),
 
+    path('parts/', views.PartsList.as_view(), name='machine_parts_list'),
+    path('part/edit/<int:part_id>/', views.PartsList.as_view(), name='machine_part_edit'),
+    path('part/add/', views.machine_part_add, name='machine_part_add'),
+
+    path('stations/', views.StationList.as_view(), name='station_list'),
+    path('station/edit/<int:pk>/', views.StationList.as_view(), name='station_edit'),
+    path('station/add/', views.station_add, name='station_add'),
 ]

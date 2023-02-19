@@ -396,6 +396,11 @@ class OperationList(ListView):
     paginate_by = 100
     context_object_name = 'operations'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(OperationList, self).get_context_data()
+        context['departments'] = Department.objects.all()
+        return context
+
 
 def operation_add(request):
     if request.method == 'POST':
@@ -514,27 +519,50 @@ class MachineReportView(ListView):
 
 def change_task_publish_status(request, pk):
     if request.method == 'POST':
-
         if request.user.is_superuser:
             type_of_delete = request.POST.get('type_of_delete')
             task = Task.published.get(pk=pk)
-
             if type_of_delete == 'delete_all':
                 task.publish = False
                 task.save()
                 task.order.publish = False
                 task.order.save()
-
             elif type_of_delete == 'delete_this':
                 task.publish = False
                 task.save()
-
             return redirect('tasks_list')
 
         else:
             return PermissionDenied()
     else:
         return redirect('tasks_list')
+
+
+def change_part_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            part = Part.objects.get(pk=pk)
+            part.delete()
+            return redirect('machine_parts_list')
+
+        else:
+            return PermissionDenied()
+    else:
+        return redirect('machine_parts_list')
+
+
+def change_station_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            station = Station.objects.get(pk=pk)
+            station.delete()
+            return redirect('station_list')
+
+        else:
+            return PermissionDenied()
+    else:
+        return redirect('station_list')
+
 
 
 def change_order_publish_status(request, pk):
@@ -577,3 +605,34 @@ def change_order_status(request, pk):
     order.second_status = 'SE'
     order.save()
     return HttpResponse(status=200)
+
+
+class PartsList(ListView):
+    model = Part
+    template_name = 'base/parts_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PartsList, self).get_context_data()
+        context['machines'] = Operation.objects.all()
+        return context
+
+
+def machine_part_add(request):
+    if request.method == 'POST':
+        machine_name = request.POST.get('machine')
+        part_name = request.POST.get('part_name')
+        machine = Operation.objects.get(id=machine_name)
+        Part.objects.create(machine=machine, name=part_name)
+        return redirect('machine_parts_list')
+
+
+class StationList(ListView):
+    model = Station
+    template_name = 'base/station_list.html'
+
+
+def station_add(request):
+    if request.method == 'POST':
+        station_name = request.POST.get('station_name')
+        Station.objects.create(name=station_name)
+        return redirect('station_list')

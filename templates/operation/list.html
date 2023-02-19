@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h4 class="py-3 breadcrumb-wrapper mb-2">لیست عملیات ها</h4>
+    <h4 class="py-3 breadcrumb-wrapper mb-2">لیست ماشین ها</h4>
 
     {% for message in messages %}
         {% if message.tags == 'error' %}
@@ -35,10 +35,10 @@
                                 <a href="javascript:;" data-bs-toggle="modal"
                                    data-bs-target="#editOperationModal_{{ operation.id }}"
                                    class="role-edit-modal">
-                                    <small>ویرایش عملیات</small>
-                                    
+                                    <small>ویرایش ماشین</small>
+
                                 </a>
-                            
+
                             </div>
                         </div>
                     </div>
@@ -52,13 +52,13 @@
                                 aria-label="Close"></button>
                         <div class="modal-body">
                             <div class="text-center mb-4">
-                                <h3 class="role-title">ویرایش عملیات</h3>
+                                <h3 class="role-title">ویرایش ماشین</h3>
                             </div>
                             <!-- Edit role form -->
                             <form method="post" class="row g-3" action="{% url 'operation_edit' operation.id %}">
                                 {% csrf_token %}
                                 <div class="col-12 mb-4">
-                                    <label class="form-label" for="operationName">نام عملیات</label>
+                                    <label class="form-label" for="operationName">نام ماشین</label>
                                     <input type="text" id="operationName" name="operationName" class="form-control"
                                            value="{{ operation.name }}" tabindex="-1" required>
                                 </div>
@@ -92,9 +92,9 @@
                         <div class="card-body text-sm-end text-center ps-sm-0">
                             <button data-bs-target="#addoperationModal" data-bs-toggle="modal"
                                     class="btn btn-primary mb-3 text-nowrap add-new-role">
-                                افزودن عملیات جدید
+                                افزودن ماشین جدید
                             </button>
-                            <p class="mb-0">اگر عملیاتی وجود ندارد اضافه کنید</p>
+                            <p class="mb-0">اگر ماشینی وجود ندارد اضافه کنید</p>
                         </div>
                     </div>
                 </div>
@@ -110,16 +110,26 @@
                 <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
                     <div class="text-center mb-4">
-                        <h3 class="role-title">افزودن عملیات جدید</h3>
-                        <p>مجوزهای عملیات را تنظیم کنید</p>
+                        <h3 class="role-title">افزودن ماشین جدید</h3>
+                        <p>مجوزهای ماشین را تنظیم کنید</p>
                     </div>
                     <!-- Add role form -->
                     <form method="post" class="row g-3" action="{% url 'operation_add' %}">
                         {% csrf_token %}
                         <div class="col-12 mb-4">
-                            <label class="form-label" for="operationName">نام عملیات</label>
+                            <label class="form-label" for="operationName">نام ماشین</label>
                             <input type="text" id="operationName" name="operationName" class="form-control"
-                                   placeholder="نام عملیات را وارد کنید" tabindex="-1" required>
+                                   placeholder="نام ماشین را وارد کنید" tabindex="-1" required>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label" for="area">سالن محل استفاده</label>
+                            <select name="area" id="" class="form-control">
+                                {% for department in departments %}
+                                    <option value="{{ department.id }}">{{ department.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {#                            <input type="text" id="area" name="area" class="form-control"#}
+                            {#                                   placeholder="نام سالن" tabindex="-1" required>#}
                         </div>
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">ثبت</button>
