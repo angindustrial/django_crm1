@@ -245,10 +245,55 @@
                             <td>{{ machine.order.all|length }}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    {% if perms.base.change_machine %}
-                                        <a href="{% url 'operation_edit' machine.id %}" class="btn btn-sm btn-icon">
+                                    {% if perms.base.change_operation %}
+                                        {#                                        <a href="{% url 'operation_edit' machine.id %}" class="btn btn-sm btn-icon">#}
+                                        {#                                            <i class="bx bx-edit"></i>#}
+                                        {#                                        </a>#}
+                                        <a href="javascript:;" data-bs-toggle="modal"
+                                           data-bs-target="#editOperationModal_{{ machine.id }}"
+                                           class="role-edit-modal">
                                             <i class="bx bx-edit"></i>
                                         </a>
+                                        <div class="modal fade" id="editOperationModal_{{ machine.id }}" tabindex="-1"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
+                                                <div class="modal-content p-3 p-md-5">
+                                                    <button type="button" class="btn-close btn-pinned"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    <div class="modal-body">
+                                                        <div class="text-center mb-4">
+                                                            <h3 class="role-title">ویرایش ماشین</h3>
+                                                        </div>
+                                                        <!-- Edit role form -->
+                                                        <form method="post" class="row g-3"
+                                                              action="{% url 'operation_edit' machine.id %}">
+                                                            {% csrf_token %}
+                                                            <div class="col-12 mb-4">
+                                                                <label class="form-label" for="operationName">نام
+                                                                    ماشین</label>
+                                                                <input type="text" id="operationName"
+                                                                       name="operationName" class="form-control"
+                                                                       value="{{ machine.name }}" tabindex="-1"
+                                                                       required>
+                                                            </div>
+
+                                                            <div class="col-12 text-center">
+                                                                <button type="submit"
+                                                                        class="btn btn-primary me-sm-3 me-1">ویرایش
+                                                                </button>
+                                                                <button type="reset" class="btn btn-label-secondary"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    انصراف
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                        <!--/ Edit role form -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     {% endif %}
                                     {% if user.is_superuser %}
                                         <a href="javascript:;" data-bs-toggle="modal"
