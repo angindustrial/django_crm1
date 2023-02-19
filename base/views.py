@@ -399,13 +399,19 @@ class OperationList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(OperationList, self).get_context_data()
         context['departments'] = Department.objects.all()
+        context['stations'] = Station.objects.all()
         return context
 
 
 def operation_add(request):
     if request.method == 'POST':
         name = request.POST.get('operationName')
-        Operation.objects.get_or_create(name=name)
+        area_id = request.POST.get('area')
+        station_id = request.POST.get('station')
+        area = Department.objects.get(id=area_id)
+        station = Station.objects.get(id=station_id)
+        print(area, station)
+        Operation.objects.get_or_create(name=name, area=area, station=station)
         messages.success(request, 'عملیات ایجاد شد')
         return redirect('operation_list')
 
@@ -564,18 +570,20 @@ def change_station_publish_status(request, pk):
         return redirect('station_list')
 
 
+def change_operation_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            operation = Operation.objects.get(pk=pk)
+            operation.delete()
+            return redirect('operation_list')
+
+        else:
+            return PermissionDenied()
+    else:
+        return redirect('operation_list')
+
 
 def change_order_publish_status(request, pk):
-    # if request.method == 'POST':
-    #     if request.user.is_superuser:
-    #         order = Order.published.get(pk=pk)
-    #         order.publish = False
-    #         order.save()
-    #         return redirect('orders_list')
-    #     else:
-    #         return PermissionDenied()
-    # else:
-    #     return HttpResponseForbidden()
     if request.method == 'POST':
 
         if request.user.is_superuser:

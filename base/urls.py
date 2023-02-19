@@ -37,6 +37,7 @@ urlpatterns = [
     path("archive-part/<int:pk>/", views.change_part_publish_status, name='archive-part'),
     path("archive-station/<int:pk>/", views.change_station_publish_status, name='archive-station'),
     path("archive-order/<int:pk>/", views.change_order_publish_status, name='archive-order'),
+    path("archive-operation/<int:pk>/", views.change_operation_publish_status, name='archive-operation'),
 
     path('parts/', views.PartsList.as_view(), name='machine_parts_list'),
     path('part/edit/<int:part_id>/', views.PartsList.as_view(), name='machine_part_edit'),

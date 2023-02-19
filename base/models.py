@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -60,6 +61,12 @@ class Department(models.Model):
 
 class Operation(models.Model):
     name = models.CharField(max_length=50)
+    area = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name='department_operations')
+    station = models.ForeignKey('Station', on_delete=models.SET_NULL, null=True, related_name='station_operations')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.name
