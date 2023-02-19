@@ -63,32 +63,32 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3 mt-3 order_status">
+                </div>
+                <div class="d-flex align-items-center row py-3 gap-3 gap-md-0">
+                    <div class="col-md-3 user_plan">
+                        <label for="operationfield">
+                            اپراتور فنی
+                        </label>
+                        <select class="select2 form-select" name="operator" id="operationfield">
+                            <option value="">انتخاب اپراتور</option>
+                            {% for operator in operators %}
+                                <option value="{{ operator.id }}"
+                                        {% if request.GET.operator|add:0 == operator.id %}
+                                        selected {% endif %}>{{ operator.get_full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3 order_status">
                         <label for="dt_date">تاریخ</label>
-                        <input type="text" id="dt_date" class="form-control dt-date flatpickr-range dt-input" data-column="5"
-                               placeholder="تاریخ شروع تا پایان" data-column-index="4" name="dt_date" value="{{ request.GET.dt_date }}">
+                        <input type="text" id="dt_date" class="form-control dt-date flatpickr-range dt-input"
+                               data-column="5"
+                               placeholder="تاریخ شروع تا پایان" data-column-index="4" name="dt_date"
+                               value="{{ request.GET.dt_date }}">
                         <input type="hidden" class="form-control dt-date start_date dt-input" data-column="5"
                                data-column-index="4" name="value_from_start_date">
                         <input type="hidden" class="form-control dt-date end_date dt-input" name="value_from_end_date"
                                data-column="5" data-column-index="4">
                     </div>
-                    {#                    <div class="col-md-3 order_status mt-3">#}
-                    {#                        <label for="start_date">#}
-                    {#                            از تاریخ:#}
-                    {#                        </label>#}
-                    {#                        <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'#}
-                    {#                               class="form-control invoice-date"#}
-                    {#                               placeholder="YYYY/MM/DD">#}
-                    {#                    </div>#}
-                    {#                    <div class="col-md-3 order_status mt-3 me-auto">#}
-                    {#                        <label for="start_date">#}
-                    {#                            تا تاریخ:#}
-                    {#                        </label>#}
-                    {#                        <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'#}
-                    {#                               class="form-control due-date"#}
-                    {#                               placeholder="YYYY/MM/DD">#}
-                    {#                    </div>#}
-
                 </div>
                 <div class="row">
                     <div class="col-md-3 user_status">
@@ -116,7 +116,14 @@
                     <tr>
                         <td>{{ task.order.orderId }}</td>
                         <td>{{ task.user.profile }}</td>
-                        <td>{{ task.operator.username }}</td>
+                        <td>
+                            {% for operator in task.operators.all %}
+                                {{ operator.get_full_name }}
+                                {% if not forloop.last %}
+                                    |
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                         <td>{{ task.description|truncatewords:"10" }}</td>
                         <td>{{ task.description2|truncatewords:"10" }}</td>
                         <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
