@@ -143,7 +143,7 @@
                     <li class="menu-item {% if 'department' in request.resolver_match.url_name %} active {% endif %}">
                         <a href="{% url 'department_list' %}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-border-all"></i>
-                            <div data-i18n="users">مدیریت واحد</div>
+                            <div data-i18n="users">مدیریت محیط ها</div>
                         </a>
                     </li>
                 {% endif %}
@@ -153,10 +153,31 @@
                     <li class="menu-item {% if 'operation' in request.resolver_match.url_name %} active {% endif %}">
                         <a href="{% url 'operation_list' %}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-select-multiple"></i>
-                            <div data-i18n="users">مدیریت عملیات</div>
+                            <div data-i18n="users">مدیریت ماشین ها</div>
                         </a>
                     </li>
                 {% endif %}
+
+                {% if perms.base.view_part %}
+                    <!-- Parts -->
+                    <li class="menu-item {% if 'parts' in request.resolver_match.url_name %} active {% endif %}">
+                        <a href="{% url 'machine_parts_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons fa fa-gear"></i>
+                            <div data-i18n="users">مدیریت قطعات</div>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if perms.base.view_station %}
+                    <!-- Parts -->
+                    <li class="menu-item {% if 'station' in request.resolver_match.url_name %} active {% endif %}">
+                        <a href="{% url 'station_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons fa fa-gear"></i>
+                            <div data-i18n="users">مدیریت ایستگاه ها</div>
+                        </a>
+                    </li>
+                {% endif %}
+
 
 
                 {% if perms.base.view_subgroup %}

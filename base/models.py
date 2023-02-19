@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -60,6 +61,12 @@ class Department(models.Model):
 
 class Operation(models.Model):
     name = models.CharField(max_length=50)
+    area = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name='department_operations')
+    station = models.ForeignKey('Station', on_delete=models.SET_NULL, null=True, related_name='station_operations')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.name
@@ -112,18 +119,17 @@ class Task(models.Model):
         except TypeError as e:
             return 0
 
-# class Status(models.Model):
-#     StatusChoices = (
-#         ('SV', 'ثبت شده'),
-#         ('SE', 'مشاهده شده',),
-#         ("DG", 'در حال انجام'),
-#         ("WG", "در انتظار قطعه"),
-#         ('ST', "ارسال به پیمانکار"),
-#         ("DN", "تکمیل شده"),
-#     )
-#     # order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_status')
-#     # task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='task_status')
-#     name = models.CharField(max_length=2, choices=StatusChoices, default='SV')
-#
-#     def __str__(self):
-#         return self.name
+
+class Part(models.Model):
+    name = models.CharField(max_length=200)
+    machine = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='parts')
+
+    def __str__(self):
+        return self.name
+
+
+class Station(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

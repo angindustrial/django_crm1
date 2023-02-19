@@ -1,17 +1,14 @@
 from django.contrib import admin
-from .models import Order, Department, Task, Subgroup, Operation
+from .models import Order, Department, Task, Subgroup, Operation, Part, Station
 
-
-# class OrderInline(admin.TabularInline):
-# 	model = Order
-# 	raw_id_fields = ('user',)
-#
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'operation', 'department', 'orderId')
     list_filter = ('user', 'department', 'createdAt')
     search_fields = ['id', 'orderId']
+
+
 # inlines = (OrderInline,)
 
 
@@ -21,9 +18,6 @@ class DepartmentAdmin(admin.ModelAdmin):
     list_filter = ('name',)
 
 
-# 	inlines = (DepartmentInline,)
-
-
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'order']
@@ -31,6 +25,11 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ['description', 'description2']
 
 
+@admin.register(Part)
+class PartAdmin(admin.ModelAdmin):
+    list_display = ['name', 'machine']
+
+
 admin.site.register(Subgroup)
 admin.site.register(Operation)
-# admin.site.register(RepairOperator)
+admin.site.register(Station)
