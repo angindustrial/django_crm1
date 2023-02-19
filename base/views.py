@@ -221,6 +221,7 @@ class TasksList(ListView):
         status = self.request.GET.get('status')
         operation = self.request.GET.get('operation')
         subgroup = self.request.GET.get('subgroup')
+        operator = self.request.GET.getlist('operator')
         dt_date = self.request.GET.get('dt_date')
 
         if q:
@@ -232,14 +233,16 @@ class TasksList(ListView):
         if status:
             orders = list(Order.objects.filter(task__in=tasks, status=status).values_list('id', flat=True))
             tasks = tasks.filter(order_id__in=orders)
-            # if tasks:
-            #     task = tasks[0]
 
         if operation:
             tasks = tasks.filter(order__operation=operation)
 
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
+
+        if operator:
+            tasks = tasks.filter(operators__in=operator)
+
         if dt_date:
             start_date, due_date = dt_date.split(' تا ')
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
@@ -253,6 +256,7 @@ class TasksList(ListView):
         context = super().get_context_data(**kwargs)
         context['departments'] = Department.objects.all()
         context['operations'] = Operation.objects.all()
+        context['operators'] = User.objects.filter(groups__name='اپراتور فنی')
         status_choices = Order.StatusChoices
         context['status_choices'] = status_choices
         tasks = self.get_queryset()
