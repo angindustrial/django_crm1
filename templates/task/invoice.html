@@ -105,23 +105,22 @@
         <div class="row g-3">
             <div class="table-responsive">
                 <br><h4>لیست کارهای انجام شده</h4>
-                {% for task in task.order.task.all|dictsort:"date" %}
+                {% for task in task.order.task.all %}
                     <table class="table table-bordered text-center mb-4">
                         <tr>
                             <td colspan="4">نام مجری : <b>{{ task.user.profile }}</b></td>
                         </tr>
                         <tr>
-                            <td rowspan="4" {% if task.completed %} class="bg-label-success" {% else %}
-                                class="bg-label-danger" {% endif %}>
+                            <td rowspan="4" class="bg-label-github">
                                 تاریخ : <b>{{ task.date|to_jalali:'%y/%m/%d' }}</b>
                             </td>
                             <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
                             <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
-                            <td>وضعیت : {% if task.completed %}
-                                <span class="badge bg-label-success">کامل</span>
-                            {% else %}
-                                <span class="badge bg-label-danger">ناقص</span>
-                            {% endif %}
+                            <td>وضعیت :
+                                {#                                <span class="badge bg-label-success">کامل</span>#}
+                                {#                            {% else %}#}
+                                <span class="badge bg-label-success">{{ task.get_status_display }}</span>
+                                {#                            {% endif %}#}
                             </td>
                         </tr>
                         <tr>
