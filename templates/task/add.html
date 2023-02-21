@@ -69,11 +69,6 @@
                                 <span class="badge bg-label-success">
                                     {{ task.get_status_display }}
                                 </span>
-{#                                {% if task.completed %}#}
-{#                                    <span class="badge bg-label-success">کامل</span>#}
-{#                                {% else %}#}
-{#                                    <span class="badge bg-label-danger">ناقص</span>#}
-{#                                {% endif %}#}
                             </td>
                         </tr>
                     {% endfor %}
@@ -84,7 +79,6 @@
     {% endif %}
     <div class="card">
         <div class="card-body">
-
             <div class="row mb-3">
                 <div class="text-center">
                     <h3 class="m-0">افزودن اطلاعات کار</h3>
@@ -97,12 +91,30 @@
                         <textarea id="autosize-demo" name="description" rows="3" class="form-control" required
                                   style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description }}</textarea>
                     </div>
-                    <div class="col-12 mb-2">
-                        <label class="form-label">شرح لوازم مصرفی</label>
-                        <textarea id="autosize-demo" name="description2" rows="3" class="form-control" required
-                                  style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description2 }}</textarea>
+                    <hr>
+                    <div class="col-12 my-4">
+                        <p>شرح لوازم مصرفی</p>
+                        <table id="usable_stuff_table" class="table table-bordered d-none my-3">
+                            <thead>
+                            <tr>
+                                <th>نام</th>
+                                <th>تعداد</th>
+                                <th class="w-px-20">عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="inputforback" name="stuff_items">
+                        <div class="d-flex gap-4">
+                            <label for="" class="form-label align-self-center ">نام</label>
+                            <input type="text" class="form-control w-50" name="description2"
+                                   id="name_of_thing">
+                            <label for="" class="form-label align-self-center">تعداد</label>
+                            <input type="number" class="form-control w-50" id="count_of_thing">
+                            <button class="btn btn-secondary btn-sm" onclick="create_row()">افزودن</button>
+                        </div>
                     </div>
-
                     <div class="row">
                         <!-- Date Picker-->
                         <div class="col-md-3 col-12 mb-4">
@@ -127,7 +139,7 @@
                         <!-- /Time Picker -->
                         <div class="col-md-3 col-12 mb-4">
                             <label class="form-label">وضعیت</label>
-                               <select class="form-select" name="status" id="">
+                            <select class="form-select" name="status" id="">
                                 <option value="">وضعیت</option>
                                 {% for key, text in status_choices %}
                                     <option value="{{ key }}" {% if task.order.status == key %} selected {% endif %}>
@@ -152,6 +164,30 @@
             </div>
         </div>
     </div>
+    <script>
+        function create_row() {
+            let name = document.getElementById('name_of_thing').value
+            let count = document.getElementById('count_of_thing').value
+            document.getElementById('usable_stuff_table').classList.remove('d-none')
+            let tbodyRef = document.getElementById('usable_stuff_table').getElementsByTagName('tbody')[0];
+            let newRow = tbodyRef.insertRow();
 
+            let nameCell = newRow.insertCell();
+            let countCell = newRow.insertCell();
+            let trashCell = newRow.insertCell();
 
+            let newName = document.createTextNode(name);
+            let newCount = document.createTextNode(count);
+            let newTrash = document.createElement('i');
+            newTrash.classList.add("bx", "bx-trash", "btn-label-danger", 'rounded', 'text-end')
+            newTrash.id = `trash_icon_${name}${count}`
+            trashCell.style.textAlign = 'center'
+            nameCell.appendChild(newName);
+            countCell.appendChild(newCount);
+            trashCell.appendChild(newTrash);
+            document.getElementById('name_of_thing').value = ''
+            document.getElementById('count_of_thing').value = ''
+            document.getElementById('inputforback').value += `${name},${count}|`
+        }
+    </script>
 {% endblock content %}

@@ -239,8 +239,7 @@
                                                             {% if not order.isCompleted %}
                                                                 {% if user.is_superuser or user.groups.all.0.name == 'کاربر فنی' %}
                                                                     <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
-                                                                       class="btn btn-primary me-sm-3 me-1">شروع
-                                                                        به کار
+                                                                       class="btn btn-primary me-sm-3 me-1">ثبت اطلاعات مربوط به درخواست
                                                                     </a>
                                                                 {% endif %}
                                                             {% else %}
