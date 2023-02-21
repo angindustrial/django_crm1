@@ -240,7 +240,7 @@ class TasksList(ListView):
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
 
-        if operator:
+        if operator != ['']:
             tasks = tasks.filter(operators__in=operator)
 
         if dt_date:
@@ -271,6 +271,7 @@ class TasksList(ListView):
 def task_add(request):
     orderId = request.GET.get('orderId')
     if request.method == 'POST':
+        print(request.POST)
         description = request.POST.get('description')
         description2 = request.POST.get('description2')
         orderId = request.POST.get('orderId')
