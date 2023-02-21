@@ -92,29 +92,34 @@
                                   style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description }}</textarea>
                     </div>
                     <hr>
-                    <div class="col-12 my-4">
-                        <p>شرح لوازم مصرفی</p>
-                        <table id="usable_stuff_table" class="table table-bordered d-none my-3">
-                            <thead>
-                            <tr>
-                                <th>نام</th>
-                                <th>تعداد</th>
-                                <th class="w-px-20">عملیات</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <input type="hidden" id="inputforback" name="stuff_items">
-                        <div class="d-flex gap-4">
-                            <label for="" class="form-label align-self-center ">نام</label>
-                            <input type="text" class="form-control w-50" name="description2"
-                                   id="name_of_thing">
-                            <label for="" class="form-label align-self-center">تعداد</label>
-                            <input type="number" class="form-control w-50" id="count_of_thing">
-                            <button class="btn btn-secondary btn-sm" onclick="create_row()">افزودن</button>
+                    {% if parts %}
+                        <div class="col-12 my-4">
+                            <p>شرح لوازم مصرفی</p>
+                            <table id="usable_stuff_table" class="table table-bordered d-none my-3">
+                                <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>تعداد</th>
+                                    <th class="w-px-20">عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <input type="hidden" id="inputforback" name="stuff_items">
+                            <div class="d-flex gap-4">
+                                <label for="" class="form-label align-self-center">نام</label>
+                                <select name="pieces" id="name_of_thing" class="form-select">
+                                    {% for part in parts %}
+                                        <option value="{{ part.name }}">{{ part.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="" class="form-label align-self-center">تعداد</label>
+                                <input type="number" class="form-control w-50" id="count_of_thing">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="create_row()">افزودن</button>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <div class="row">
                         <!-- Date Picker-->
                         <div class="col-md-3 col-12 mb-4">

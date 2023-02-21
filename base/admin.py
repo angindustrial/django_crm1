@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, Department, Task, Subgroup, Operation, Part, Station
+from .models import Order, Department, Task, Subgroup, Operation, Part, Station, Piece
 
 
 @admin.register(Order)
@@ -33,3 +33,4 @@ class PartAdmin(admin.ModelAdmin):
 admin.site.register(Subgroup)
 admin.site.register(Operation)
 admin.site.register(Station)
+admin.site.register(Piece)
