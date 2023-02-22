@@ -220,7 +220,7 @@
                                                                             <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
                                                                             <td>
                                                                                 <span class="badge bg-label-success">
-                                                                                    {{ task.get_status_display }}
+                                                                                    {{ task.order.get_status_display }}
                                                                                 </span>
                                                                                 {#                                                                                {% if task.completed %}#}
                                                                                 {#                                                                                    <span class="badge bg-label-success">کامل</span>#}
