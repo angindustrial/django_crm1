@@ -374,6 +374,7 @@ def task_edit(request, taskId):
 
 def task_detail(request, taskId):
     task = Task.published.get(id=taskId)
+    print(task.order.task.all())
     context = {'task': task}
     return render(request, 'task/detail.html', context)
 
@@ -472,6 +473,7 @@ class WorkReportView(ListView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.due_date = None
         self.tasks = None
         self.end_date = None
         self.start_date = None
