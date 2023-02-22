@@ -240,7 +240,7 @@ class TasksList(ListView):
         if subgroup:
             tasks = tasks.filter(order__subGroup=subgroup)
 
-        if operator != ['']:
+        if operator != [''] and operator:
             tasks = tasks.filter(operators__in=operator)
 
         if dt_date:
@@ -280,11 +280,24 @@ def task_add(request):
         end_time = request.POST.get('end_time')
         status = request.POST.get('status')
         operator_id = request.POST.getlist('operator')
+        stuff_items = request.POST.get('stuff_items')
+
         if orderId:
             order = Order.published.get(orderId=orderId)
             operators = User.objects.filter(id__in=operator_id)
-            task = Task.published.create(order=order, user=request.user, description=description,
-                                         description2=description2)
+            task = Task.published.create(order=order, user=request.user, description=description)
+            if stuff_items:
+                stuff_items = stuff_items.split('|')
+                for piece in stuff_items:
+                    if piece:
+                        print(piece)
+                        parsed_piece = piece.split(',')
+                        piece_name = parsed_piece[0]
+                        piece_count = int(parsed_piece[1])
+                        piece_object = Part.objects.get(name=piece_name)
+
+                        Piece.objects.create(count=piece_count, part=piece_object, order=order)
+
             year, month, day = split_persian_date(date)
             date = jdatetime.date(year, month, day).togregorian()
 
@@ -301,13 +314,16 @@ def task_add(request):
 
     if orderId:
         order = Order.published.get(orderId=orderId)
+        operation = Operation.objects.get(name=order.operationName)
+        parts = operation.parts.all()
         tasks = Task.published.filter(order=order).order_by('date')
     else:
         order = None
+        parts = None
         tasks = None
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
     status_choices = Order.StatusChoices
-    context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices}
+    context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices, 'parts': parts}
     return render(request, 'task/add.html', context)
 
 

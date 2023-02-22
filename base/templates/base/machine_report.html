@@ -65,7 +65,7 @@
                             <td><a href="{% url 'orders_list' %}?operation={{ operation.id }}">{{ operation.name }}</a>
                             </td>
                             <td>
-                                {{ operation.time_spent }}
+                                {{ operation.time_spent|translate_day }}
                             </td>
 
                         </tr>

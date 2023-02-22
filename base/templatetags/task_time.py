@@ -11,3 +11,10 @@ def total_task_time(orders):
         for task in tasks:
             total += task.get_time_diff
     return total
+
+
+@register.filter
+def translate_day(value):
+    translated = str(value).replace("day", "روز")
+    translated = translated.replace(',', ' و')
+    return translated

@@ -98,6 +98,7 @@ class Task(models.Model):
     publish = models.BooleanField(default=True)
     hours = models.CharField(max_length=20, blank=True, null=True)
     # completed = models.BooleanField(default=False)
+    parts = models.ManyToManyField('Part', related_name='task_parts')
     operators = models.ManyToManyField(User, null=True, related_name='operator_tasks')
     status = models.CharField(max_length=2, blank=True, null=True, choices=TaskChoices, default='SV')
 
@@ -118,6 +119,15 @@ class Task(models.Model):
             return time_diff.total_seconds()
         except TypeError as e:
             return 0
+
+
+class Piece(models.Model):
+    part = models.ForeignKey('Part', on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='pieces')
+    count = models.IntegerField(default=0, null=True, blank=True)
+
+    def __str__(self):
+        return f'piece for {self.part.name}| count: {self.count}'
 
 
 class Part(models.Model):
