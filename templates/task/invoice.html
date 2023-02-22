@@ -119,7 +119,7 @@
                             <td>وضعیت :
                                 {#                                <span class="badge bg-label-success">کامل</span>#}
                                 {#                            {% else %}#}
-                                <span class="badge bg-label-success">{{ task.get_status_display }}</span>
+                                <span class="badge bg-label-success">{{ task.order.get_status_display }}</span>
                                 {#                            {% endif %}#}
                             </td>
                         </tr>
