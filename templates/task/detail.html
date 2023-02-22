@@ -70,7 +70,7 @@
                                 <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
                                 <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
                                 <td>وضعیت :
-                                    <span class="badge bg-label-success">{{ task.get_status_display }}</span>
+                                    <span class="badge bg-label-success">{{ task.order.get_status_display }}</span>
                                 </td>
                             </tr>
                             <tr>
