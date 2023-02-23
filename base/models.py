@@ -30,6 +30,7 @@ class Order(models.Model):
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=2, choices=StatusChoices, default='SV')  # Which step is right now
+    part = models.ForeignKey('Part', on_delete=models.SET_NULL, null=True, related_name='order')
     # second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices, default='SV')
     # isCompleted = models.BooleanField(default=False)
 

@@ -1,4 +1,6 @@
-from django.http import JsonResponse
+from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse, HttpResponse
 from .models import *
 
 import json
@@ -38,6 +40,8 @@ def update_status(request):
 
 
 def get_parts(request):
-    # data = json.loads(request.body)
-    request.GET.get('operation_id')
-# print(data)
+    operation_id = request.GET.get('operation_id')
+    operation = Operation.objects.get(id=operation_id)
+    parts = list(operation.parts.values_list('name', 'pk'))
+    message = {'data': parts}
+    return JsonResponse(message, safe=False)

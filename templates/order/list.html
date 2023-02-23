@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load common %}
 {% load contains_building %}
 {% load order_tags %}
 {% load static %}
@@ -19,6 +20,7 @@
     <div class="card">
         <div class="card-header border-bottom">
             <h5 class="card-title">فیلتر جستجو</h5>
+
             <form action="{% url 'orders_list' %}">
                 <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-3 user_role">
@@ -45,15 +47,31 @@
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="col-md-3 order_status">
-                        <select class="form-select" name="status" id="">
-                            <option value="">وضعیت</option>
-                            {% for key, text in status_choices %}
-                                <option value="{{ key }}" {% if request.GET.status == key %} selected {% endif %}>
-                                    {{ text }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                        <div class="select2-success">
+                            <select class="select2 form-select" name="status" id="" multiple>
+                                <option value="">وضعیت</option>
+                                {% for key, text in status_choices %}
+                                    <option value="{{ key }}"
+                                            {% for status in request.GET|get_list:'status' %}
+                                                {% if status == key %}
+                                                    selected
+                                                {% endif %}
+                                            {% endfor %}>
+                                        {{ text }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {#                        <label for="select2Success" class="form-label">زیرگروه</label>#}
+                        {#                        <div class="select2-success">#}
+                        {#                            <select id="select2Success" class="select2 form-select" name="subgroup" multiple required>#}
+                        {#                                {% for subgroup in subgroups %}#}
+                        {#                                    <option value="{{ subgroup.id }}">{{ subgroup.name }} </option>#}
+                        {#                                {% endfor %}#}
+                        {#                            </select>#}
+                        {#                        </div>#}
                     </div>
                     <div class="col-md-3 mt-3 order_status">
                         <label for="dt_date">تاریخ</label>
@@ -66,22 +84,6 @@
                         <input type="hidden" class="form-control dt-date end_date dt-input" name="value_from_end_date"
                                data-column="5" data-column-index="4">
                     </div>
-                    {#                    <div class="col-md-3 order_status mt-3">#}
-                    {#                        <label for="start_date">#}
-                    {#                            از تاریخ:#}
-                    {#                        </label>#}
-                    {#                        <input type="text" id="start_date" name="start_date" value='{{ request.GET.start_date }}'#}
-                    {#                               class="form-control invoice-date"#}
-                    {#                               placeholder="YYYY/MM/DD">#}
-                    {#                    </div>#}
-                    {#                    <div class="col-md-3 order_status mt-3 me-auto">#}
-                    {#                        <label for="start_date">#}
-                    {#                            تا تاریخ:#}
-                    {#                        </label>#}
-                    {#                        <input type="text" id="due_date" name="due_date" value='{{ request.GET.due_date }}'#}
-                    {#                               class="form-control due-date"#}
-                    {#                               placeholder="YYYY/MM/DD">#}
-                    {#                    </div>#}
                 </div>
                 <div class="row">
                     <div class="col-md-12 user_status">
@@ -239,7 +241,8 @@
                                                             {% if not order.isCompleted %}
                                                                 {% if user.is_superuser or user.groups.all.0.name == 'کاربر فنی' %}
                                                                     <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
-                                                                       class="btn btn-primary me-sm-3 me-1">ثبت اطلاعات مربوط به درخواست
+                                                                       class="btn btn-primary me-sm-3 me-1">ثبت اطلاعات
+                                                                        مربوط به درخواست
                                                                     </a>
                                                                 {% endif %}
                                                             {% else %}
