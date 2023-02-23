@@ -20,10 +20,19 @@
             <form id="formValidationExamples" action="{% url 'order_add' %}" method="post">
                 {% csrf_token %}
                 <div class="row ">
-
+                    <div class="col-md-3 align-self-center">
+                        <div class="mb-1 justify-content-around d-flex">
+                            <label for="is_machine">ثبت درخواست ماشین</label>
+                            <input type="radio" id="is_machine" onchange="changePartDisplay()" name="typeOrder">
+                        </div>
+                        <div class=" justify-content-around d-flex">
+                            <label for="is_department">ثبت درخواست محیط</label>
+                            <input type="radio" id="is_department" onchange="changePartDisplay()" name="typeOrder">
+                        </div>
+                    </div>
                     <div class="col-md-3 mb-1">
                         <label for="" class="form-label">عملیات درخواستی*</label>
-                        <select class="select2 form-select form-select-lg" data-allow-clear="true" name="operation"
+                        <select class="select2 form-select form-select-lg" id="operationselect" data-allow-clear="true" onchange="getParts()" name="operation"
                                 required>
                             <option value="">لطفا انتخاب کنید</option>
                             {% for operation in operations %}
@@ -31,7 +40,15 @@
                             {% endfor %}
                         </select>
                     </div>
-
+                    <div class="col-md-3 mb-1 d-none" id="part_div">
+                        <label for="" class="form-label">قطعات مربوطه</label>
+                        <select class="select2 form-select form-select-lg" data-allow-clear="true" name="part">
+                            <option value="">لطفا انتخاب کنید</option>
+                            {#                            {% for operation in operations %}#}
+                            {#                                <option value="{{ operation.id }}">{{ operation.name }}</option>#}
+                            {#                            {% endfor %}#}
+                        </select>
+                    </div>
                     <div class="col-md-3 mb-1">
                         <label for="select2Success" class="form-label">زیرگروه</label>
                         <div class="select2-success">
@@ -42,18 +59,6 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="col-md-3 mb-1">
-                        <label for="" class="form-label">واحد ارجاعی *</label>
-                        <select class="select2 form-select form-select-lg" data-allow-clear="true" name="department"
-                                required>
-                            <!--<option value="">لطفا انتخاب کنید</option>-->
-                            {% for department in departments %}
-                                <option value="{{ department.id }}">{{ department.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
                     <div class="col-md-3 mb-1">
                         <label for="" class="form-label">اولویت</label>
                         <select class="form-select" name="priority" id="">
@@ -63,7 +68,6 @@
                             <option value="3">زیاد</option>
                         </select>
                     </div>
-
                     <div class="col-md-12 mb-1">
                         <label for="" class="form-label">توضیحات</label>
                         <textarea style="  height: 150px;" class="form-control" placeholder="توضیح"
@@ -71,7 +75,6 @@
 
 
                     </div>
-
                     <div class="mt-1">
                         <button type="submit" class="btn btn-primary me-2">ثبت</button>
                     </div>
@@ -80,6 +83,19 @@
             </form>
         </div>
     </div>
-
-
+    <script>
+        function changePartDisplay() {
+            let is_machine = document.getElementById('is_machine')
+            let is_department = document.getElementById('is_department')
+            if (is_machine.checked) {
+                document.getElementById('part_div').classList.remove('d-none')
+            } else if (is_department.checked) {
+                document.getElementById('part_div').classList.add('d-none')
+            }
+        }
+        function getParts(){
+            let operation = document.getElementById('operationselect')
+            const response = fetch(`/ajax/get-parts/?operation_id=${operation.value}`)
+        }
+    </script>
 {% endblock content %}

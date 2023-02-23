@@ -6,12 +6,12 @@
 
     <div class="d-flex justify-content-between mb-2">
         <h4 class="breadcrumb-wrapper mb-0">لیست قطعات ماشین ها</h4>
+        <input type="hidden" id="create_for_value" value="{{ create_for }}">
+
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-success h-25 align-self-center" data-bs-toggle="modal"
-                data-bs-target="#modalCenter">
-            {#                    <button class="btn btn-success h-25 align-self-center">#}
+                data-bs-target="#modalCenter" id="createNewPart">
             افزودن
-            {#                    </button>#}
         </button>
 
         <!-- Modal -->
@@ -38,7 +38,8 @@
                                     <label for="emailWithTitle" class="form-label">ماشین</label>
                                     <select name="machine" id="" class="form-control">
                                         {% for machine in machines %}
-                                            <option value="{{ machine.id }}">{{ machine.name }}</option>
+                                            <option value="{{ machine.id }}"
+                                                    {% if create_for == machine.name %}selected{% endif %}>{{ machine.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -157,5 +158,13 @@
     {% else %}
         <p>قطعه ای ساخته نشده است</p>
     {% endif %}
-
+    <script>
+        window.onload = function () {
+            let createFor = document.getElementById('create_for_value')
+            if (createFor.value) {
+                let modalBtn = document.getElementById('createNewPart')
+                modalBtn.click()
+            }
+        }
+    </script>
 {% endblock content %}

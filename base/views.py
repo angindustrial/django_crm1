@@ -92,13 +92,13 @@ class OrdersList(ListView):
 def order_add(request):
     if request.method == 'POST':
         operationId = request.POST.get('operation')
-        departmentId = request.POST.get('department')
+        # departmentId = request.POST.get('department')
         subgropuIds = request.POST.getlist('subgroup')
         priority = request.POST.get('priority')
         lastOrder = Order.objects.last()
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
-        department = Department.objects.get(id=departmentId)
+        # department = Department.objects.get(id=departmentId)
 
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -109,8 +109,8 @@ def order_add(request):
             instance.operation = operation
             instance.operationName = operation.name
 
-            instance.department = department
-            instance.departmentName = department.name
+            # instance.department = department
+            # instance.departmentName = department.name
             instance.priority = priority
             try:
                 instance.save()
@@ -271,9 +271,8 @@ class TasksList(ListView):
 def task_add(request):
     orderId = request.GET.get('orderId')
     if request.method == 'POST':
-        print(request.POST)
         description = request.POST.get('description')
-        description2 = request.POST.get('description2')
+        # description2 = request.POST.get('description2')
         orderId = request.POST.get('orderId')
         date = request.POST.get('date')
         start_time = request.POST.get('start_time')
@@ -641,6 +640,7 @@ class PartsList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PartsList, self).get_context_data()
         context['machines'] = Operation.objects.all()
+        context['create_for'] = self.request.GET.get('create_for')
         return context
 
 

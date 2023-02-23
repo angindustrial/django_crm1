@@ -91,8 +91,8 @@
                         <textarea id="autosize-demo" name="description" rows="3" class="form-control" required
                                   style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description }}</textarea>
                     </div>
-                    <hr>
                     {% if parts %}
+                        <hr>
                         <div class="col-12 my-4">
                             <p>شرح لوازم مصرفی</p>
                             <table id="usable_stuff_table" class="table table-bordered d-none my-3">
@@ -116,10 +116,19 @@
                                 </select>
                                 <label for="" class="form-label align-self-center">تعداد</label>
                                 <input type="number" class="form-control w-50" id="count_of_thing">
-                                <button type="button" class="btn btn-secondary btn-sm" onclick="create_row()">افزودن</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="create_row()">افزودن
+                                </button>
                             </div>
                         </div>
+                        <hr>
+                    {% else %}
+                        <div class="col-12 my-4">
+                            <a href="{% url 'machine_parts_list' %}?create_for={{ order.operationName }}">
+                                <button type="button" class="btn btn-secondary">افزودن قطعه برای ماشین</button>
+                            </a>
+                        </div>
                     {% endif %}
+
                     <div class="row">
                         <!-- Date Picker-->
                         <div class="col-md-3 col-12 mb-4">
