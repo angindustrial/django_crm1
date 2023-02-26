@@ -53,9 +53,9 @@ class OrdersList(ListView):
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
         operation = self.request.GET.get('operation')
-        status = self.request.GET.get('status')
+        status = self.request.GET.getlist('status')
         dt_date = self.request.GET.get('dt_date')
-
+        print(status)
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -66,7 +66,7 @@ class OrdersList(ListView):
             orders = orders.filter(operation_id=operation)
 
         if status:
-            orders = orders.filter(status=status)
+            orders = orders.filter(status__in=status)
 
         if dt_date:
             start_date, due_date = dt_date.split(' تا ')
@@ -94,7 +94,9 @@ def order_add(request):
         operationId = request.POST.get('operation')
         # departmentId = request.POST.get('department')
         subgropuIds = request.POST.getlist('subgroup')
+        part_id = request.POST.get('part')
         priority = request.POST.get('priority')
+        part = Part.objects.get(id=part_id)
         lastOrder = Order.objects.last()
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
@@ -105,10 +107,9 @@ def order_add(request):
             instance = form.save(commit=False)
             instance.orderId = code
             instance.user = request.user
-
             instance.operation = operation
             instance.operationName = operation.name
-
+            instance.part = part
             # instance.department = department
             # instance.departmentName = department.name
             instance.priority = priority
@@ -218,7 +219,7 @@ class TasksList(ListView):
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
-        status = self.request.GET.get('status')
+        status = self.request.GET.getlist('status')
         operation = self.request.GET.get('operation')
         subgroup = self.request.GET.get('subgroup')
         operator = self.request.GET.getlist('operator')
@@ -231,7 +232,7 @@ class TasksList(ListView):
             tasks = tasks.filter(order__department_id=department)
 
         if status:
-            orders = list(Order.objects.filter(task__in=tasks, status=status).values_list('id', flat=True))
+            orders = list(Order.objects.filter(task__in=tasks, status__in=status).values_list('id', flat=True))
             tasks = tasks.filter(order_id__in=orders)
 
         if operation:
@@ -427,7 +428,6 @@ def operation_add(request):
         station_id = request.POST.get('station')
         area = Department.objects.get(id=area_id)
         station = Station.objects.get(id=station_id)
-        print(area, station)
         Operation.objects.get_or_create(name=name, area=area, station=station)
         messages.success(request, 'عملیات ایجاد شد')
         return redirect('operation_list')
@@ -435,8 +435,13 @@ def operation_add(request):
 
 def operation_edit(request, operationId):
     if request.method == 'POST':
+        # print(operationId)
         name = request.POST.get('operationName')
-        Operation.objects.filter(id=operationId).update(name=name)
+        station_id = request.POST.get('operationStation')
+        station = Station.objects.get(id=station_id)
+        area_id = request.POST.get('operationArea')
+        area = Department.objects.get(id=area_id)
+        Operation.objects.filter(id=operationId).update(name=name, station=station, area=area)
         messages.success(request, 'عملیات ویرایش شد')
         return redirect('operation_list')
 

@@ -32,7 +32,8 @@
                     </div>
                     <div class="col-md-3 mb-1">
                         <label for="" class="form-label">عملیات درخواستی*</label>
-                        <select class="select2 form-select form-select-lg" id="operationselect" data-allow-clear="true" onchange="getParts()" name="operation"
+                        <select class="select2 form-select form-select-lg" id="operationselect" data-allow-clear="true"
+                                onchange="getParts()" name="operation"
                                 required>
                             <option value="">لطفا انتخاب کنید</option>
                             {% for operation in operations %}
@@ -42,11 +43,9 @@
                     </div>
                     <div class="col-md-3 mb-1 d-none" id="part_div">
                         <label for="" class="form-label">قطعات مربوطه</label>
-                        <select class="select2 form-select form-select-lg" data-allow-clear="true" name="part">
+                        <select class="select2 form-select form-select-lg" id="partselect" data-allow-clear="true"
+                                name="part">
                             <option value="">لطفا انتخاب کنید</option>
-                            {#                            {% for operation in operations %}#}
-                            {#                                <option value="{{ operation.id }}">{{ operation.name }}</option>#}
-                            {#                            {% endfor %}#}
                         </select>
                     </div>
                     <div class="col-md-3 mb-1">
@@ -93,9 +92,26 @@
                 document.getElementById('part_div').classList.add('d-none')
             }
         }
-        function getParts(){
+
+        function getParts() {
             let operation = document.getElementById('operationselect')
-            const response = fetch(`/ajax/get-parts/?operation_id=${operation.value}`)
+            let partSelect = document.getElementById('partselect')
+            partSelect.innerHTML = ''
+
+            function addOption(item, index) {
+                let opt = document.createElement('option');
+                opt.value = item[1];
+                opt.innerHTML = item[0];
+                partSelect.appendChild(opt);
+            }
+
+            (async function () {
+                await fetch(`/ajax/get-parts/?operation_id=${operation.value}`).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    data.data.forEach(addOption);
+                });
+            })();
         }
     </script>
 {% endblock content %}

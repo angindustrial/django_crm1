@@ -161,7 +161,7 @@
     <script>
         window.onload = function () {
             let createFor = document.getElementById('create_for_value')
-            if (createFor.value) {
+            if (createFor.value !== 'None') {
                 let modalBtn = document.getElementById('createNewPart')
                 modalBtn.click()
             }
