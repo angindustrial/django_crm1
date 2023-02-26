@@ -137,77 +137,60 @@
                         </a>
                     </li>
                 {% endif %}
+                <li class="menu-item {% if 'department' in request.resolver_match.url_name or 'operation' in request.resolver_match.url_name or 'subgroup_list' in request.resolver_match.url_name or 'machine_parts_list' in request.resolver_match.url_name  or 'station_list' in request.resolver_match.url_name %} open {% endif %}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons fa fa-gear"></i>
+                        <div data-i18n="users">تنظیمات</div>
+                    </a>
+                    <ul class="menu-sub">
+                        {% if perms.base.view_department %}
+                            <!-- Department -->
+                            <li class="menu-item {% if 'department' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'department_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت محیط ها</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if perms.base.view_operation %}
+                            <!-- Operation -->
+                            <li class="menu-item {% if 'operation' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'operation_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت ماشین ها</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if perms.base.view_part %}
+                            <!-- Parts -->
+                            <li class="menu-item {% if 'parts' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'machine_parts_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت قطعات</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if perms.base.view_station %}
+                            <!-- Parts -->
+                            <li class="menu-item {% if 'station' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'station_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت ایستگاه ها</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if perms.base.view_subgroup %}
+                            <!-- SubGroup -->
+                            <li class="menu-item {% if 'subgroup' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'subgroup_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت زیرگروه</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
 
-                {% if perms.base.view_department %}
-                    <!-- Department -->
-                    <li class="menu-item {% if 'department' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'department_list' %}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-border-all"></i>
-                            <div data-i18n="users">مدیریت محیط ها</div>
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if perms.base.view_operation %}
-                    <!-- Operation -->
-                    <li class="menu-item {% if 'operation' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'operation_list' %}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-select-multiple"></i>
-                            <div data-i18n="users">مدیریت ماشین ها</div>
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if perms.base.view_part %}
-                    <!-- Parts -->
-                    <li class="menu-item {% if 'parts' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'machine_parts_list' %}" class="menu-link">
-                            <i class="menu-icon tf-icons fa fa-gear"></i>
-                            <div data-i18n="users">مدیریت قطعات</div>
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if perms.base.view_station %}
-                    <!-- Parts -->
-                    <li class="menu-item {% if 'station' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'station_list' %}" class="menu-link">
-                            <i class="menu-icon tf-icons fa fa-gear"></i>
-                            <div data-i18n="users">مدیریت ایستگاه ها</div>
-                        </a>
-                    </li>
-                {% endif %}
-
-
-
-                {% if perms.base.view_subgroup %}
-                    <!-- SubGroup -->
-                    <li class="menu-item {% if 'subgroup' in request.resolver_match.url_name %} active {% endif %}">
-                        <a href="{% url 'subgroup_list' %}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-layer"></i>
-                            <div data-i18n="users">مدیریت زیرگروه</div>
-                        </a>
-                    </li>
-                {% endif %}
-                {#                {% if perms.base.view_operation %}#}
-                {#                    <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} active {% endif %}">#}
-                {#                        <a href="{% url 'machines_report' %}" class="menu-link">#}
-                {#                            <i class="menu-icon tf-icons fa fa-car-on"></i>#}
-                {#                            <div data-i18n="users">گزارش دستگاه ها</div>#}
-                {#                        </a>#}
-                {#                    </li>#}
-                {#                {% endif %}#}
-                {#                    <li class="menu-item {% if 'persons_report' in request.resolver_match.url_name %} active {% endif %}">#}
-                {#                        <a href="{% url 'persons_report' %}" class="menu-link">#}
-                {#                            <i class="menu-icon tf-icons fa fa-user-gear"></i>#}
-                {#                            <div data-i18n="users">مدیریت مدت زمان کار</div>#}
-                {#                        </a>#}
-                {#                    </li>#}
                 {% if perms.base.view_operation or perms.auth.view_user %}
                     <!-- Users -->
                     <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} open {% endif %}">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bxs-report"></i>
                             <div data-i18n="users">گزارشات</div>
                         </a>
                         <ul class="menu-sub">
@@ -226,7 +209,6 @@
                         </ul>
                     </li>
                 {% endif %}
-
                 {% if perms.users.view_user or perms.users.add_user %}
                     <!-- Users -->
                     <li class="menu-item {% if 'user' in request.resolver_match.url_name %} open {% endif %}">
@@ -265,7 +247,7 @@
                 {% if perms.review.view_review or perms.users.add_review %}
                     <!-- Review -->
                     <li
-                            class="menu-item {% if 'review' in request.resolver_match.url_name or 'machine' in request.resolver_match.url_name or 'part' in request.resolver_match.url_name %} open {% endif %}">
+                            class="menu-item {% if 'review' in request.resolver_match.url_name or 'machine_list' in request.resolver_match.url_name or 'part_list' in request.resolver_match.url_name %} open {% endif %}">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="users">بازدید دوره ای</div>
