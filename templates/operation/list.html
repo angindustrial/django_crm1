@@ -278,6 +278,31 @@
                                                                        required>
                                                             </div>
 
+                                                            <div class="col-12 mb-4">
+                                                                <label class="form-label" for="operationArea">سالن محل
+                                                                    استفاده</label>
+                                                                <select name="operationArea" id="operationArea"
+                                                                        class="form-control">
+                                                                    <option value="">سالن را انتخاب کنید</option>
+                                                                    {% for department in departments %}
+                                                                        <option value="{{ department.id }}"
+                                                                                {% if machine.area == department %}selected{% endif %}>{{ department.name }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 mb-4">
+                                                                <label class="form-label" for="operationStation">ایستگاه
+                                                                    محل استقرار</label>
+                                                                <select name="operationStation" id="operationStation"
+                                                                        class="form-control">
+                                                                    <option value="">ایستگاه را انتخاب کنید</option>
+                                                                    {% for station in stations %}
+                                                                        <option value="{{ station.id }}"
+                                                                                {% if machine.station == station %}selected{% endif %}>{{ station.name }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
                                                             <div class="col-12 text-center">
                                                                 <button type="submit"
                                                                         class="btn btn-primary me-sm-3 me-1">ویرایش

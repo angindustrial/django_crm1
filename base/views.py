@@ -428,7 +428,6 @@ def operation_add(request):
         station_id = request.POST.get('station')
         area = Department.objects.get(id=area_id)
         station = Station.objects.get(id=station_id)
-        print(area, station)
         Operation.objects.get_or_create(name=name, area=area, station=station)
         messages.success(request, 'عملیات ایجاد شد')
         return redirect('operation_list')
@@ -436,8 +435,13 @@ def operation_add(request):
 
 def operation_edit(request, operationId):
     if request.method == 'POST':
+        # print(operationId)
         name = request.POST.get('operationName')
-        Operation.objects.filter(id=operationId).update(name=name)
+        station_id = request.POST.get('operationStation')
+        station = Station.objects.get(id=station_id)
+        area_id = request.POST.get('operationArea')
+        area = Department.objects.get(id=area_id)
+        Operation.objects.filter(id=operationId).update(name=name, station=station, area=area)
         messages.success(request, 'عملیات ویرایش شد')
         return redirect('operation_list')
 
