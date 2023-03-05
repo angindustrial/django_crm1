@@ -20,7 +20,7 @@
         <div class="card-body">
             <div class="mb-3">
                 <div class="alert alert-solid-primary" role="alert">
-                <label for="">وضعیت درخواست : {{ order.status }}</label>
+                <label for="">وضعیت درخواست : {{ order.get_status_display }}</label>
                 {% if not order.isConfirmed and perms.base.change_order %}
                     <button type="button" class="btn btn-label-primary btn-sm" data-orderid="{{ order.orderId }}"
                             id="confirmOrderBtn">تایید درخواست
