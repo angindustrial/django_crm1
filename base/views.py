@@ -25,16 +25,37 @@ from .utils import split_persian_date, is_member, total_seconds_calculator, to_g
 @login_required(login_url='/users/login/')
 def index(request):
     user = request.user
+    tasks = None
+
     if user.is_superuser:
         users = User.objects.filter(is_superuser=False)
         orders = Order.published.all()
         tasks = Task.published.all()
+        tasks_done = Task.published.filter(order__status='DN')
+        tasks_saved = Task.published.filter(order__status='SV')
+        tasks_seen = Task.published.filter(order__status='SE')
+        tasks_doing = Task.published.filter(order__status='DG')
+        tasks_waiting = Task.published.filter(order__status='WG')
+        tasks_sent = Task.published.filter(order__status='ST')
+
     else:
         users = User.objects.filter(is_superuser=False)
         orders = Order.published.filter(user=user)
-        tasks = Task.published.filter(user=user, order__status='DN')
+        tasks_done = Task.published.filter(user=user, order__status='DN')
+        tasks_saved = Task.published.filter(user=user, order__status='SV')
+        tasks_seen = Task.published.filter(user=user, order__status='SE')
+        tasks_doing = Task.published.filter(user=user, order__status='DG')
+        tasks_waiting = Task.published.filter(user=user, order__status='WG')
+        tasks_sent = Task.published.filter(user=user, order__status='ST')
 
-    context = {'users': users, 'orders': orders, 'tasks': tasks}
+    context = {'users': users, 'orders': orders, 'tasks': tasks,
+               'tasks_done': tasks_done,
+               'tasks_saved': tasks_saved,
+               'tasks_seen': tasks_seen,
+               'tasks_doing': tasks_doing,
+               'tasks_waiting': tasks_waiting,
+               'tasks_sent': tasks_sent,
+               }
     return render(request, 'index.html', context)
 
 
@@ -96,7 +117,9 @@ def order_add(request):
         subgropuIds = request.POST.getlist('subgroup')
         part_id = request.POST.get('part')
         priority = request.POST.get('priority')
-        part = Part.objects.get(id=part_id)
+        part = None
+        if part_id:
+            part = Part.objects.get(id=part_id)
         lastOrder = Order.objects.last()
         code = int(lastOrder.orderId) + 1
         operation = Operation.objects.get(id=operationId)
@@ -109,7 +132,8 @@ def order_add(request):
             instance.user = request.user
             instance.operation = operation
             instance.operationName = operation.name
-            instance.part = part
+            if part:
+                instance.part = part
             # instance.department = department
             # instance.departmentName = department.name
             instance.priority = priority
@@ -633,7 +657,7 @@ def change_order_publish_status(request, pk):
 
 def change_order_status(request, pk):
     order = Order.objects.get(pk=pk)
-    order.second_status = 'SE'
+    order.status = 'SE'
     order.save()
     return HttpResponse(status=200)
 

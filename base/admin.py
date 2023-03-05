@@ -9,9 +9,6 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['id', 'orderId']
 
 
-# inlines = (OrderInline,)
-
-
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
@@ -21,7 +18,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'order']
-    list_filter = ['user']
+    list_filter = ['user', 'status']
     search_fields = ['description', 'description2']
 
 

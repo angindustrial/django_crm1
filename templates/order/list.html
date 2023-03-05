@@ -93,7 +93,7 @@
             </form>
         </div>
         <div class="card-datatable table-responsive">
-            <table class="table border-top text-center table-striped">
+            <table class="table border-top text-center">
                 <thead class="table-dark">
                 <tr>
                     <th>#</th>
@@ -108,7 +108,7 @@
                 </thead>
                 <tbody>
                 {% for order in orders %}
-                    <tr>
+                    <tr class="{% if order.status == 'SV' %}bg-white{% else %}bg-lighter{% endif %}">
                         <td>{{ forloop.counter }}</td>
                         <td>{{ order.user.profile }}</td>
                         <td>{{ order.orderId }}</td>

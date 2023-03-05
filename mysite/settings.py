@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -168,3 +169,13 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
+
+# CELERY_BEAT_SCHEDULE = {
+#     "every_monday_morning": {
+#         "task": "base.tasks.every_monday_morning",
+#         "schedule": crontab(hour=2, minute=49),
+#     },
+# }
+#
+# CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_RESULT_BACKEND = "amqp://localhost"
