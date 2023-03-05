@@ -20,9 +20,9 @@
 //     });
 // }
 async function changeStatus(orderId) {
-    // await fetch(`/order/change_status/${orderId}`).then((result) => {
-    //     console.log(result)
-    // })
+    await fetch(`/order/change_status/${orderId}`).then((result) => {
+        console.log(result)
+    })
     let response = await fetch(`/order/change_status/${orderId}`, {
         method: 'GET',
         headers: {

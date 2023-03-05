@@ -8,22 +8,24 @@ from .forms import *
 
 import json
 
+
 class ReviewList(ListView):
     model = Review
     template_name = 'review/list.html'
     context_object_name = 'reviews'
     paginate_by = 10
-    
+
     def get_queryset(self):
         reviews = Review.objects.all().order_by('-createdAt')
-        
+
         q = self.request.GET.get('q')
         machine = self.request.GET.get('department')
         part = self.request.GET.get('operation')
 
         if q:
-            reviews = reviews.filter(Q(user__username__contains=q) | Q(user__first_name__contains=q) | Q(user__last_name__contains=q))
-  
+            reviews = reviews.filter(
+                Q(user__username__contains=q) | Q(user__first_name__contains=q) | Q(user__last_name__contains=q))
+
         if machine:
             reviews = reviews.filter(machine_id=machine)
 
@@ -37,7 +39,6 @@ class ReviewList(ListView):
         context['machines'] = Machine.objects.all()
         context['parts'] = Part.objects.all()
         return context
-
 
 
 def review_add(request):
@@ -57,8 +58,9 @@ def review_add(request):
     else:
         form = ReviewForm()
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'review/add.html', context)
+
 
 def review_edit(request, reviewId):
     review = Review.objects.get(id=reviewId)
@@ -76,16 +78,17 @@ def review_edit(request, reviewId):
             return redirect('review_list')
     else:
         form = ReviewForm(request.POST or None, instance=review)
-    
-    context = {'form':form, 'review':review}
+
+    context = {'form': form, 'review': review}
     return render(request, 'review/edit.html', context)
 
 
 def review_detail(request, reviewId):
     review = Review.objects.get(id=reviewId)
 
-    context = {'review':review}
+    context = {'review': review}
     return render(request, 'review/detail.html', context)
+
 
 class MachineList(ListView):
     model = Machine
@@ -108,7 +111,6 @@ def machine_edit(request, machineId):
         Machine.objects.filter(id=machineId).update(name=name)
         messages.success(request, 'واحد ویرایش شد')
         return redirect('machine_list')
-
 
 
 class PartList(ListView):
@@ -144,7 +146,7 @@ def reviewtask_add(request, reviewId):
         description = request.POST.get('description')
         done = request.POST.get('done')
 
-        ReviewTask.objects.create(review=review ,description=description, done=done)
+        ReviewTask.objects.create(review=review, description=description, done=done)
         messages.success(request, 'بازدید ثبت شد')
         return redirect('review_list')
 
@@ -159,5 +161,5 @@ def reviewtask_edit(request):
         print('taskId', taskId)
 
         ReviewTask.objects.filter(id=taskId).update(description=description, done=done)
-        messages = {'status': 200, 'text' : 'بازدید ویرایش شد'}
+        messages = {'status': 200, 'text': 'بازدید ویرایش شد'}
         return JsonResponse(messages, safe=False)
