@@ -19,12 +19,14 @@
     <div class="card">
         <div class="card-body">
             <div class="mb-3">
+                <div class="alert alert-solid-primary" role="alert">
                 <label for="">وضعیت درخواست : {{ order.get_status_display }}</label>
                 {% if not order.isConfirmed and perms.base.change_order %}
                     <button type="button" class="btn btn-label-primary btn-sm" data-orderid="{{ order.orderId }}"
                             id="confirmOrderBtn">تایید درخواست
                     </button>
                 {% endif %}
+            </div>
             </div>
             <form id="formValidationExamples" action="{% url 'order_edit' order.orderId %}" method="post">
                 {% csrf_token %}
@@ -40,7 +42,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3 mb-1">
+                    <div class="col-md-2 mb-1">
                         <label for="" class="form-label">واحد*</label>
                         <select class="select2 form-select form-select-lg" data-allow-clear="true" name="department"
                                 required>
@@ -52,7 +54,7 @@
                         </select>
                     </div>
 
-                    <div class="col-md-3 mb-1">
+                    <div class="col-md-2 mb-1">
                         <label for="second_status" class="form-label">وضعیت</label>
                         <select class="select2 form-select form-select-lg" id="second_status" data-allow-clear="true"
                                 name="status"
@@ -64,7 +66,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3 mb-1">
+                    <div class="col-md-2 mb-1">
                         <label for="select2Success" class="form-label">زیرگروه</label>
                         <div class="select2-success">
                             <select id="select2Success" class="select2 form-select" name="subgroup" multiple required>
@@ -78,7 +80,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 mb-1">
+                    <div class="col-md-2 mb-1">
                         <label for="" class="form-label">اولویت</label>
                         <select class="form-select" name="priority" id="">
                             <option value="">انتخاب کنید</option>

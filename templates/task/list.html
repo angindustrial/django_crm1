@@ -22,7 +22,10 @@
             <form action="{% url 'tasks_list' %}">
                 <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-3 user_role">
-                        <input class="form-control" type="search" name="q" placeholder="جستجو براساس شماره درخواست"
+                        <label for="departmentfield">
+                            جستجو براساس شماره درخواست
+                        </label>
+                        <input class="form-control" type="search" name="q" placeholder="401000..."
                                value="{{ request.GET.q }}">
                     </div>
                     <div class="col-md-3 user_plan">
