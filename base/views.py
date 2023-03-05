@@ -76,7 +76,7 @@ class OrdersList(ListView):
         operation = self.request.GET.get('operation')
         status = self.request.GET.getlist('status')
         dt_date = self.request.GET.get('dt_date')
-        print(status)
+        operators = self.request.GET.getlist('operators')
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -89,12 +89,14 @@ class OrdersList(ListView):
         if status:
             orders = orders.filter(status__in=status)
 
+        if operators:
+            orders = orders.filter(task__operators__in=operators)
+
         if dt_date:
             start_date, due_date = dt_date.split(' تا ')
             start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             orders = orders.filter(Q(createdAt__gte=start_date), Q(createdAt__lte=due_date))
-
         orders = orders.order_by('-createdAt')
 
         return orders
@@ -102,6 +104,7 @@ class OrdersList(ListView):
     def get_context_data(self, **kwargs):
         contains_building = False
         context = super().get_context_data(**kwargs)
+        context['operators'] = User.objects.filter(groups__name='اپراتور فنی')
         context['templatetags'] = contains_building
         context['operations'] = Operation.objects.all()
         context['departments'] = Department.objects.all()
