@@ -27,7 +27,6 @@
                         <td><b> تاریخ درخواست : </b>
                             {{ task.order.createdAt|to_jalali:'%y/%m/%d' }}
                         </td>
-                        </tr>
                         <tr>
                             <td><b> واحد : </b>
                                 واحد {{ task.order.user.profile.department.name }}
@@ -51,6 +50,12 @@
                                 {% endfor %}
                             </td>
                         </tr>
+                        <tr>
+                            <td>وضعیت درخواست</td>
+                            <td colspan="2">
+                                    {{ task.order.get_status_display }}
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -70,7 +75,7 @@
                                 <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
                                 <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
                                 <td>وضعیت :
-                                    <span class="badge bg-label-success">{{ task.order.get_status_display }}</span>
+                                    <span class="badge bg-label-success">{{ task.get_status_display }}</span>
                                 </td>
                             </tr>
                             <tr>

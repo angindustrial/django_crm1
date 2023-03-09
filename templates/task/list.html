@@ -163,7 +163,7 @@
                         <td>{{ task.description|truncatewords:"10" }}</td>
                         <td>{{ task.description2|truncatewords:"10" }}</td>
                         <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
-                        <td>{{ task.order.get_status_display }}</td>
+                        <td>{{ task.get_status_display }}</td>
                         {#                        <td>{% if task.completed %}#}
                         {#                            <span class="badge bg-label-success">کامل</span>#}
                         {#                        {% else %}#}
