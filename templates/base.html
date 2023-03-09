@@ -115,6 +115,14 @@
                                         <div data-i18n="Orders list">لیست درخواست ها</div>
                                     </a>
                                 </li>
+                                {% if not request.user.is_superuser %}
+                                    <li
+                                        class="menu-item {% if request.resolver_match.url_name == 'orders_completed_list' %} active {% endif %}">
+                                    <a href="{% url 'orders_completed_list' %}" class="menu-link">
+                                        <div data-i18n="Orders list">لیست درخواست های تکمیل شده</div>
+                                    </a>
+                                </li>
+                                {% endif %}
                             {% endif %}
                             {% if perms.base.add_order %}
                                 <li

@@ -1,5 +1,5 @@
 {% extends '../base.html' %}
-
+{% load task %}
 {% load static %}
 {% load jalali_tags %}
 
@@ -53,7 +53,7 @@
                         <tr>
                             <td>وضعیت درخواست</td>
                             <td colspan="2">
-                                    {{ task.order.get_status_display }}
+                                {{ task.order.get_status_display }}
                             </td>
                         </tr>
                     </table>
@@ -63,31 +63,59 @@
             <div class="row g-3">
                 <div class="table-responsive">
                     <br><h4>لیست کارهای انجام شده</h4>
-                    {% for task in task.order.task.all %}
-                        <table class="table table-bordered text-center mb-4">
-                            <tr>
-                                <td colspan="4">نام مجری : <b>{{ task.user.profile }}</b></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="4" class="bg-label-github">
-                                    تاریخ : <b>{{ task.date|to_jalali:'%y/%m/%d' }}</b>
-                                </td>
-                                <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
-                                <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
-                                <td>وضعیت :
-                                    <span class="badge bg-label-success">{{ task.get_status_display }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شرح فعالیت</td>
-                                <td colspan="3" style="text-align: justify;">{{ task.description }}</td>
-                            </tr>
-                            <tr>
-                                <td>شرح لوازم مصرفی</td>
-                                <td colspan="3" style="text-align: justify;">{{ task.description2 }}</td>
-                            </tr>
-                        </table>
-                    {% endfor %}
+                    {% with task.id as current_task_id %}
+                        {% published_task task as published_task %}
+                        {% for task in published_task %}
+                            <div class="d-flex">
+                                <div class="mb-3 col-11">
+                                    <table class="table table-bordered text-center ">
+                                        <tr>
+                                            <td colspan="4">نام مجری : <b>{{ task.user.profile }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="4" class="bg-label-github">
+                                                تاریخ : <b>{{ task.date|to_jalali:'%y/%m/%d' }}</b>
+                                            </td>
+                                            <td>ساعت شروع : <b dir="ltr">{{ task.start_time|time:'H:i' }}</b></td>
+                                            <td>ساعت پایان : <b dir="ltr">{{ task.end_time|time:'H:i' }}</b></td>
+                                            <td>وضعیت :
+                                                <span class="badge bg-label-success">{{ task.get_status_display }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>شرح فعالیت</td>
+                                            <td colspan="3" style="text-align: justify;">{{ task.description }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>شرح لوازم مصرفی</td>
+                                            <td colspan="3" style="text-align: justify;">{{ task.description2 }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-1 text-center align-self-center ">
+                                    <button class="btn btn-primary w-50 mb-2">
+                                        <a href=" {% url 'task_edit' task.id %}" class="text-white">
+                                            <i class="bx bx-edit d-flex justify-content-center"></i>
+                                        </a>
+                                    </button>
+                                    {% if task.id != current_task_id %}
+                                        <form method="post" class=""
+                                              action="{% url 'archive-task' task.id %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ current_task_id }}" name="detail">
+                                            <button type="submit" class="btn btn-danger w-50">
+                                                {#                                        <a href=" {% url 'archive-task' task.id %}?detail" class="text-white">#}
+                                                <i class="bx bx-trash d-flex justify-content-center"></i>
+                                                {#                                        </a>#}
+                                            </button>
+                                        </form>
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
                 </div>
             </div>
 

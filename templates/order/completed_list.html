@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <h4 class="py-3 breadcrumb-wrapper mb-2">لیست درخواست ها</h4>
+    <h4 class="py-3 breadcrumb-wrapper mb-2">لیست درخواست های تکمیل شده</h4>
 
     {% for message in messages %}
         {% if message.tags == 'error' %}
@@ -103,9 +103,6 @@
                 <div class="row">
                     <div class="col-md-12 user_status">
                         <button type="submit" class="btn btn-label-primary">اعمال فیلتر</button>
-                        <button type="button" class="btn btn-danger">
-                            <a href="{% url 'orders_list' %}" class="text-white">حذف فیلتر ها</a>
-                        </button>
                     </div>
                 </div>
             </form>
@@ -126,11 +123,9 @@
                 </thead>
                 <tbody>
                 {% for order in orders %}
-                    <tr class="{% if order.status == 'SV' %}bg-white{% else %}bg-lighter{% endif %}">
+                    <tr class="bg-white">
                         <td>
-                            <p class="m-0{% if order.status == 'SV' %} rounded-pill text-white bg-google-plus{% endif %}">
                                 {{ forloop.counter }}
-                            </p>
                         </td>
                         <td>{{ order.user.profile }}</td>
                         <td>{{ order.orderId }}</td>
@@ -261,14 +256,11 @@
 
                                                         <div class="col-12 text-center">
                                                             {% if not order.isCompleted %}
-                                                                {% if  order.status != 'DN' %}
-                                                                    {% if user.is_superuser or user.groups.all.0.name == 'کاربر فنی' %}
-                                                                        <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
-                                                                           class="btn btn-primary me-sm-3 me-1">ثبت
-                                                                            اطلاعات
-                                                                            مربوط به درخواست
-                                                                        </a>
-                                                                    {% endif %}
+                                                                {% if user.is_superuser or user.groups.all.0.name == 'کاربر فنی' %}
+                                                                    <a href="{% url 'task_add' %}?orderId={{ order.orderId }}"
+                                                                       class="btn btn-primary me-sm-3 me-1">ثبت اطلاعات
+                                                                        مربوط به درخواست
+                                                                    </a>
                                                                 {% endif %}
                                                             {% else %}
                                                                 <a href="{% url 'order_detail' order.orderId %}"

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import Group
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import DurationField
@@ -70,6 +71,64 @@ class OrdersList(ListView):
             orders = Order.published.all().order_by('-createdAt')
         else:
             orders = Order.published.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
+        if not self.request.user.is_superuser:
+            orders = orders.exclude(status='DN')
+
+        q = self.request.GET.get('q')
+        department = self.request.GET.get('department')
+        operation = self.request.GET.get('operation')
+        status = self.request.GET.getlist('status')
+        dt_date = self.request.GET.get('dt_date')
+        operators = self.request.GET.getlist('operators')
+        if q:
+            orders = orders.filter(Q(orderId__contains=q))
+
+        if department:
+            orders = orders.filter(department_id=department)
+
+        if operation:
+            orders = orders.filter(operation_id=operation)
+
+        if status:
+            orders = orders.filter(status__in=status)
+
+        if operators:
+            orders = orders.filter(task__operators__in=operators)
+
+        if dt_date:
+            start_date, due_date = dt_date.split(' تا ')
+            start_date = jdatetime.datetime.strptime(start_date, '%Y/%m/%d').togregorian().date()
+            due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
+            orders = orders.filter(Q(createdAt__gte=start_date), Q(createdAt__lte=due_date))
+        orders = orders.order_by('-createdAt')
+
+        return orders
+
+    def get_context_data(self, **kwargs):
+        contains_building = False
+        context = super().get_context_data(**kwargs)
+        context['operators'] = User.objects.filter(groups__name='اپراتور فنی')
+        context['templatetags'] = contains_building
+        context['operations'] = Operation.objects.all()
+        context['departments'] = Department.objects.all()
+        status_choices = Order.StatusChoices
+        context['status_choices'] = status_choices
+        return context
+
+
+class OrdersCompletedList(ListView):
+    model = Order
+    template_name = 'order/completed_list.html'
+    paginate_by = 30
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        # if self.request.user.has_perm('review.view_order_all') or is_member(self.request.user):
+        #     orders = Order.published.all().order_by('-createdAt')
+        # else:
+        #     orders = Order.published.filter(user=self.request.user, isConfirmed=True).order_by('-createdAt')
+        # if not self.request.user.is_superuser:
+        orders = Order.published.filter(status='DN')
 
         q = self.request.GET.get('q')
         department = self.request.GET.get('department')
@@ -308,6 +367,9 @@ def task_add(request):
         status = request.POST.get('status')
         operator_id = request.POST.getlist('operator')
         stuff_items = request.POST.get('stuff_items')
+        if start_time > end_time:
+            messages.error(request, 'ساعت شروع نمیتواند کمتر از ساعت پایان باشد')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         if orderId:
             order = Order.published.get(orderId=orderId)
@@ -317,7 +379,6 @@ def task_add(request):
                 stuff_items = stuff_items.split('|')
                 for piece in stuff_items:
                     if piece:
-                        print(piece)
                         parsed_piece = piece.split(',')
                         piece_name = parsed_piece[0]
                         piece_count = int(parsed_piece[1])
@@ -401,7 +462,6 @@ def task_edit(request, taskId):
 
 def task_detail(request, taskId):
     task = Task.published.get(id=taskId)
-    print(task.order.task.all())
     context = {'task': task}
     return render(request, 'task/detail.html', context)
 
@@ -462,7 +522,6 @@ def operation_add(request):
 
 def operation_edit(request, operationId):
     if request.method == 'POST':
-        # print(operationId)
         name = request.POST.get('operationName')
         station_id = request.POST.get('operationStation')
         station = Station.objects.get(id=station_id)
@@ -577,6 +636,7 @@ def change_task_publish_status(request, pk):
     if request.method == 'POST':
         if request.user.is_superuser:
             type_of_delete = request.POST.get('type_of_delete')
+            from_detail_page = request.POST.get('detail')
             task = Task.published.get(pk=pk)
             if type_of_delete == 'delete_all':
                 task.publish = False
@@ -586,8 +646,12 @@ def change_task_publish_status(request, pk):
             elif type_of_delete == 'delete_this':
                 task.publish = False
                 task.save()
-            return redirect('tasks_list')
 
+            if from_detail_page:
+                task.publish = False
+                task.save()
+                return redirect(reverse('task_detail', kwargs={'taskId': from_detail_page}))
+            return redirect('tasks_list')
         else:
             return PermissionDenied()
     else:
@@ -660,9 +724,10 @@ def change_order_publish_status(request, pk):
 
 def change_order_status(request, pk):
     order = Order.objects.get(pk=pk)
-    order.status = 'SE'
-    order.save()
-    return HttpResponse(status=200)
+    if order.status == 'SV':
+        order.status = 'SE'
+        order.save()
+        return HttpResponse(status=200)
 
 
 class PartsList(ListView):
