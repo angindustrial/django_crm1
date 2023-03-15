@@ -1,5 +1,8 @@
+import datetime
+import time
 from django.db import models
 from django.contrib.auth.models import User
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -8,6 +11,8 @@ class Review(models.Model):
     machine = models.ForeignKey('Machine', on_delete=models.SET_NULL, null=True)
     machineName = models.CharField(max_length=300)
     reviewPeriod = models.CharField(max_length=200)
+    last_sms = models.CharField(default=time.time(), max_length=100)
+    # last_sms.editable = True
     reviewCount = models.IntegerField()
     createdAt = models.DateTimeField(auto_now_add=True)
 
@@ -23,12 +28,13 @@ class Review(models.Model):
         elif self.reviewPeriod == 'year':
             return 'سال'
 
+
 class Part(models.Model):
     name = models.CharField(max_length=300)
     description = models.TextField(blank=True, null=True)
     isActive = models.BooleanField(default=True)
     createdAt = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f'{self.name}'
 

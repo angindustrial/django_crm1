@@ -36,6 +36,7 @@ urlpatterns = [
 
     path("archive-task/<int:pk>/", views.change_task_publish_status, name='archive-task'),
     path("archive-part/<int:pk>/", views.change_part_publish_status, name='archive-part'),
+    path("archive-stuff/<int:pk>/", views.change_stuff_publish_status, name='archive-stuff'),
     path("archive-station/<int:pk>/", views.change_station_publish_status, name='archive-station'),
     path("archive-order/<int:pk>/", views.change_order_publish_status, name='archive-order'),
     path("archive-operation/<int:pk>/", views.change_operation_publish_status, name='archive-operation'),
@@ -44,7 +45,13 @@ urlpatterns = [
     path('part/edit/<int:part_id>/', views.PartsList.as_view(), name='machine_part_edit'),
     path('part/add/', views.machine_part_add, name='machine_part_add'),
 
+    # path('stuff/edit/<int:stuff_id>/', views.StuffEdit.as_view(), name='department_stuff_edit'),
+
+    path('stuff/', views.StuffList.as_view(), name='stuff_list'),
+    path('stuff/add/', views.machine_stuff_add, name='stuff_add'),
+
     path('stations/', views.StationList.as_view(), name='station_list'),
     path('station/edit/<int:pk>/', views.StationList.as_view(), name='station_edit'),
     path('station/add/', views.station_add, name='station_add'),
+
 ]

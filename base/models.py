@@ -27,10 +27,14 @@ class Order(models.Model):
     description = RichTextField(blank=True, null=True)
     orderId = models.CharField(max_length=50)
     publish = models.BooleanField(default=True)
+    is_for_machine = models.BooleanField(default=False)
+    is_for_department = models.BooleanField(default=False)
     isConfirmed = models.BooleanField(default=False)  # Confirmed by manager
     priority = models.CharField(max_length=5, blank=True, null=True)
     status = models.CharField(max_length=2, choices=StatusChoices, default='SV')  # Which step is right now
     part = models.ForeignKey('Part', on_delete=models.SET_NULL, null=True, related_name='order')
+    stuff = models.ForeignKey('Stuff', on_delete=models.SET_NULL, null=True, related_name='order_stuff')
+
     # second_status = models.CharField(max_length=2, blank=True, null=True, choices=StatusChoices, default='SV')
     # isCompleted = models.BooleanField(default=False)
 
@@ -134,6 +138,14 @@ class Piece(models.Model):
 class Part(models.Model):
     name = models.CharField(max_length=200)
     machine = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='parts')
+
+    def __str__(self):
+        return self.name
+
+
+class Stuff(models.Model):
+    name = models.CharField(max_length=200)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='stuffs')
 
     def __str__(self):
         return self.name

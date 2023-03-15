@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, Department, Task, Subgroup, Operation, Part, Station, Piece
+from .models import Order, Department, Task, Subgroup, Operation, Part, Station, Piece, Stuff
 
 
 @admin.register(Order)
@@ -31,3 +31,4 @@ admin.site.register(Subgroup)
 admin.site.register(Operation)
 admin.site.register(Station)
 admin.site.register(Piece)
+admin.site.register(Stuff)

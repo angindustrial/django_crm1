@@ -173,31 +173,51 @@ class OrdersCompletedList(ListView):
 
 
 def order_add(request):
+    print(request.POST)
     if request.method == 'POST':
         operationId = request.POST.get('operation')
-        # departmentId = request.POST.get('department')
+        departmentId = request.POST.get('department')
         subgropuIds = request.POST.getlist('subgroup')
+        is_department = request.POST.get("create_department")
+        is_machine = request.POST.get("create_machine")
         part_id = request.POST.get('part')
+        stuff_id = request.POST.get('stuff')
         priority = request.POST.get('priority')
         part = None
+        stuff = None
         if part_id:
             part = Part.objects.get(id=part_id)
+        elif stuff_id:
+            stuff = Stuff.objects.get(id=stuff_id)
+
         lastOrder = Order.objects.last()
         code = int(lastOrder.orderId) + 1
-        operation = Operation.objects.get(id=operationId)
-        # department = Department.objects.get(id=departmentId)
+        operation = None
+        department = None
+        if operationId:
+            operation = Operation.objects.get(id=operationId)
+        elif departmentId:
+            department = Department.objects.get(id=departmentId)
 
         form = OrderForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.orderId = code
             instance.user = request.user
-            instance.operation = operation
-            instance.operationName = operation.name
+            if operation:
+                instance.operation = operation
+                instance.operationName = operation.name
+            if department:
+                instance.department = department
+                instance.departmentName = department.name
+            if is_machine:
+                instance.is_for_machine = True
+            if is_department:
+                instance.is_for_department = True
             if part:
                 instance.part = part
-            # instance.department = department
-            # instance.departmentName = department.name
+            if stuff:
+                instance.stuff = stuff
             instance.priority = priority
             try:
                 instance.save()
@@ -205,9 +225,6 @@ def order_add(request):
                 messages.error(request, 'این رکورد در این تاریخ یک بار ثبت شده است')
                 return redirect('orders_list')
             instance.isConfirmed = True
-            # instance.status = f'ارسال به  {department.name}'
-            # instance.status = 'ارسال به واحد فنی'
-
             # id of ساخت subgroup is 4
             building_subgroup = Subgroup.objects.get(id=4)
 
@@ -230,7 +247,7 @@ def order_add(request):
 
     subgroups = Subgroup.objects.all()
     operations = Operation.objects.all()
-    departments = Department.objects.filter(id=3)  # limit the department by technical in form
+    departments = Department.objects.all()  # limit the department by technical in form
     context = {'departments': departments, 'operations': operations, 'subgroups': subgroups, 'form': form}
     return render(request, 'order/add.html', context)
 
@@ -241,18 +258,21 @@ def order_edit(request, orderId):
     if request.method == 'POST':
         operationId = request.POST.get('operation')
         departmentId = request.POST.get('department')
+        part_id = request.POST.get("part")
         subgropupIds = request.POST.getlist('subgroup')
         description = request.POST.get('description')
         priority = request.POST.get('priority')
         status = request.POST.get('status')
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
-
+        if part_id:
+            part = Part.objects.get(id=part_id)
         form = OrderForm(request.POST, instance=order)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.description = description
             instance.operation = operation
+            instance.part = part
             instance.operationName = operation.name
             instance.status = status
             instance.department = department
@@ -379,13 +399,14 @@ def task_add(request):
                 stuff_items = stuff_items.split('|')
                 for piece in stuff_items:
                     if piece:
-                        parsed_piece = piece.split(',')
-                        piece_name = parsed_piece[0]
-                        piece_count = int(parsed_piece[1])
-                        piece_object = Part.objects.get(name=piece_name)
-
-                        Piece.objects.create(count=piece_count, part=piece_object, order=order)
-
+                        try:
+                            parsed_piece = piece.split(',')
+                            piece_name = parsed_piece[0]
+                            piece_count = int(parsed_piece[1])
+                            piece_object = Part.objects.get(name=piece_name)
+                            Piece.objects.create(count=piece_count, part=piece_object, order=order)
+                        except ValueError:
+                            pass
             year, month, day = split_persian_date(date)
             date = jdatetime.date(year, month, day).togregorian()
 
@@ -394,7 +415,6 @@ def task_add(request):
             task.end_time = end_time
             task.status = status
             task.operators.set(operators)
-            # task.order.save()
             task.save()
 
             messages.success(request, 'درخواست شروع کار ثبت شد')
@@ -402,8 +422,18 @@ def task_add(request):
 
     if orderId:
         order = Order.published.get(orderId=orderId)
-        operation = Operation.objects.get(name=order.operationName)
-        parts = operation.parts.all()
+        operation = None
+        department = None
+        parts = None
+        if order.operationName:
+            operation = Operation.objects.get(name=order.operationName)
+        elif order.departmentName:
+            department = Department.objects.get(name=order.departmentName)
+        if operation:
+            parts = operation.parts.all()
+        if department:
+            stuff = department.stuffs.all()
+
         tasks = Task.published.filter(order=order).order_by('date')
     else:
         order = None
@@ -411,7 +441,8 @@ def task_add(request):
         tasks = None
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
     status_choices = Order.StatusChoices
-    context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices, 'parts': parts}
+    context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices,
+               'parts': parts if parts else stuff}
     return render(request, 'task/add.html', context)
 
 
@@ -671,6 +702,19 @@ def change_part_publish_status(request, pk):
         return redirect('machine_parts_list')
 
 
+def change_stuff_publish_status(request, pk):
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            stuff = Stuff.objects.get(pk=pk)
+            stuff.delete()
+            return redirect('stuff_list')
+
+        else:
+            return PermissionDenied()
+    else:
+        return redirect('stuff_list')
+
+
 def change_station_publish_status(request, pk):
     if request.method == 'POST':
         if request.user.is_superuser:
@@ -750,6 +794,16 @@ def machine_part_add(request):
         return redirect('machine_parts_list')
 
 
+def machine_stuff_add(request):
+    if request.method == 'POST':
+        department_name = request.POST.get('department')
+        stuff_name = request.POST.get('stuff_name')
+        print(department_name)
+        department = Department.objects.get(id=department_name)
+        Stuff.objects.create(department=department, name=stuff_name)
+        return redirect('stuff_list')
+
+
 class StationList(ListView):
     model = Station
     template_name = 'base/station_list.html'
@@ -760,3 +814,15 @@ def station_add(request):
         station_name = request.POST.get('station_name')
         Station.objects.create(name=station_name)
         return redirect('station_list')
+
+
+class StuffList(ListView):
+    model = Stuff
+    template_name = 'base/stuff_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['departments'] = Department.objects.all()
+        # context['create_for'] = self.request.GET.get('create_for')
+        return context
+# class StuffEdit()

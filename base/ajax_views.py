@@ -45,3 +45,11 @@ def get_parts(request):
     parts = list(operation.parts.values_list('name', 'pk'))
     message = {'data': parts}
     return JsonResponse(message, safe=False)
+
+
+def get_stuff(request):
+    department_id = request.GET.get('department_id')
+    department = Department.objects.get(id=department_id)
+    stuff = list(department.stuffs.values_list('name', 'pk'))
+    message = {'data': stuff}
+    return JsonResponse(message, safe=False)
