@@ -117,11 +117,11 @@
                                 </li>
                                 {% if not request.user.is_superuser %}
                                     <li
-                                        class="menu-item {% if request.resolver_match.url_name == 'orders_completed_list' %} active {% endif %}">
-                                    <a href="{% url 'orders_completed_list' %}" class="menu-link">
-                                        <div data-i18n="Orders list">لیست درخواست های تکمیل شده</div>
-                                    </a>
-                                </li>
+                                            class="menu-item {% if request.resolver_match.url_name == 'orders_completed_list' %} active {% endif %}">
+                                        <a href="{% url 'orders_completed_list' %}" class="menu-link">
+                                            <div data-i18n="Orders list">لیست درخواست های تکمیل شده</div>
+                                        </a>
+                                    </li>
                                 {% endif %}
                             {% endif %}
                             {% if perms.base.add_order %}
@@ -171,6 +171,13 @@
                             <li class="menu-item {% if 'parts' in request.resolver_match.url_name %} active {% endif %}">
                                 <a href="{% url 'machine_parts_list' %}" class="menu-link">
                                     <div data-i18n="users">مدیریت قطعات</div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if perms.base.view_stuff %}
+                            <li class="menu-item {% if 'stuff_list' in request.resolver_match.url_name %} active {% endif %}">
+                                <a href="{% url 'stuff_list' %}" class="menu-link">
+                                    <div data-i18n="users">مدیریت وسایل</div>
                                 </a>
                             </li>
                         {% endif %}

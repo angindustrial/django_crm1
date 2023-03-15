@@ -29,8 +29,6 @@ app.conf.beat_schedule = {
         # Task Name (Name Specified in Decorator)
         'task': 'check_review_due',
         # Schedule
-        'schedule': 1.0,
-        # Function Arguments
-        # 'args': ("Hello",)
+        'schedule': crontab(day_of_week='*'),
     },
 }
