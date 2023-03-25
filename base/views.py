@@ -173,7 +173,6 @@ class OrdersCompletedList(ListView):
 
 
 def order_add(request):
-    print(request.POST)
     if request.method == 'POST':
         operationId = request.POST.get('operation')
         departmentId = request.POST.get('department')
@@ -192,6 +191,11 @@ def order_add(request):
 
         lastOrder = Order.objects.last()
         code = int(lastOrder.orderId) + 1
+        code = f'402{str(code)[3:]}'
+
+        # print(str(jdatetime.datetime.now().year)[1:])
+        # if jdatetime.datetime.now() == 1402 and str(code).startswith('401'):
+
         operation = None
         department = None
         if operationId:
