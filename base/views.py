@@ -75,11 +75,17 @@ class OrdersList(ListView):
             orders = orders.exclude(status='DN')
 
         q = self.request.GET.get('q')
+        year = self.request.GET.get('year')
         department = self.request.GET.get('department')
         operation = self.request.GET.get('operation')
         status = self.request.GET.getlist('status')
         dt_date = self.request.GET.get('dt_date')
         operators = self.request.GET.getlist('operators')
+
+        if year:
+            year = year[1:]
+            orders = orders.filter(orderId__startswith=year)
+
         if q:
             orders = orders.filter(Q(orderId__contains=q))
 
@@ -269,6 +275,7 @@ def order_edit(request, orderId):
         status = request.POST.get('status')
         operation = Operation.objects.get(id=operationId)
         department = Department.objects.get(id=departmentId)
+        part = None
         if part_id:
             part = Part.objects.get(id=part_id)
         form = OrderForm(request.POST, instance=order)
@@ -276,7 +283,8 @@ def order_edit(request, orderId):
             instance = form.save(commit=False)
             instance.description = description
             instance.operation = operation
-            instance.part = part
+            if part:
+                instance.part = part
             instance.operationName = operation.name
             instance.status = status
             instance.department = department

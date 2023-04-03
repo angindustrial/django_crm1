@@ -20,7 +20,12 @@
     <div class="card">
         <div class="card-header border-bottom">
             <h5 class="card-title">فیلتر جستجو</h5>
-
+            <a href="{% url 'orders_list' %}?year=1401">
+                <button class="btn btn-primary">1401</button>
+            </a>
+            <a href="{% url 'orders_list' %}?year=1402">
+                <button class="btn btn-primary">1402</button>
+            </a>
             <form action="{% url 'orders_list' %}">
                 <div class="d-flex align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-3 user_role">
@@ -29,7 +34,6 @@
                     </div>
                     <div class="col-md-3 user_plan">
                         <label for="" class="form-label">دپارتمان</label>
-
                         <select class="select2 form-select" name="department" id="">
                             <option value="">انتخاب واحد</option>
                             {% for department in departments %}
