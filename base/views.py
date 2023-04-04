@@ -437,6 +437,7 @@ def task_add(request):
         operation = None
         department = None
         parts = None
+        stuff = None
         if order.operationName:
             operation = Operation.objects.get(name=order.operationName)
         elif order.departmentName:
