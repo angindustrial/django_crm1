@@ -433,25 +433,26 @@ def task_add(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if orderId:
-        order = Order.published.get(orderId=orderId)
-        operation = None
-        department = None
-        parts = None
-        stuff = None
-        if order.operationName:
-            operation = Operation.objects.get(name=order.operationName)
-        elif order.departmentName:
-            department = Department.objects.get(name=order.departmentName)
-        if operation:
-            parts = operation.parts.all()
-        if department:
-            stuff = department.stuffs.all()
+        order = Order.published.filter(orderId=orderId).last()
+        operation = Operation.objects.get(name=order.operationName) if order.operationName else None
+        department = Department.objects.get(name=order.departmentName) if order.departmentName else None
+        parts = operation.parts.all() if operation else None
+        stuff = department.stuffs.all() if department else None
+        # if order.operationName:
+        #     operation = Operation.objects.get(name=order.operationName)
+        # elif order.departmentName:
+        #     department = Department.objects.get(name=order.departmentName)
+        # if operation:
+        #     parts = operation.parts.all()
+        # if department:
+        #     stuff = department.stuffs.all()
 
         tasks = Task.published.filter(order=order).order_by('date')
     else:
         order = None
         parts = None
         tasks = None
+        stuff = None
     operators = Group.objects.get(name='اپراتور فنی').user_set.all()
     status_choices = Order.StatusChoices
     context = {'order': order, 'tasks': tasks, 'operators': operators, 'status_choices': status_choices,
@@ -485,8 +486,12 @@ def task_edit(request, taskId):
         task.date = date
         task.start_time = start_time
         task.end_time = end_time
-        task.order.status = status
+        task.status = status
         task.operators.set(operators)
+        if task.id == task.order.task.all().last().id:
+            task.order.status = status
+        else:
+            task.order.status = task.order.task.last().status
         task.order.save()
         task.save()
 
@@ -506,6 +511,7 @@ def task_edit(request, taskId):
 
 def task_detail(request, taskId):
     task = Task.published.get(id=taskId)
+    print(task.order.task.last().id)
     context = {'task': task}
     return render(request, 'task/detail.html', context)
 
@@ -802,9 +808,9 @@ def machine_part_add(request):
     if request.method == 'POST':
         machine_name = request.POST.get('machine')
         part_name = request.POST.get('part_name')
-        machine = Operation.objects.get(id=machine_name)
+        machine = Operation.objects.get(name=machine_name)
         Part.objects.create(machine=machine, name=part_name)
-        return redirect('machine_parts_list')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def machine_stuff_add(request):

@@ -83,6 +83,40 @@
                 <div class="text-center">
                     <h3 class="m-0">افزودن اطلاعات کار</h3>
                 </div>
+                <div class="modal fade" id="addPartModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title secondary-font" id="exampleModalLabel1">افزودن قطعه</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form action="{% url 'machine_part_add' %}" method="post">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="nameBasic" class="form-label">نام</label>
+                                            <input type="text" id="nameBasic" name="part_name"
+                                                   class="form-control"
+                                                   placeholder="نام قطعه را وارد کنید">
+                                            <input type="hidden" value="{{ order.operationName }}" name="machine">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-label-secondary"
+                                            data-bs-dismiss="modal">
+                                        بستن
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">افزودن</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
                 <form class="form-repeater" method="post" action="{% url 'task_add' %}">
                     {% csrf_token %}
                     <input type="hidden" name="orderId" value="{{ request.GET.orderId }}">
@@ -91,43 +125,48 @@
                         <textarea id="autosize-demo" name="description" rows="3" class="form-control" required
                                   style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description }}</textarea>
                     </div>
-                    {% if parts %}
-                        <hr>
-                        <div class="col-12 my-4">
-                            <p>شرح لوازم مصرفی</p>
-                            <table id="usable_stuff_table" class="table table-bordered d-none my-3">
-                                <thead>
-                                <tr>
-                                    <th>نام</th>
-                                    <th>تعداد</th>
-                                    <th class="w-px-20">عملیات</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <input type="hidden" id="inputforback" name="stuff_items">
-                            <div class="d-flex gap-4">
-                                <label for="" class="form-label align-self-center">نام</label>
-                                <select name="pieces" id="name_of_thing" class="form-select">
-                                    {% for part in parts %}
-                                        <option value="{{ part.name }}">{{ part.name }}</option>
-                                    {% endfor %}
-                                </select>
-                                <label for="" class="form-label align-self-center">تعداد</label>
-                                <input type="number" class="form-control w-50" id="count_of_thing">
-                                <button type="button" class="btn btn-secondary btn-sm" onclick="create_row()">افزودن
-                                </button>
-                            </div>
+                    {#                    {% if parts %}#}
+                    <hr>
+                    <div class="col-12 my-4">
+                        <p>شرح لوازم مصرفی</p>
+                        <table id="usable_stuff_table" class="table table-bordered d-none my-3">
+                            <thead>
+                            <tr>
+                                <th>نام</th>
+                                <th>تعداد</th>
+                                <th class="w-px-20">عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="inputforback" name="stuff_items">
+                        <div class="d-flex gap-4">
+                            <label for="" class="form-label align-self-center">نام</label>
+                            <select name="pieces" id="name_of_thing" class="form-select">
+                                {% for part in parts %}
+                                    <option value="{{ part.name }}">{{ part.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="" class="form-label align-self-center">تعداد</label>
+                            <input type="number" class="form-control w-50" id="count_of_thing">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="create_row()">افزودن
+                            </button>
                         </div>
-                        <hr>
-                    {% else %}
-                        <div class="col-12 my-4">
-                            <a href="{% url 'machine_parts_list' %}?create_for={{ order.operationName }}">
-                                <button type="button" class="btn btn-secondary">افزودن قطعه برای ماشین</button>
-                            </a>
-                        </div>
-                    {% endif %}
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPartModal">
+                            افزودن قطعه جدید
+                        </button>
+                    </div>
+                    {#                    {% else %}#}
+                    {#                        <div class="col-12 my-4">#}
+                    {#                            <a href="{% url 'machine_parts_list' %}?create_for={{ order.operationName }}">#}
+                    {#                                <button type="button" class="btn btn-secondary">افزودن قطعه برای ماشین</button>#}
+                    {#                            </a>#}
+                    {#                        </div>#}
+                    {#                    {% endif %}#}
 
                     <div class="row">
                         <!-- Date Picker-->
@@ -141,14 +180,14 @@
                         <div class="col-md-3 col-12 mb-4">
                             <label for="flatpickr-time" class="form-label">ساعت شروع</label>
                             <input type="text" class="form-control" name="start_time" placeholder="HH:MM"
-                                   id="flatpickr-time1"  data-enable-time=true data-time_24hr=true>
+                                   id="flatpickr-time1" data-enable-time=true data-time_24hr=true>
                         </div>
                         <!-- /Time Picker -->
                         <!-- Time Picker-->
                         <div class="col-md-3 col-12 mb-4">
                             <label for="flatpickr-time" class="form-label">ساعت پایان</label>
                             <input type="text" class="form-control" name="end_time" placeholder="HH:MM"
-                                   id="flatpickr-time2"  data-enable-time=true data-time_24hr=true>
+                                   id="flatpickr-time2" data-enable-time=true data-time_24hr=true>
                         </div>
                         <!-- /Time Picker -->
                         <div class="col-md-3 col-12 mb-4">

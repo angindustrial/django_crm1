@@ -60,7 +60,7 @@
                             <select class="form-select" name="status" id="">
                                 <option value="">وضعیت</option>
                                 {% for key, text in status_choices %}
-                                    <option value="{{ key }}" {% if task.order.status == key %} selected {% endif %}>
+                                    <option value="{{ key }}" {% if task.status == key %} selected {% endif %}>
                                         {{ text }}
                                     </option>
                                 {% endfor %}

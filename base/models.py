@@ -111,7 +111,7 @@ class Task(models.Model):
     published = PublishedManager()
 
     class Meta:
-        ordering = ("-date",)
+        ordering = ("date",)
 
     def __str__(self):
         return f'{self.order.orderId}'

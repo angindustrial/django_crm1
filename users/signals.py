@@ -10,7 +10,5 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def create_profile_for_new_users(sender, instance, created, **kwargs):
     # pass
-    print('outside if')
     if created:
-        print('inside if')
         Profile.objects.create(user=instance)

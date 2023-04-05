@@ -200,7 +200,7 @@
                     </ul>
                 </li>
 
-                {% if perms.base.view_operation or perms.auth.view_user %}
+                {% if request.user.is_superuser %}
                     <!-- Users -->
                     <li class="menu-item {% if 'machines_report' in request.resolver_match.url_name %} open {% endif %}">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
