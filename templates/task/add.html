@@ -171,27 +171,27 @@
                     <div class="row">
                         <!-- Date Picker-->
                         <div class="col-md-3 col-12 mb-4">
-                            <label for="flatpickr-date" class="form-label">تاریخ</label>
+                            <label for="flatpickr-date" class="form-label">تاریخ<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="date" placeholder="YYYY/MM/DD"
                                    id="flatpickr-date">
                         </div>
                         <!-- /Date Picker -->
                         <!-- Time Picker-->
                         <div class="col-md-3 col-12 mb-4">
-                            <label for="flatpickr-time" class="form-label">ساعت شروع</label>
+                            <label for="flatpickr-time" class="form-label">ساعت شروع<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="start_time" placeholder="HH:MM"
                                    id="flatpickr-time1" data-enable-time=true data-time_24hr=true>
                         </div>
                         <!-- /Time Picker -->
                         <!-- Time Picker-->
                         <div class="col-md-3 col-12 mb-4">
-                            <label for="flatpickr-time" class="form-label">ساعت پایان</label>
+                            <label for="flatpickr-time" class="form-label">ساعت پایان<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="end_time" placeholder="HH:MM"
                                    id="flatpickr-time2" data-enable-time=true data-time_24hr=true>
                         </div>
                         <!-- /Time Picker -->
                         <div class="col-md-3 col-12 mb-4">
-                            <label class="form-label">وضعیت</label>
+                            <label class="form-label">وضعیت<span class="text-danger">*</span></label>
                             <select class="form-select" name="status" id="">
                                 <option value="">وضعیت</option>
                                 {% for key, text in status_choices %}
@@ -202,7 +202,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-12 mb-4">
-                            <label class="form-label">اپراتور فنی</label>
+                            <label class="form-label">اپراتور فنی<span class="text-danger">*</span></label>
                             <select class="select2 form-select" name="operator" id="select2Success" multiple required>
                                 {% for operator in operators %}
                                     <option value={{ operator.id }}>{{ operator.get_full_name }} {{ operator.username }}</option>
