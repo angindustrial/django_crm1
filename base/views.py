@@ -429,6 +429,9 @@ def task_add(request):
             task.operators.set(operators)
             task.save()
 
+            task.order.status = status
+            task.order.save()
+
             messages.success(request, 'درخواست شروع کار ثبت شد')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
