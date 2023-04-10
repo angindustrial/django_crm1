@@ -117,15 +117,16 @@
                     </div>
                 </div>
 
-                <form class="form-repeater" method="post" action="{% url 'task_add' %}">
+                <form class="form-repeater" onsubmit="deleteCookies()" method="post" action="{% url 'task_add' %}">
                     {% csrf_token %}
                     <input type="hidden" name="orderId" value="{{ request.GET.orderId }}">
                     <div class="col-12 mb-2">
                         <label class="form-label">شرح فعالیت</label>
-                        <textarea id="autosize-demo" name="description" rows="3" class="form-control" required
-                                  style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;">{{ task.description }}</textarea>
+                        <textarea id="autosize-demo-description" name="description" rows="3" class="form-control"
+                                  required
+                                  style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 107px;"
+                                  onchange="saveToCookie()">{{ task.description }}</textarea>
                     </div>
-                    {#                    {% if parts %}#}
                     <hr>
                     <div class="col-12 my-4">
                         <p>شرح لوازم مصرفی</p>
@@ -160,25 +161,19 @@
                             افزودن قطعه جدید
                         </button>
                     </div>
-                    {#                    {% else %}#}
-                    {#                        <div class="col-12 my-4">#}
-                    {#                            <a href="{% url 'machine_parts_list' %}?create_for={{ order.operationName }}">#}
-                    {#                                <button type="button" class="btn btn-secondary">افزودن قطعه برای ماشین</button>#}
-                    {#                            </a>#}
-                    {#                        </div>#}
-                    {#                    {% endif %}#}
-
                     <div class="row">
                         <!-- Date Picker-->
                         <div class="col-md-3 col-12 mb-4">
-                            <label for="flatpickr-date" class="form-label">تاریخ<span class="text-danger">*</span></label>
+                            <label for="flatpickr-date" class="form-label">تاریخ<span
+                                    class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="date" placeholder="YYYY/MM/DD"
                                    id="flatpickr-date">
                         </div>
                         <!-- /Date Picker -->
                         <!-- Time Picker-->
                         <div class="col-md-3 col-12 mb-4">
-                            <label for="flatpickr-time" class="form-label">ساعت شروع<span class="text-danger">*</span></label>
+                            <label for="flatpickr-time" class="form-label">ساعت شروع<span
+                                    class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="start_time" placeholder="HH:MM"
                                    id="flatpickr-time1" data-enable-time=true data-time_24hr=true>
                         </div>
@@ -218,6 +213,28 @@
         </div>
     </div>
     <script>
+        {#let descriptionElement = document.getElementById('autosize-demo-description')#}
+        {#window.onunload = function () {#}
+        {#    deleteCookie('description')#}
+        {##}
+        {#function deleteCookie(name) {#}
+        {#    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';#}
+        {##}
+        {#function deleteCookies() {#}
+        {#    deleteCookie('description')#}
+        {##}
+        {#function getCookie(name) {#}
+        {#    const value = `; ${document.cookie}`;#}
+        {#    const parts = value.split(`; ${name}=`);#}
+        {#    if (parts.length === 2) return parts.pop().split(';').shift();#}
+        {##}
+        {#function saveToCookie() {#}
+        {#    document.cookie = `description=${descriptionElement.value};path=/;`#}
+        {##}
+        {#let description_value = getCookie('description')#}
+        {#if (description_value) {#}
+        {#    descriptionElement.value = description_value#}
+
         function create_row() {
             let name = document.getElementById('name_of_thing').value
             let count = document.getElementById('count_of_thing').value

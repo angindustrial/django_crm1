@@ -441,15 +441,6 @@ def task_add(request):
         department = Department.objects.get(name=order.departmentName) if order.departmentName else None
         parts = operation.parts.all() if operation else None
         stuff = department.stuffs.all() if department else None
-        # if order.operationName:
-        #     operation = Operation.objects.get(name=order.operationName)
-        # elif order.departmentName:
-        #     department = Department.objects.get(name=order.departmentName)
-        # if operation:
-        #     parts = operation.parts.all()
-        # if department:
-        #     stuff = department.stuffs.all()
-
         tasks = Task.published.filter(order=order).order_by('date')
     else:
         order = None

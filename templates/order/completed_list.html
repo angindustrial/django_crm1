@@ -333,13 +333,11 @@
                 {% if is_paginated %}
                     <div class="card-footer">
                         <div style="text-align: center;">
-
                             {% if page_obj.has_previous %}
                                 <a class="btn btn-outline-primary btn-sm  paging" href="#" data-num="1">اولین صفحه</a>
                                 <a class="btn btn-outline-primary btn-sm  paging" href="#"
                                    data-num="{{ page_obj.previous_page_number }}">قبلی</a>
                             {% endif %}
-
                             {% for num in page_obj.paginator.page_range %}
                                 {% if page_obj.number == num %}
                                     <a class="btn btn-primary btn-sm  paging" href="#"
@@ -349,7 +347,6 @@
                                        data-num="{{ num }}">{{ num }}</a>
                                 {% endif %}
                             {% endfor %}
-
                             {% if page_obj.has_next %}
                                 <a class="btn btn-outline-primary btn-sm  paging" href="#"
                                    data-num="{{ page_obj.next_page_number }}">بعدی</a>
