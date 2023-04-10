@@ -133,7 +133,8 @@
                     <tr class="{% if order.status == 'SV' %}bg-white{% else %}bg-lighter{% endif %}">
                         <td>
                             <p class="m-0{% if order.status == 'SV' %} rounded-pill text-white bg-google-plus{% endif %}">
-                                {{ forloop.counter }}
+{#                                {{ forloop.counter }}#}
+                            {{ page_obj.start_index|add:forloop.counter0 }}
                             </p>
                         </td>
                         <td>{{ order.user.profile }}</td>
@@ -236,27 +237,24 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    {% for task in order.task.all %}
-                                                                        <tr>
-                                                                            <td>{{ task.user.profile }}</td>
-                                                                            <td>{{ task.description|truncatewords:"10"|linebreaks }}
-                                                                            </td>
-                                                                            <td>{{ task.description2|truncatewords:"10"|linebreaks }}
-                                                                            </td>
-                                                                            <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
-                                                                            <td dir="ltr">{{ task.start_time|time:'h:i A' }}</td>
-                                                                            <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
-                                                                            <td>
+                                                                    {% for task in tasks %}
+                                                                        {% if task in order.task.all %}
+                                                                            <tr>
+                                                                                <td>{{ task.user.profile }}</td>
+                                                                                <td>{{ task.description|truncatewords:"10"|linebreaks }}
+                                                                                </td>
+                                                                                <td>{{ task.description2|truncatewords:"10"|linebreaks }}
+                                                                                </td>
+                                                                                <td>{{ task.date|to_jalali:'%y/%m/%d' }}</td>
+                                                                                <td dir="ltr">{{ task.start_time|time:'h:i A' }}</td>
+                                                                                <td dir="ltr">{{ task.end_time|time:'h:i A' }}</td>
+                                                                                <td>
                                                                                 <span class="badge bg-label-success">
                                                                                     {{ task.get_status_display }}
                                                                                 </span>
-                                                                                {#                                                                                {% if task.completed %}#}
-                                                                                {#                                                                                    <span class="badge bg-label-success">کامل</span>#}
-                                                                                {#                                                                                {% else %}#}
-                                                                                {#                                                                                    <span class="badge bg-label-danger">ناقص</span>#}
-                                                                                {#                                                                                {% endif %}#}
-                                                                            </td>
-                                                                        </tr>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {% endif %}
                                                                     {% endfor %}
                                                                     </tbody>
                                                                 </table>

@@ -107,7 +107,6 @@ class OrdersList(ListView):
             due_date = jdatetime.datetime.strptime(due_date, '%Y/%m/%d').togregorian().date()
             orders = orders.filter(Q(createdAt__gte=start_date), Q(createdAt__lte=due_date))
         orders = orders.order_by('-createdAt')
-
         return orders
 
     def get_context_data(self, **kwargs):
@@ -119,6 +118,7 @@ class OrdersList(ListView):
         context['departments'] = Department.objects.all()
         status_choices = Order.StatusChoices
         context['status_choices'] = status_choices
+        context['tasks'] = Task.published.all()
         return context
 
 
@@ -342,6 +342,7 @@ class TasksList(ListView):
         subgroup = self.request.GET.get('subgroup')
         operator = self.request.GET.getlist('operator')
         dt_date = self.request.GET.get('dt_date')
+        year = self.request.GET.get('year')
 
         if q:
             tasks = tasks.filter(order__orderId__contains=q)
@@ -505,7 +506,6 @@ def task_edit(request, taskId):
 
 def task_detail(request, taskId):
     task = Task.published.get(id=taskId)
-    print(task.order.task.last().id)
     context = {'task': task}
     return render(request, 'task/detail.html', context)
 
