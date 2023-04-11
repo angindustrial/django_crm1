@@ -10,7 +10,7 @@ def send_review_order(machine_name, mobile):
 
     try:
         bulk_id = sms.send_pattern(
-            "k58n4blrcu",  # pattern code
+            "n1z10op8x9bmulq",  # pattern code
             "3000505",  # originator
             mobile,  # recipient
             pattern_values,  # pattern values

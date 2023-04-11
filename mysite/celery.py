@@ -22,6 +22,7 @@ app.autodiscover_tasks()
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
 
+from datetime import timedelta
 
 app.conf.beat_schedule = {
     # Scheduler Name
@@ -29,6 +30,6 @@ app.conf.beat_schedule = {
         # Task Name (Name Specified in Decorator)
         'task': 'check_review_due',
         # Schedule
-        'schedule': crontab(day_of_week='*'),
+        'schedule': crontab(minute=0, hour=10),
     },
 }
