@@ -17,17 +17,18 @@ def check_review_due(*args, **kwargs):
         #         review.save()
 
         if period_scale == 'day':
-            if abs(int(time.time()) - int(review.last_sms.split('.')[0])) >= review.reviewCount * 86400:
+            if abs(int(time.time()) - int(review.last_sms)) >= review.reviewCount * 86400:
+                print('sent daily sms')
                 send_review_order(review.machineName, '09300629575')
                 review.last_sms = int(time.time())
                 review.save()
         elif period_scale == 'month':
-            if abs(int(time.time()) - int(review.last_sms.split('.')[0])) >= review.reviewCount * 2629800:
+            if abs(int(time.time()) - int(review.last_sms)) >= review.reviewCount * 2629800:
                 send_review_order(review.machineName, '09300629575')
                 review.last_sms = int(time.time())
                 review.save()
         elif period_scale == 'year':
-            if abs(int(time.time()) - int(review.last_sms.split('.')[0])) >= review.reviewCount * 31557600:
+            if abs(int(time.time()) - int(review.last_sms)) >= review.reviewCount * 31557600:
                 send_review_order(review.machineName, '09300629575')
                 review.last_sms = int(time.time())
                 review.save()
