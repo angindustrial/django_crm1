@@ -9,6 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
 from django.db.models import Q, Sum, F
 from django.db.utils import IntegrityError
+
+from review.utils import send_review_order, send_new_order_message, send_completed_message
 from users.models import Profile
 from django.core.exceptions import PermissionDenied
 
@@ -245,9 +247,11 @@ def order_add(request):
                     instance.status = 'درانتظار تایید مدیریت'
                 instance.subGroup.add(subgroup_item)
 
+            send_new_order_message(instance, '09160485041')
             instance.save()
         else:
             messages.error(request, 'اطلاعات به صورت صحیح وارد نشده است')
+
         messages.success(request, 'درخواست ثبت شد')
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -290,6 +294,12 @@ def order_edit(request, orderId):
             instance.department = department
             instance.departmentName = department.name
             instance.priority = priority
+            if status == 'DN':
+                phone_numbers = [
+                    '09192955815',
+                    '09160485041']
+                for phone_number in phone_numbers:
+                    send_completed_message(instance, phone_number)
             instance.save()
 
             instance.subGroup.clear()
